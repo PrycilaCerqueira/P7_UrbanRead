@@ -16,7 +16,7 @@ namespace P7_UrbanRead
         private int _AlternativePhoneNumber;
         private string _PrimaryEmail;
         private string _SecondaryEmail;
-        private Address _Address;
+        private List<Address> _Address;
         private List<Book> _WishList;
 
         public string FirstName
@@ -54,7 +54,7 @@ namespace P7_UrbanRead
             get { return _SecondaryEmail; }
             set { _SecondaryEmail = value; }
         }
-        public Address Address
+        public List<Address> Address
         {
             get { return _Address; }
             set { _Address = value; }
