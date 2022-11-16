@@ -16,7 +16,7 @@ namespace P7_UrbanRead
         private int _AlternativePhoneNumber;
         private string _PrimaryEmail;
         private string _SecondaryEmail;
-        private List<Address> _Address;
+        private Address _Address;
         private List<Book> _WishList;
 
         public string FirstName

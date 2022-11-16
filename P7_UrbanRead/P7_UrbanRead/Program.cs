@@ -7,6 +7,10 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+
+            var x = new Book();
+
+          
         }
     }
 }

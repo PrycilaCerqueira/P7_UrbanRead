@@ -16,23 +16,19 @@ namespace P7_UrbanRead
         private int _ISBN;
         private Author _Author;
         private Publisher _Publisher;
-        private List<string> _Language = new List<string> {"Portuguese", "English", "Spanish", "French", "Italian"};
-        private List<string> _Genre = new List<string> {"Fiction", "Non-Fiction"};
-        private List<string> _SubGenre = new List<string> { };
+        private LangType _Language; 
+        private GenreType _Genre; 
+        private List <SubGenereType> _SubGenres;
+        private BookType _Type;
+        private EbookFormat _EbookFormat;
+     
 
-        public List<string> Language 
+
+        public LangType Language 
         {
             get { return _Language; }
         }
 
-        private enum Type
-        {
-
-        }
-        private enum EbookFormart
-        {
-
-        }
 
     }
 }
