@@ -11,8 +11,8 @@ namespace P7_UrbanRead
     {
         private Person _Requester;
         private Person _Requestee;
-        private string _Subject;
-        private string _Body;
+        private string _EmailSubject;
+        private string _EmailBody;
         private DateTime _PickupDateTime;
         private bool _ApprovalStatus;
         private Address _PickupAddress;
@@ -29,13 +29,13 @@ namespace P7_UrbanRead
         }
         public string Subject
         {
-            get { return _Subject; }
-            set { _Subject = value; }
+            get { return _EmailSubject; }
+            set { _EmailSubject = value; }
         }
         public string Body
         {
-            get { return _Body; }
-            set { _Body = value; }
+            get { return _EmailBody; }
+            set { _EmailBody = value; }
         }
         public DateTime PickupDateTime
         {
