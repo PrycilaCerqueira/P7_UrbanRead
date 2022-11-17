@@ -11,7 +11,7 @@ namespace P7_UrbanRead
         private string _StoreName;
         private string _Website;
         private Address _Country;
-        private List<BookstoreBooks> _Books;
+        private List<BookstoreBook> _Books;
 
         public string StoreName
         {
