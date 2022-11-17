@@ -1,6 +1,6 @@
 ﻿namespace P7_UrbanRead
 {
-    enum EbookFormat
+    enum EbFormat
     {
         PDF,
         MOBI,
