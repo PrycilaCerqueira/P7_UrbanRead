@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace P7_UrbanRead // Note: actual namespace depends on the project name.
 {
@@ -8,7 +9,12 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
         {
             Console.WriteLine("Hello World!");
 
-            var x = new Book();
+            List<Book> Books = new List<Book>();
+
+            Console.WriteLine("Book search: ");
+            string book = Console.ReadLine();
+
+            var searchBook = JsonConvert.SerializeObject(book);
 
           
         }
