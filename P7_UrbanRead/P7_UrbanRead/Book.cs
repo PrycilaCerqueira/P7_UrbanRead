@@ -19,8 +19,7 @@ namespace P7_UrbanRead
         private LangType _Language; 
         private GenreType _Genre; 
         private List <SubGenereType> _SubGenres;
-        private BookType _Type;
-        private EbFormat _EbookFormat;
+        private BookFormat _BookFormat;
      
         public string Cover
         {
@@ -74,14 +73,11 @@ namespace P7_UrbanRead
         {
             get { return _SubGenres; }
         }
-        public BookType Type
+        public BookFormat Type
         {
-            get { return _Type; }
+            get { return _BookFormat; }
         }
-        public EbFormat EbookFormat
-        {
-            get { return _EbookFormat; }
-        }
+
 
     }
 }
