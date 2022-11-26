@@ -18,6 +18,7 @@ namespace P7_UrbanRead
         private string _SecondaryEmail;
         private Address _Address;
         private List<Book> _WishList;
+        private List<Book> _ActiveBook;
 
         public string FirstName
         {
@@ -54,7 +55,7 @@ namespace P7_UrbanRead
             get { return _SecondaryEmail; }
             set { _SecondaryEmail = value; }
         }
-        public List<Address> Address
+        public Address Address
         {
             get { return _Address; }
             set { _Address = value; }
@@ -64,7 +65,11 @@ namespace P7_UrbanRead
             get { return _WishList; }
             set { _WishList = value; }
         }
-
+        public List<Book> ActiveBook
+        {
+            get { return _ActiveBook; }
+            set { _ActiveBook = value; }
+        }
 
     }
 }

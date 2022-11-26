@@ -20,7 +20,9 @@ namespace P7_UrbanRead
         private GenreType _Genre; 
         private List <SubGenereType> _SubGenres;
         private BookFormat _BookFormat;
-     
+        private ReadStatus _ReadingStatus;
+        private int _PageAt;
+
         public string Cover
         {
             get { return _Cover; }
@@ -77,7 +79,15 @@ namespace P7_UrbanRead
         {
             get { return _BookFormat; }
         }
-
-
+        public ReadStatus ReadingStatus
+        {
+            get { return _ReadingStatus; }
+            set { _ReadingStatus = value; }
+        }
+        public int PageAt
+        {
+            get { return _PageAt; }
+            set { _PageAt = value; }
+        }
     }
 }
