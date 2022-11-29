@@ -66,18 +66,22 @@ namespace P7_UrbanRead
         public LangType Language
         {
             get { return _Language; }
+            set { _Language = value; }
         }
         public GenreType Genre
         {
             get { return _Genre; }
+            set { _Genre = value; }
         }
         public List<SubGenereType> SubGeneres
         {
-            get { return _SubGenres; }
+            get { return _SubGenres; } 
+            set { _SubGenres = value; }
         }
         public BookFormat Type
         {
             get { return _BookFormat; }
+            set { _BookFormat = value; }
         }
         public ReadStatus ReadingStatus
         {
