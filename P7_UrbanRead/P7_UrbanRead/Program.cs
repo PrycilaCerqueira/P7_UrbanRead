@@ -16,11 +16,9 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
             Console.Write("Book search: ");
             string book = Console.ReadLine().Trim().ToLower();
 
-            WebClient client = new WebClient();
-            string htmlBookSearch = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={book}&key={apiKey}");
-            //string htmlBookData = File.ReadAllText(htmlBookSearch);
-
-            var books = JsonSerializer.Deserialize<List<Book>>(htmlBookSearch);
+            var client = new WebClient();
+            var search = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={book}&key={apiKey}");
+            var serachData = JsonSerializer.Deserialize<GoogleBooksJson>(search);
 
             //TODO: Re-watch the videos https://www.youtube.com/watch?v=z-5ot9WkE80 and https://www.youtube.com/watch?v=XvsOnKvwhfQ 
 
