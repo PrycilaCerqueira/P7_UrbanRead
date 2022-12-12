@@ -10,12 +10,14 @@ namespace P7_UrbanRead
     {
         private string _Cover; //Source of the cover image
         private string _Title;
+        private string _Subtitle;
         private string _Description;
         private int  _TotalPages;
-        private DateTime _Edition;
-        private int _ISBN;
+        private int _ISBN10;
+        private int _ISBN13;
         private Author _Author;
         private Publisher _Publisher;
+        private DateTime _PublishedDate;
         private LangType _Language; 
         private GenreType _Genre; 
         private List <SubGenereType> _SubGenres;
@@ -33,6 +35,11 @@ namespace P7_UrbanRead
             get { return _Title; }  
             set { _Title = value; }
         }
+        public string Subtitle
+        {
+            get { return _Subtitle; }
+            set { _Subtitle = value; }
+        }
         public string Description
         {
             get { return _Description; }
@@ -43,15 +50,20 @@ namespace P7_UrbanRead
             get { return _TotalPages; }
             set { _TotalPages = value; }
         }
-        public DateTime Edition
+        public DateTime PublishedDate
         {
-            get { return _Edition; }
-            set { _Edition = value; }
+            get { return _PublishedDate; }
+            set { _PublishedDate = value; }
         }
-        public int ISBN
+        public int ISBN10
         {
-            get { return _ISBN; }
-            set { _ISBN = value; }
+            get { return _ISBN10; }
+            set { _ISBN10 = value; }
+        }
+        public int ISBN13
+        {
+            get { return _ISBN13; }
+            set { _ISBN13 = value; }
         }
         public Author Author
         {

@@ -22,24 +22,26 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
             var localData = JsonConvert.DeserializeObject<GoogleBooksJson.Root>(jsonData);
 
             var books = new List<Book>();
+            for (int i = 0; i < localData.Items.Count; i++)
+            {
+                var GB = localData.Items[i];
+                var locBook = new Book();
 
-            var GB = localData.Items[0];
-            var locBook = new Book();
+                locBook.Title = GB.VolumeInfo.Title;
+                locBook.Subtitle = GB.VolumeInfo.Subtitle;
+                locBook.Description = GB.VolumeInfo.Description;
+                locBook.TotalPages = GB.VolumeInfo.PageCount;
+                locBook.PublishedDate = DateTime.Parse(GB.VolumeInfo.PublishedDate);
+                locBook.ISBN10 = GB.VolumeInfo.IndustryIdentifiers[1,1];
 
-            locBook.Title = GB.VolumeInfo.Title;
+                                
+                books.Add(locBook);
 
-            //for (int i = 0; i < searchData.Length; i++)
-            //{
-                //var book = new Book();
-                //book.Title = searchData.
-                
-                //books.Add(book);
-
-            //}
+            }
           
 
             Console.WriteLine();
-            //TODO: Re-watch the videos https://www.youtube.com/watch?v=z-5ot9WkE80 and https://www.youtube.com/watch?v=XvsOnKvwhfQ 
+           
 
         }
     }
