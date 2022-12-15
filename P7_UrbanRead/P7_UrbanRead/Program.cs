@@ -5,6 +5,7 @@ using System.Net.Http.Json;
 using System.Reflection.PortableExecutable;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using static GoogleBooksJson;
 
 namespace P7_UrbanRead // Note: actual namespace depends on the project name.
 {
@@ -32,13 +33,27 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 locBook.Description = GB.VolumeInfo.Description;
                 locBook.TotalPages = GB.VolumeInfo.PageCount;
                 locBook.PublishedDate = DateTime.Parse(GB.VolumeInfo.PublishedDate);
-                locBook.ISBN10 = GB.VolumeInfo.IndustryIdentifiers[1,1];
+                
+                var isbnId = new ISBN();
+                foreach (var item in GB.VolumeInfo.IndustryIdentifiers)
+                {
+                    if (item.Type == "ISBN_10")
+                    {
+                        isbnId.Isbn10 = Int64.Parse(item.Identifier);
+                    }
+                    if (item.Type == "ISBN_13")
+                    {
+                        isbnId.Isbn13 = Int64.Parse(item.Identifier);
+                    }
 
+
+                    locBook.ISBNS.Add(isbnId);  
+                }
                                 
                 books.Add(locBook);
 
             }
-          
+
 
             Console.WriteLine();
            
