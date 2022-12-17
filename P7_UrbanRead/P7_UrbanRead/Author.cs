@@ -23,8 +23,9 @@ namespace P7_UrbanRead
             set { _LastName = value; }
         }
         public string FullName
-        {
+        { 
             get { return _FullName; }
+            set { _FullName = $"{FirstName} {LastName}"; }
         }
     }
     
