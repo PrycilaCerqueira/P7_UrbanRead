@@ -46,6 +46,16 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 {
                     locBook.PublishedDate = dt;
                 }
+
+                var authors = new Author();
+                string aName = GB.VolumeInfo.Authors;
+                foreach (var aName in GB.VolumeInfo.Authors)
+                {
+
+                   
+                    authors.FirstName = aName.Split(' ');
+                    locBook.Authors.Add();
+                }
                 
                 //Copy the ISBN codes into their specific variables                
                 var isbnId = new ISBN();
