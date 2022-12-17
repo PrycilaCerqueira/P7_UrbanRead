@@ -34,11 +34,12 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 locBook.Description = GB.VolumeInfo.Description;
                 locBook.TotalPages = GB.VolumeInfo.PageCount;
 
+
+                //Converts the specified string representation of a date and time to its DateTime equivalent.
                 DateTime dt;
                 string[] validDateFormats = new string[] 
                 {
                     "yyyy",
-                    "yyyy-mm",
                     "yyyy-mm-dd"
                 };
                 if (DateTime.TryParseExact(GB.VolumeInfo.PublishedDate, validDateFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out dt))
@@ -46,7 +47,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                     locBook.PublishedDate = dt;
                 }
                 
-                                
+                //Copy the ISBN codes into their specific variables                
                 var isbnId = new ISBN();
                 foreach (var item in GB.VolumeInfo.IndustryIdentifiers)
                 {
@@ -54,7 +55,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                     {
                         isbnId.Isbn10 = Int64.Parse(item.Identifier);
                     }
-                    if (item.Type == "ISBN_13")
+                    else if (item.Type == "ISBN_13")
                     {
                         isbnId.Isbn13 = Int64.Parse(item.Identifier);
                     }
@@ -65,7 +66,8 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
 
                     locBook.ISBNS.Add(isbnId);  
                 }
-                                
+                
+                
                 books.Add(locBook);
 
             }

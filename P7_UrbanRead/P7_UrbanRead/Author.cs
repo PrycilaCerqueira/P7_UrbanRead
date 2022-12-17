@@ -10,6 +10,7 @@ namespace P7_UrbanRead
     {
         private string _FirstName;
         private string _LastName;
+        private string _FullName;
 
         public string FirstName
         {
@@ -20,6 +21,10 @@ namespace P7_UrbanRead
         {
             get { return _LastName; }
             set { _LastName = value; }
+        }
+        public string FullName
+        {
+            get { return _FullName; }
         }
     }
     
