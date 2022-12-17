@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Globalization;
 using System.Net;
 using System.Net.Http.Json;
 using System.Reflection.PortableExecutable;
@@ -32,8 +33,20 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 locBook.Subtitle = GB.VolumeInfo.Subtitle;
                 locBook.Description = GB.VolumeInfo.Description;
                 locBook.TotalPages = GB.VolumeInfo.PageCount;
-                locBook.PublishedDate = DateTime.Parse(GB.VolumeInfo.PublishedDate);
+
+                DateTime dt;
+                string[] validDateFormats = new string[] 
+                {
+                    "yyyy",
+                    "yyyy-mm",
+                    "yyyy-mm-dd"
+                };
+                if (DateTime.TryParseExact(GB.VolumeInfo.PublishedDate, validDateFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out dt))
+                {
+                    locBook.PublishedDate = dt;
+                }
                 
+                                
                 var isbnId = new ISBN();
                 foreach (var item in GB.VolumeInfo.IndustryIdentifiers)
                 {
@@ -45,7 +58,10 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                     {
                         isbnId.Isbn13 = Int64.Parse(item.Identifier);
                     }
-
+                    else
+                    {
+                        break;
+                    }
 
                     locBook.ISBNS.Add(isbnId);  
                 }
