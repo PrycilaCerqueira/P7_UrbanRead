@@ -46,34 +46,40 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 {
                     locBook.PublishedDate = dt;
                 }
-
+                
+                /*
                 var authors = new Author();
                 string aName = GB.VolumeInfo.Authors;
                 foreach (var aName in GB.VolumeInfo.Authors)
-                {
-
-                   
+                {   
                     authors.FirstName = aName.Split(' ');
                     locBook.Authors.Add();
                 }
-                
+                */
                 //Copy the ISBN codes into their specific variables                
                 var isbnId = new ISBN();
                 foreach (var item in GB.VolumeInfo.IndustryIdentifiers)
                 {
                     if (item.Type == "ISBN_10")
                     {
-                        isbnId.Isbn10 = Int64.Parse(item.Identifier);
+                        isbnId.Isbn10 = item.Identifier;
                     }
                     else if (item.Type == "ISBN_13")
                     {
                         isbnId.Isbn13 = Int64.Parse(item.Identifier);
                     }
-                    else
+                    else if (item.Type is null && item.Type == "ISBN_10")
                     {
+                        isbnId.Isbn10 = "A000000000";
+                    }
+                    else if (item.Type is null && item.Type == "ISBN_13")
+                    {
+                        isbnId.Isbn13 = 0000000000000;
+                    }
+                    else 
+                    { 
                         break;
                     }
-
                     locBook.ISBNS.Add(isbnId);  
                 }
                 
@@ -83,7 +89,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
             }
 
 
-            Console.WriteLine();
+             Console.WriteLine();
            
 
         }

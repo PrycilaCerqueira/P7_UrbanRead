@@ -8,10 +8,10 @@ namespace P7_UrbanRead
 {
     internal class ISBN
     {
-        private long _Isbn10;
+        private string _Isbn10;
         private long _Isbn13;
 
-        public long Isbn10
+        public string Isbn10
         {
             get { return _Isbn10; }
             set { _Isbn10 = value; }
