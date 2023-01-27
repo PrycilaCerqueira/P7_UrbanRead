@@ -68,14 +68,6 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                     {
                         isbnId.Isbn13 = Int64.Parse(item.Identifier);
                     }
-                    else if (item.Type is null && item.Type == "ISBN_10")
-                    {
-                        isbnId.Isbn10 = "A000000000";
-                    }
-                    else if (item.Type is null && item.Type == "ISBN_13")
-                    {
-                        isbnId.Isbn13 = 0000000000000;
-                    }
                     else 
                     { 
                         break;
