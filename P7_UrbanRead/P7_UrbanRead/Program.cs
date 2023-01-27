@@ -58,24 +58,30 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 */
                 //Copy the ISBN codes into their specific variables                
                 var isbnId = new ISBN();
+
                 foreach (var item in GB.VolumeInfo.IndustryIdentifiers)
                 {
-                    if (item.Type == "ISBN_10")
+                    if (item != null)
                     {
-                        isbnId.Isbn10 = item.Identifier;
-                    }
-                    else if (item.Type == "ISBN_13")
+                        if (item.Type == "ISBN_10")
+                        {
+                            isbnId.Isbn10 = item.Identifier;
+                        }
+                        else if (item.Type == "ISBN_13")
+                        {
+                            isbnId.Isbn13 = Int64.Parse(item.Identifier);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                        locBook.ISBNS.Add(isbnId);
+                    }else
                     {
-                        isbnId.Isbn13 = Int64.Parse(item.Identifier);
+                        isbnId.Isbn10 = "A000000000Z";
+                        isbnId.Isbn13 = 10000000000012;
                     }
-                    else 
-                    { 
-                        break;
-                    }
-                    locBook.ISBNS.Add(isbnId);  
                 }
-                
-                
                 books.Add(locBook);
 
             }
