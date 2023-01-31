@@ -30,28 +30,9 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 var locBook = new Book();
 
                 //Gets the ISBNs from the Google Book Search and adds it to the object ISBN 
-                var isbnId = new ISBN();
+                //var isbnId = new ISBN();
                 var isbnIdentifiers = GB.VolumeInfo.IndustryIdentifiers;
-                if (isbnIdentifiers != null)
-                {
-                    foreach (var item in isbnIdentifiers)
-                    {
-                        if (item.Type == "ISBN_10")
-                        {
-                            isbnId.Isbn10 = item.Identifier;
-                        }
-                        else if (item.Type == "ISBN_13")
-                        {
-                            isbnId.Isbn13 = Int64.Parse(item.Identifier);
-                        }
-                        else
-                        {
-                            break;
-                        }
-                        locBook.ISBNS.Add(isbnId);
-                    }
-                }
-                else
+                if (ISBN.addIsbnIfValid(isbnIdentifiers, locBook) == false)
                 {
                     books.Remove(locBook);
                     continue;
