@@ -29,6 +29,35 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 var GB = localData.Items[i];
                 var locBook = new Book();
 
+                //Gets the ISBNs from the Google Book Search and adds it to the object ISBN 
+                var isbnId = new ISBN();
+                var isbnIdentifiers = GB.VolumeInfo.IndustryIdentifiers;
+                if (isbnIdentifiers != null)
+                {
+                    foreach (var item in isbnIdentifiers)
+                    {
+                        if (item.Type == "ISBN_10")
+                        {
+                            isbnId.Isbn10 = item.Identifier;
+                        }
+                        else if (item.Type == "ISBN_13")
+                        {
+                            isbnId.Isbn13 = Int64.Parse(item.Identifier);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                        locBook.ISBNS.Add(isbnId);
+                    }
+                }
+                else
+                {
+                    books.Remove(locBook);
+                    continue;
+                }
+
+
                 locBook.Title = GB.VolumeInfo.Title;
                 locBook.Subtitle = GB.VolumeInfo.Subtitle;
                 locBook.Description = GB.VolumeInfo.Description;
@@ -57,37 +86,12 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 }
                 */
                 //Copy the ISBN codes into their specific variables                
-                var isbnId = new ISBN();
 
-                foreach (var item in GB.VolumeInfo.IndustryIdentifiers)
-                {
-                    if (item != null)
-                    {
-                        if (item.Type == "ISBN_10")
-                        {
-                            isbnId.Isbn10 = item.Identifier;
-                        }
-                        else if (item.Type == "ISBN_13")
-                        {
-                            isbnId.Isbn13 = Int64.Parse(item.Identifier);
-                        }
-                        else
-                        {
-                            break;
-                        }
-                        locBook.ISBNS.Add(isbnId);
-                    }else
-                    {
-                        isbnId.Isbn10 = "A000000000Z";
-                        isbnId.Isbn13 = 10000000000012;
-                    }
-                }
                 books.Add(locBook);
 
             }
 
-
-             Console.WriteLine();
+            Console.WriteLine();
            
 
         }
