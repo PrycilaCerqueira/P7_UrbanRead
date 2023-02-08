@@ -23,26 +23,26 @@ namespace P7_UrbanRead
             set { _Isbn13 = value; }
         }
 
-        public static bool addIsbnIfValid(List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, Book locBook )
+        public static bool isIsbnValid(List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, Book locBook )
         {
             var isbnId = new ISBN();
             if (isbnIdentifiers != null)
             {
                 foreach (var item in isbnIdentifiers)
                 {
-                    if (item.Type == "ISBN_10" && item.Identifier.ToString().Trim().Length == 10 && item.Identifier.ToString().Trim() != " ")
+                    if (item.Type == "ISBN_10")
                     {
                         isbnId.Isbn10 = item.Identifier;
                         locBook.ISBNS.Add(isbnId);
                     }
-                    else if (item.Type == "ISBN_13" && item.Identifier.ToString().Trim().Length == 13)
+                    if (item.Type == "ISBN_13")
                     {
                         isbnId.Isbn13 = Int64.Parse(item.Identifier);
                         locBook.ISBNS.Add(isbnId);
                     }
-                    else
+                    if (item.Type == "OTHER")
                     {
-                        break;
+                        return false;
                     }
                 }
                 return true;
