@@ -30,12 +30,12 @@ namespace P7_UrbanRead
             {
                 foreach (var item in isbnIdentifiers)
                 {
-                    if (item.Type == "ISBN_10" && item.Type.Length == 10)
+                    if (item.Type == "ISBN_10" && item.Identifier.ToString().Trim().Length == 10 && item.Identifier.ToString().Trim() != " ")
                     {
                         isbnId.Isbn10 = item.Identifier;
                         locBook.ISBNS.Add(isbnId);
                     }
-                    else if (item.Type == "ISBN_13" && item.Type.Length == 13)
+                    else if (item.Type == "ISBN_13" && item.Identifier.ToString().Trim().Length == 13)
                     {
                         isbnId.Isbn13 = Int64.Parse(item.Identifier);
                         locBook.ISBNS.Add(isbnId);
