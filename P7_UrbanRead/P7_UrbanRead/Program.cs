@@ -20,21 +20,20 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
             string bookTopic= Console.ReadLine().Trim().ToLower();
 
             var client = new WebClient();
-            var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={bookTopic}&key={apiKey}");
+            var jsonData = client.DownloadString($"https://www.googleapis.com/library/v1/volumes?q={bookTopic}&key={apiKey}");
             var localData = JsonConvert.DeserializeObject<GoogleBooksJson.Root>(jsonData);
 
-            var books = new List<Book>();
+            var library = new List<Book>();
             for (int i = 0; i < localData.Items.Count; i++)
             {
                 var GB = localData.Items[i];
                 var locBook = new Book();
 
-                //Gets the ISBNs from the Google Book Search and adds it to the object ISBN 
-                //var isbnId = new ISBN();
+                //Verifies whether or not the ISBNs format and values are valid to add the book to the internal library.
                 var isbnIdentifiers = GB.VolumeInfo.IndustryIdentifiers;
                 if (ISBN.isIsbnValid(isbnIdentifiers, locBook) == false)
                 {
-                    books.Remove(locBook);
+                    library.Remove(locBook);
                     continue;
                 }
 
@@ -68,7 +67,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 */
                 //Copy the ISBN codes into their specific variables                
 
-                books.Add(locBook);
+                library.Add(locBook);
 
             }
 
