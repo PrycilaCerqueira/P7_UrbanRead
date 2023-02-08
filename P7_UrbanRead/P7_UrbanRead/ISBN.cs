@@ -33,18 +33,19 @@ namespace P7_UrbanRead
                     if (item.Type == "ISBN_10")
                     {
                         isbnId.Isbn10 = item.Identifier;
-                        locBook.ISBNS.Add(isbnId);
                     }
                     if (item.Type == "ISBN_13")
                     {
                         isbnId.Isbn13 = Int64.Parse(item.Identifier);
-                        locBook.ISBNS.Add(isbnId);
+                        
                     }
                     if (item.Type == "OTHER")
                     {
                         return false;
                     }
+                    
                 }
+                locBook.ISBNS.Add(isbnId);
                 return true;
             }
             else
