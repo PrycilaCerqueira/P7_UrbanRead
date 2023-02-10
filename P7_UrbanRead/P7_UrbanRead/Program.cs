@@ -20,7 +20,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
             string bookTopic= Console.ReadLine().Trim().ToLower();
 
             var client = new WebClient();
-            var jsonData = client.DownloadString($"https://www.googleapis.com/library/v1/volumes?q={bookTopic}&key={apiKey}");
+            var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={bookTopic}&key={apiKey}");
             var localData = JsonConvert.DeserializeObject<GoogleBooksJson.Root>(jsonData);
 
             var library = new List<Book>();
@@ -37,12 +37,10 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                     continue;
                 }
 
-
                 locBook.Title = GB.VolumeInfo.Title;
                 locBook.Subtitle = GB.VolumeInfo.Subtitle;
                 locBook.Description = GB.VolumeInfo.Description;
                 locBook.TotalPages = GB.VolumeInfo.PageCount;
-
 
                 //Converts the specified string representation of a date and time to its DateTime equivalent.
                 DateTime dt;
@@ -55,17 +53,20 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 {
                     locBook.PublishedDate = dt;
                 }
-                
-                /*
-                var authors = new Author();
-                string aName = GB.VolumeInfo.Authors;
-                foreach (var aName in GB.VolumeInfo.Authors)
-                {   
-                    authors.FirstName = aName.Split(' ');
-                    locBook.Authors.Add();
+
+                //TODO: Gets the authors' names from GoogleBooksJson and passes it to Library
+                var aNames = GB.VolumeInfo.Authors;
+                for (int j = 0; j < aNames.Count; j++)
+                {
+                    var authorsNames = new Author();
+                    authorsNames.FullName = aNames[j];
+                    if (authorsNames == null)
+                    {
+                        continue;
+                    }
+                    
+                    locBook.Authors.Add(authorsNames);
                 }
-                */
-                //Copy the ISBN codes into their specific variables                
 
                 library.Add(locBook);
 

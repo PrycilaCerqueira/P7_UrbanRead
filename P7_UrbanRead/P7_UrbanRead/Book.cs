@@ -14,7 +14,7 @@ namespace P7_UrbanRead
         private string _Description;
         private int  _TotalPages;
         private List<ISBN> _ISBNS = new List<ISBN>();
-        private List<Author> _Authors;
+        private List<Author> _Authors = new List<Author>();
         private Publisher _Publisher;
         private DateTime _PublishedDate;
         private LangType _Language; 
