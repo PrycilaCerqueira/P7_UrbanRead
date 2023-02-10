@@ -3,6 +3,7 @@ using System;
 using System.Globalization;
 using System.Net;
 using System.Net.Http.Json;
+using System.Reflection;
 using System.Reflection.PortableExecutable;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -54,7 +55,8 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                     locBook.PublishedDate = dt;
                 }
 
-                //TODO: Gets the authors' names from GoogleBooksJson and passes it to Library
+                //Gets the authors' names from GoogleBooksJson and passes it to Library
+                //TODO: Move the block below under Author's class 
                 var aNames = GB.VolumeInfo.Authors;
                 for (int j = 0; j < aNames.Count; j++)
                 {
