@@ -46,8 +46,13 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 //Gets the authors' names from GoogleBooksJson and passes it to Library
                 Author.GetGBAuthorNames(GB.VolumeInfo.Authors, locBook);
 
-                //TODO: Get the Publisher data from GoogleBookJson
-                //Converts the specified string representation of a date and time to its DateTime equivalent.
+                //Gets the Publisher data from GoogleBookJson
+                //TODO: get the publisher name from GoogleBookJson and passes it to PublisherName 
+
+
+
+                //TODO: move the block below to Publisher class
+                //Converts the specified string representation of a date and time to its DateTime equivalent. It adds the date/time to the PublishDate variable
                 DateTime dt;
                 string[] validDateFormats = new string[]
                 {
