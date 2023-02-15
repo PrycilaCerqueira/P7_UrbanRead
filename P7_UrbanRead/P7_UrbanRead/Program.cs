@@ -57,18 +57,9 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
 
                 //Gets the authors' names from GoogleBooksJson and passes it to Library
                 //TODO: Move the block below under Author's class 
-                var aNames = GB.VolumeInfo.Authors;
-                for (int j = 0; j < aNames.Count; j++)
-                {
-                    var authorsNames = new Author();
-                    authorsNames.FullName = aNames[j];
-                    if (authorsNames == null)
-                    {
-                        continue;
-                    }
-                    
-                    locBook.Authors.Add(authorsNames);
-                }
+                Author.GetGBAuthorNames(GB.VolumeInfo.Authors, locBook);
+                
+                
 
                 library.Add(locBook);
 
