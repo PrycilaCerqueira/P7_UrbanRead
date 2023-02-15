@@ -9,7 +9,7 @@ namespace P7_UrbanRead
     internal class Publisher
     {
         private string _PublisherName;
-        private Address _Country;
+        private DateTime _PublishedDate;
 
         public string PublisherName
         {
@@ -17,10 +17,10 @@ namespace P7_UrbanRead
             set { _PublisherName = value; }
         }
 
-        public Address Country
+        public DateTime PublishedDate
         {
-            get { return _Country; }
-            set { _Country = value; }
+            get { return _PublishedDate; }
+            set { _PublishedDate = value; }
         }
     }
 }

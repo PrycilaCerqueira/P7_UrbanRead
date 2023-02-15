@@ -43,9 +43,13 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 locBook.Description = GB.VolumeInfo.Description;
                 locBook.TotalPages = GB.VolumeInfo.PageCount;
 
+                //Gets the authors' names from GoogleBooksJson and passes it to Library
+                Author.GetGBAuthorNames(GB.VolumeInfo.Authors, locBook);
+
+                //TODO: Get the Publisher data from GoogleBookJson
                 //Converts the specified string representation of a date and time to its DateTime equivalent.
                 DateTime dt;
-                string[] validDateFormats = new string[] 
+                string[] validDateFormats = new string[]
                 {
                     "yyyy",
                     "yyyy-mm-dd"
@@ -55,11 +59,6 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                     locBook.PublishedDate = dt;
                 }
 
-                //Gets the authors' names from GoogleBooksJson and passes it to Library
-                //TODO: Move the block below under Author's class 
-                Author.GetGBAuthorNames(GB.VolumeInfo.Authors, locBook);
-                
-                
 
                 library.Add(locBook);
 
