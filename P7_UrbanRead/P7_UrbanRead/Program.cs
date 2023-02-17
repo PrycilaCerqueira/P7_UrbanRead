@@ -53,17 +53,8 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
 
                 //TODO: move the block below to Publisher class
                 //Converts the specified string representation of a date and time to its DateTime equivalent. It adds the date/time to the PublishDate variable
-                DateTime dt;
-                string[] validDateFormats = new string[]
-                {
-                    "yyyy",
-                    "yyyy-mm-dd"
-                };
-                if (DateTime.TryParseExact(GB.VolumeInfo.PublishedDate, validDateFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out dt))
-                {
-                    locBook.PublishedDate = dt;
-                }
-
+                Publisher.GetGBPublishDates(GB.VolumeInfo.PublishedDate, locBook);
+                
 
                 library.Add(locBook);
 
