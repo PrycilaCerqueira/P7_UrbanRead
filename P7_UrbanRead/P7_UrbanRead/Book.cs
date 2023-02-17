@@ -15,7 +15,7 @@ namespace P7_UrbanRead
         private int  _TotalPages;
         private List<ISBN> _ISBNS = new List<ISBN>();
         private List<Author> _Authors = new List<Author>();
-        private Publisher _Publisher;
+        private string _PublisherName;
         private DateTime _PublishedDate;
         private LangType _Language; 
         private GenreType _Genre; 
@@ -64,10 +64,10 @@ namespace P7_UrbanRead
             get { return _Authors; }
             set { _Authors = value; }
         }
-        public Publisher Publisher
+        public string PublisherName
         {
-            get { return _Publisher; }
-            set { _Publisher = value; }
+            get { return _PublisherName; }
+            set { _PublisherName = value; }
         }
         public LangType Language
         {
