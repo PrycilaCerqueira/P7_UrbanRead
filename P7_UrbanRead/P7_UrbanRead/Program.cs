@@ -50,7 +50,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 locBook.Publisher = GB.VolumeInfo.Publisher;
                 Publisher.GetGBPublishDates(GB.VolumeInfo.PublishedDate, locBook);
                 
-
+                //TODO: Set the language type based on the GBdata
                 library.Add(locBook);
 
             }
