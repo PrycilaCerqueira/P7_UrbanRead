@@ -31,8 +31,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 var locBook = new Book();
 
                 //Verifies whether or not the ISBNs format and values are valid to add the book to the internal library.
-                var isbnIdentifiers = GB.VolumeInfo.IndustryIdentifiers;
-                if (ISBN.isIsbnValid(isbnIdentifiers, locBook) == false)
+                if (FuncHelp.isIsbnValid(GB.VolumeInfo.IndustryIdentifiers, locBook) == false)
                 {
                     library.Remove(locBook);
                     continue;
@@ -50,7 +49,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 locBook.PublisherName = GB.VolumeInfo.Publisher;
                 Publisher.GetGBPublishDates(GB.VolumeInfo.PublishedDate, locBook);
 
-                //TODO: Set the language type based on the GBdata
+                //Sets the language type based on the GoogleBook language data
                 FuncHelp.GetLanguageType(GB.VolumeInfo.Language.ToUpper().Trim(), locBook);
                 
                 
