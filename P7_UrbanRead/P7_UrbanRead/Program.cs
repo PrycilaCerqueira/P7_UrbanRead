@@ -47,10 +47,13 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 Author.GetGBAuthorNames(GB.VolumeInfo.Authors, locBook);
 
                 //Gets the Publisher data from GoogleBookJson
-                locBook.Publisher = GB.VolumeInfo.Publisher;
+                locBook.PublisherName = GB.VolumeInfo.Publisher;
                 Publisher.GetGBPublishDates(GB.VolumeInfo.PublishedDate, locBook);
-                
+
                 //TODO: Set the language type based on the GBdata
+                FuncHelp.GetLanguageType(GB.VolumeInfo.Language.ToUpper().Trim(), locBook);
+                
+                
                 library.Add(locBook);
 
             }

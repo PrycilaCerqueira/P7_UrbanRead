@@ -2,11 +2,9 @@
 {
     enum LangType
     {
-        EN,
-        FR,
-        ES,
-        PT,
-        IT
-
+        English,
+        French,
+        Spanish,
+        Portuguese,
     }
 }
