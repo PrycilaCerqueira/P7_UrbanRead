@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,6 +65,28 @@ namespace P7_UrbanRead
                 }
 
                 locBook.Authors.Add(authorsNames);
+            }
+
+        }
+
+        /// <summary>
+        /// Gets the PublisherDate data with the correct date format and datatype 
+        /// </summary>
+        /// <param name="bookPublishedDate">GoogleBookJson Published Date data</param>
+        /// <param name="locBook">Book instance with its elements to be populated</param>
+        public static void GetGBPublishDates(string bookPublishedDate, Book locBook)
+        {
+            DateTime dt;
+
+            //Converts the specified string representation of a date and time to its DateTime equivalent
+            string[] validDateFormats = new string[]
+            {
+                    "yyyy",
+                    "yyyy-mm-dd"
+            };
+            if (DateTime.TryParseExact(bookPublishedDate, validDateFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out dt))
+            {
+                locBook.PublishedDate = dt;
             }
 
         }
