@@ -17,21 +17,7 @@ namespace P7_UrbanRead
             set { _FullName = value; }
         }
 
-        public static void GetGBAuthorNames(List<string> aNames, Book locBook)
-        {
-            for (int n = 0; n < aNames.Count; n++)
-            {
-                var authorsNames = new Author();
-                authorsNames.FullName = aNames[n];
-                if (authorsNames == null)
-                {
-                    continue;
-                }
-
-                locBook.Authors.Add(authorsNames);
-            }
-
-        }
+        
 
     }
 }

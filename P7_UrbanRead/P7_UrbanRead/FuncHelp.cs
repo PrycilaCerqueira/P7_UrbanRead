@@ -8,7 +8,12 @@ namespace P7_UrbanRead
 {
     internal class FuncHelp
     {
-
+        /// <summary>
+        /// Verifies whether the ISBN has a valid format or not 
+        /// </summary>
+        /// <param name="isbnIdentifiers">GoogleBookJson ISBN data</param>
+        /// <param name="locBook">Book instance with its elements to be populated</param>
+        /// <returns>Returns true/false for the ISBN format</returns>
         public static bool isIsbnValid(List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, Book locBook)
         {
             var isbnId = new ISBN();
@@ -42,7 +47,32 @@ namespace P7_UrbanRead
         }
 
 
+        /// <summary>
+        /// Gets the Authors'Names and populates the data on the Book instance 
+        /// </summary>
+        /// <param name="aNames">GoogleBookJson Authors' data</param>
+        /// <param name="locBook">Book instance with its elements to be populated</param>
+        public static void GetGBAuthorNames(List<string> aNames, Book locBook)
+        {
+            for (int n = 0; n < aNames.Count; n++)
+            {
+                var authorsNames = new Author();
+                authorsNames.FullName = aNames[n];
+                if (authorsNames == null)
+                {
+                    continue;
+                }
 
+                locBook.Authors.Add(authorsNames);
+            }
+
+        }
+
+        /// <summary>
+        /// Gets the Language and populates the data on the Book instance
+        /// </summary>
+        /// <param name="GBlang">GoogleBookJson Language data</param>
+        /// <param name="locBook">Book instance with its elements to be populated</param>
         public static void GetLanguageType(string GBlang, Book locBook)
         {
 

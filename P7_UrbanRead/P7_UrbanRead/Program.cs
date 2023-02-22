@@ -43,7 +43,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 locBook.TotalPages = GB.VolumeInfo.PageCount;
 
                 //Gets the authors' names from GoogleBooksJson and passes it to Library
-                Author.GetGBAuthorNames(GB.VolumeInfo.Authors, locBook);
+                FuncHelp.GetGBAuthorNames(GB.VolumeInfo.Authors, locBook);
 
                 //Gets the Publisher data from GoogleBookJson
                 locBook.PublisherName = GB.VolumeInfo.Publisher;
