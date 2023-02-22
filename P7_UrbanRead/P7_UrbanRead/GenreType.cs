@@ -3,6 +3,38 @@
     enum GenreType
     {
         Fiction,
-        NonFiction
+        NonFiction,
+        Fantasy,
+        ScienceFiction,
+        Action,
+        Adventure,
+        Mystery,
+        Horror,
+        Thriller,
+        Suspense,
+        HistoricalFiction,
+        Romance,
+        GraficNovel,
+        LGBTQ,
+        YoungAdult,
+        Children,
+        Poetry,
+        Fairytale,
+        Drama,
+        MemoirAutobiography,
+        Diary,
+        Dictionary,
+        Biography,
+        FoodDrink,
+        SelfHelp,
+        History,
+        Travel,
+        TrueCrime,
+        Humor,
+        HowTo_Guide,
+        ReligionSpirituality,
+        Parenting,
+        ScienceTechnology
+        
     }
 }
