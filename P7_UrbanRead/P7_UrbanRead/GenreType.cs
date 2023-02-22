@@ -12,7 +12,7 @@
         Horror,
         Thriller,
         Suspense,
-        HistoricalFiction,
+        Historical,
         Romance,
         GraficNovel,
         LGBTQ,

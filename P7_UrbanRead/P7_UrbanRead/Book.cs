@@ -19,7 +19,6 @@ namespace P7_UrbanRead
         private DateTime _PublishedDate; //verify if the type is correct
         private LangType _Language; 
         private GenreType _Genre; 
-        private List <SubGenereType> _SubGenres;
         private BookFormat _BookFormat;
         private ReadStatus _ReadingStatus;
         private int _PageAt;
@@ -79,11 +78,7 @@ namespace P7_UrbanRead
             get { return _Genre; }
             set { _Genre = value; }
         }
-        public List<SubGenereType> SubGeneres
-        {
-            get { return _SubGenres; } 
-            set { _SubGenres = value; }
-        }
+
         public BookFormat Type
         {
             get { return _BookFormat; }

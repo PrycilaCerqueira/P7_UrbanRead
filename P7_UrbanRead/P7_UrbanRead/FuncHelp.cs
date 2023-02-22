@@ -98,7 +98,6 @@ namespace P7_UrbanRead
         /// <param name="locBook">Book instance with its elements to be populated</param>
         public static void GetLanguageType(string GBlang, Book locBook)
         {
-
             if (GBlang == "EN")
             {
                 locBook.Language = LangType.English;
@@ -115,6 +114,17 @@ namespace P7_UrbanRead
             {
                 locBook.Language = LangType.Portuguese;
             }
+
+        }
+
+        //TODO: develop the UpdateGenreTypeEnum() and GetGenreType()
+        public static void UpdateGenreTypeEnum()
+        {
+
+        }
+
+        public static void GetGenreType()
+        {
 
         }
     }
