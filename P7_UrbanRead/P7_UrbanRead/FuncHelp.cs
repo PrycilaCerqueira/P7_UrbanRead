@@ -124,11 +124,19 @@ namespace P7_UrbanRead
         //TODO: develop the UpdateGenreTypeEnum() and GetGenreType()
         public static void UpdateGenreTypeEnum()
         {
-            var genres = 
+
         }
 
         public static void GetGenreType()
         {
+            List<string> genres = new List<string>();
+            genres.AddRange(Enum.GetNames(typeof(GenreType))); //Creates a string list with all the Enum Names for Genre
+
+            foreach (var g in genres)
+            {
+
+
+            }
 
         }
     }
