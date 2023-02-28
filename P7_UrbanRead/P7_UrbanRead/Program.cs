@@ -53,7 +53,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 FuncHelp.GetLanguageType(GB.VolumeInfo.Language.ToUpper().Trim(), locBook);
 
                 //TODO: Sets the genre type based on the GoogleBook Categories data
-                //
+                
 
 
                 library.Add(locBook);

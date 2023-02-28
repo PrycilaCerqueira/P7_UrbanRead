@@ -114,13 +114,17 @@ namespace P7_UrbanRead
             {
                 locBook.Language = LangType.Portuguese;
             }
+            else
+            {
+                locBook.Language = LangType.Others;
+            }
 
         }
 
         //TODO: develop the UpdateGenreTypeEnum() and GetGenreType()
         public static void UpdateGenreTypeEnum()
         {
-
+            var genres = 
         }
 
         public static void GetGenreType()
