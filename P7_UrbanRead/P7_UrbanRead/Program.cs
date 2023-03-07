@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Immutable;
 using System.Globalization;
 using System.Net;
 using System.Net.Http.Json;
@@ -52,8 +53,10 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 //Sets the language type based on the GoogleBook language data
                 FuncHelp.GetLanguageType(GB.VolumeInfo.Language.ToUpper().Trim(), locBook);
 
-                //TODO: Sets the genre type based on the GoogleBook Categories data
-                
+                foreach (string categ in GB.VolumeInfo.Categories)
+                {
+                    locBook.Genre = categ;
+                } //TODO: create a enum list and populate it with the genre type
 
 
                 library.Add(locBook);

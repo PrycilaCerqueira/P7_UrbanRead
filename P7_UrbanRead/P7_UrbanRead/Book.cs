@@ -18,7 +18,7 @@ namespace P7_UrbanRead
         private string _PublisherName; //verify if the type is correct
         private DateTime _PublishedDate; //verify if the type is correct
         private LangType _Language; 
-        private GenreType _Genre; 
+        private string _Genre; 
         private BookFormat _BookFormat;
         private ReadStatus _ReadingStatus;
         private int _PageAt;
@@ -73,7 +73,7 @@ namespace P7_UrbanRead
             get { return _Language; }
             set { _Language = value; }
         }
-        public GenreType Genre
+        public string Genre
         {
             get { return _Genre; }
             set { _Genre = value; }
