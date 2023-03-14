@@ -121,6 +121,11 @@ namespace P7_UrbanRead
 
         }
 
+        /// <summary>
+        /// Gets the Language and populates the data on the Book instance
+        /// </summary>
+        /// <param name="Categories">GoogleBookJson Category data</param>
+        /// <param name="locBook">Book instance with its elements to be populated</param>
         public static void GetGenreType(List<string> Categories, Book locBook)
         {
             if (Categories != null)
