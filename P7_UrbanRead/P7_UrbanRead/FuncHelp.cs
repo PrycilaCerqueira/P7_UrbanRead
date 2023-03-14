@@ -121,6 +121,20 @@ namespace P7_UrbanRead
 
         }
 
+        public static void GetGenreType(List<string> Categories, Book locBook)
+        {
+            if (Categories != null)
+            {
+                foreach (string categ in Categories)
+                {
+                    locBook.Genre = categ;
+                }
+            }
+            else
+            {
+                locBook.Genre = "Null";
+            }
+        }
 
     }
 }
