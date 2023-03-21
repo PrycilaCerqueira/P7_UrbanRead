@@ -22,7 +22,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
             string bookTopic= Console.ReadLine().Trim().ToLower();
 
             var client = new WebClient();
-            var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={bookTopic}&key={apiKey}");
+            var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={bookTopic}&maxResults&key={apiKey}");
             var localData = JsonConvert.DeserializeObject<GoogleBooksJson.Root>(jsonData);
 
             var library = new List<Book>();
@@ -56,6 +56,9 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 //Sets Genre based on GoogleBook category data
                 FuncHelp.GetGenreType(GB.VolumeInfo.Categories, locBook);
                 
+
+                //TODO: Get the BookFormat 
+                //SalesInfo isEbook; accessInfo epub isAvailable or pdf isAvailable 
 
                 library.Add(locBook);
 
