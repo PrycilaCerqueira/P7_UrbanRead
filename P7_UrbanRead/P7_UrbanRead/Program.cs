@@ -55,21 +55,6 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
 
                 //Sets Genre based on GoogleBook category data
                 FuncHelp.GetGenreType(GB.VolumeInfo.Categories, locBook);
-                
-
-                //TODO: Get the BookFormat
-                //SalesInfo isEbook (used for Google Play); accessInfo epub isAvailable or pdf isAvailable (stores to find the book)
-
-                if (GB.AccessInfo.Pdf == true)
-                {
-
-                }
-                else
-                {
-
-                }
-
-                library.Add(locBook);
 
             }
 
