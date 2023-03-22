@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -98,21 +99,25 @@ namespace P7_UrbanRead
         /// <param name="locBook">Book instance with its elements to be populated</param>
         public static void GetLanguageType(string GBlang, Book locBook)
         {
-            if (GBlang == "EN")
+            GBlang = GBlang.ToLower();
+            if (GBlang != null)
             {
-                locBook.Language = LangType.English;
-            }
-            if (GBlang == "FR")
-            {
-                locBook.Language = LangType.French;
-            }
-            if (GBlang == "ES")
-            {
-                locBook.Language = LangType.Spanish;
-            }
-            if (GBlang == "PT-BR" || GBlang == "PT")
-            {
-                locBook.Language = LangType.Portuguese;
+                if (GBlang == "en")
+                {
+                    locBook.Language = LangType.English;
+                }
+                if (GBlang == "fr")
+                {
+                    locBook.Language = LangType.French;
+                }
+                if (GBlang == "es")
+                {
+                    locBook.Language = LangType.Spanish;
+                }
+                if (GBlang == "pt-br" || GBlang == "pt")
+                {
+                    locBook.Language = LangType.Portuguese;
+                }
             }
             else
             {

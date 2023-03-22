@@ -22,7 +22,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
             string bookTopic= Console.ReadLine().Trim().ToLower();
 
             var client = new WebClient();
-            var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={bookTopic}&maxResults&key={apiKey}");
+            var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={bookTopic}&maxResults=40&key={apiKey}");
             var localData = JsonConvert.DeserializeObject<GoogleBooksJson.Root>(jsonData);
 
             var library = new List<Book>();
@@ -51,7 +51,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 FuncHelp.GetGBPublishDates(GB.VolumeInfo.PublishedDate, locBook);
 
                 //Sets the language type based on the GoogleBook language data
-                FuncHelp.GetLanguageType(GB.VolumeInfo.Language.ToUpper().Trim(), locBook);
+                FuncHelp.GetLanguageType(GB.VolumeInfo.Language, locBook);
 
                 //Sets Genre based on GoogleBook category data
                 FuncHelp.GetGenreType(GB.VolumeInfo.Categories, locBook);

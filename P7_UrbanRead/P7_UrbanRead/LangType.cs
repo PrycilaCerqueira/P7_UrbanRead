@@ -2,10 +2,10 @@
 {
     enum LangType
     {
+        Others,
         English,
         French,
         Spanish,
         Portuguese,
-        Others
     }
 }
