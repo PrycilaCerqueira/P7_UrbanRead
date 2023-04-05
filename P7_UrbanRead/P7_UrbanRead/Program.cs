@@ -16,7 +16,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
     {
         static void Main(string[] args)
         {
-            string apiKey = "AIzaSyC-5Ko6EbggLw5AQVesI1qnmqpbRaS72GI";
+            string apiKey = Secret.gbKey; //TODO: Issue#3
 
             Console.Write("Book search: ");
             string bookTopic= Console.ReadLine().Trim().ToLower();

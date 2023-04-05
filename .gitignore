@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+#Secret file
+P7_UrbanRead\P7_UrbanRead\P7_UrbanRead\.Secret.cs
+
+
 # User-specific files
 *.rsuser
 *.suo
