@@ -19,20 +19,30 @@ namespace P7_UrbanRead
         public static bool isIsbnValid(List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, Book locBook)
         {
             var isbnId = new ISBN();
+            long isbnNum;
+
             if (isbnIdentifiers != null)
             {
                 foreach (var item in isbnIdentifiers)
                 {
-                    if (item.Type == "ISBN_10")
+                    bool isntAlphaNumeric = long.TryParse(item.Identifier, out isbnNum);
+                    if (isntAlphaNumeric)
                     {
-                        isbnId.Isbn10 = Int64.Parse(item.Identifier);
-                    }
-                    if (item.Type == "ISBN_13")
-                    {
-                        isbnId.Isbn13 = Int64.Parse(item.Identifier);
+                        if (item.Type == "ISBN_10")
+                        {
+                            isbnId.Isbn10 = isbnNum;
+                        }
+                        if (item.Type == "ISBN_13")
+                        {
+                            isbnId.Isbn13 = isbnNum;
 
+                        }
+                        if (item.Type == "OTHER")
+                        {
+                            return false;
+                        }
                     }
-                    if (item.Type == "OTHER")
+                    else
                     {
                         return false;
                     }
