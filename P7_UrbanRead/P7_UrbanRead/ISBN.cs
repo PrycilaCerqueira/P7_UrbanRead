@@ -15,7 +15,7 @@ namespace P7_UrbanRead
         public long Isbn10
         {
             get { return _Isbn10; }
-            set { if (value < 11 ) _Isbn10 = value; }
+            set { _Isbn10 = value; }
         }
         public long Isbn13
         {
