@@ -25,7 +25,7 @@ namespace P7_UrbanRead
                 {
                     if (item.Type == "ISBN_10")
                     {
-                        isbnId.Isbn10 = item.Identifier;
+                        isbnId.Isbn10 = Int64.Parse(item.Identifier);
                     }
                     if (item.Type == "ISBN_13")
                     {
