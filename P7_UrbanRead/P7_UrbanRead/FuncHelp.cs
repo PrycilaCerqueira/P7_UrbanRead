@@ -18,37 +18,9 @@ namespace P7_UrbanRead
         /// <returns>Returns true/false for the ISBN format</returns>
         public static bool isIsbnValid(List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, Book locBook)
         {
-            var isbnId = new ISBN();
-            long isbnNum;
-
-            if (isbnIdentifiers != null)
+            GetGBIsbnNumbers(isbnIdentifiers, locBook);
+            if (!locBook.ISBNS.Contains(null))
             {
-                foreach (var item in isbnIdentifiers)
-                {
-                    bool isntAlphaNumeric = long.TryParse(item.Identifier, out isbnNum);
-                    if (isntAlphaNumeric)
-                    {
-                        if (item.Type == "ISBN_10")
-                        {
-                            isbnId.Isbn10 = isbnNum;
-                        }
-                        if (item.Type == "ISBN_13")
-                        {
-                            isbnId.Isbn13 = isbnNum;
-
-                        }
-                        if (item.Type == "OTHER")
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        return false;
-                    }
-
-                }
-                locBook.ISBNS.Add(isbnId);
                 return true;
             }
             else
@@ -63,39 +35,46 @@ namespace P7_UrbanRead
         /// </summary>
         /// <param name="isbnIdentifiers">GoogleBookJson ISBNs' data</param>
         /// <param name="locBook">Book instance with its elements to be populated</param>
-        public static ISBN GetGBIsbnNumbers (List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, Book locBook)
+        public static void GetGBIsbnNumbers(List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, Book locBook)
         {
             ISBN isbnId = new ISBN();
             long isbnNum;
 
-            foreach (var item in isbnIdentifiers)
+            if (isbnIdentifiers != null)
             {
-                bool isntAlphaNumeric = long.TryParse(item.Identifier, out isbnNum);
-                if (isntAlphaNumeric == true)
+                foreach (var item in isbnIdentifiers)
                 {
-                    if (item.Type == "OTHER")
+                    bool isntAlphaNumeric = long.TryParse(item.Identifier, out isbnNum);
+                    if (isntAlphaNumeric == true)
                     {
-                        continue;
+                        if (item.Type == "OTHER")
+                        {
+                            continue;
+                        }
+                        if (item.Type == "ISBN_10")
+                        {
+                            isbnId.Isbn10 = isbnNum;
+                        }
+                        if (item.Type == "ISBN_13")
+                        {
+                            isbnId.Isbn13 = isbnNum;
+                        }
                     }
-                    if (item.Type == "ISBN_10")
+                    else
                     {
-                        isbnId.Isbn10 = isbnNum;
-                    }
-                    if (item.Type == "ISBN_13")
-                    {
-                        isbnId.Isbn13 = isbnNum;
+                        isbnId = null;
                     }
                 }
 
             }
-
-            if (isbnId != null)
+            else
             {
-                return isbnId;
+                isbnId = null;
             }
-            return null;
-                     
+
+            locBook.ISBNS.Add(isbnId);
         }
+
 
         /// <summary>
         /// Gets the Authors'Names and populates the data on the Book instance 
@@ -193,6 +172,8 @@ namespace P7_UrbanRead
                 locBook.Genre = "Null";
             }
         }
+
+
 
     }
 }
