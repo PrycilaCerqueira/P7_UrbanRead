@@ -58,6 +58,18 @@ namespace P7_UrbanRead
 
         }
 
+        /// <summary>
+        /// Verifies whether or not the ISBNs format and values are valid to adding to library
+        /// </summary>
+        /// <param name="isbnIdentifiers">GoogleBookJson ISBNs' data</param>
+        /// <param name="locBook">Book instance with its elements to be populated</param>
+        public static void GetGBIsbnNumbers(List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, Book locBook)
+        {
+            var isbnId = new ISBN();
+            long isbnNum;
+
+         
+        }
 
         /// <summary>
         /// Gets the Authors'Names and populates the data on the Book instance 
