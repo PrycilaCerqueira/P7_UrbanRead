@@ -63,12 +63,38 @@ namespace P7_UrbanRead
         /// </summary>
         /// <param name="isbnIdentifiers">GoogleBookJson ISBNs' data</param>
         /// <param name="locBook">Book instance with its elements to be populated</param>
-        public static void GetGBIsbnNumbers(List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, Book locBook)
+        public static ISBN GetGBIsbnNumbers (List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, Book locBook)
         {
-            var isbnId = new ISBN();
+            ISBN isbnId = new ISBN();
             long isbnNum;
 
-         
+            foreach (var item in isbnIdentifiers)
+            {
+                bool isntAlphaNumeric = long.TryParse(item.Identifier, out isbnNum);
+                if (isntAlphaNumeric == true)
+                {
+                    if (item.Type == "OTHER")
+                    {
+                        continue;
+                    }
+                    if (item.Type == "ISBN_10")
+                    {
+                        isbnId.Isbn10 = isbnNum;
+                    }
+                    if (item.Type == "ISBN_13")
+                    {
+                        isbnId.Isbn13 = isbnNum;
+                    }
+                }
+
+            }
+
+            if (isbnId != null)
+            {
+                return isbnId;
+            }
+            return null;
+                     
         }
 
         /// <summary>
