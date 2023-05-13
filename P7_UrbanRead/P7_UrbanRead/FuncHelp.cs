@@ -40,6 +40,7 @@ namespace P7_UrbanRead
             ISBN isbnId = new ISBN();
             long isbnNum;
 
+            //TODO: There are books only with the ISBN_13 data. How do I want to standardize it?
             if (isbnIdentifiers != null)
             {
                 foreach (var item in isbnIdentifiers)
