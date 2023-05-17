@@ -41,7 +41,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 locBook.Title = GB.VolumeInfo.Title;
                 locBook.Subtitle = GB.VolumeInfo.Subtitle;
                 locBook.Description = GB.VolumeInfo.Description;
-                locBook.TotalPages = GB.VolumeInfo.PageCount; //TODO: this field is not populating
+                locBook.TotalPages = GB.VolumeInfo.PageCount;
 
                 //Gets the authors' names from GoogleBooksJson and passes it to Library
                 FuncHelp.GetGBAuthorNames(GB.VolumeInfo.Authors, locBook);
