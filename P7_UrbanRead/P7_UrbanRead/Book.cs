@@ -8,25 +8,28 @@ namespace P7_UrbanRead
 {
     internal class Book
     {
-        private string _Cover; //Source of the cover image
+        //Sample book https://www.googleapis.com/books/v1/volumes/EYzOAwAAQBAJ
+        private string _CoverImgLink; //TODO: Get the HTTPS of the book cover image (field name imageLinks - thumbnail. Ex.: http://books.google.com/books/publisher/content?id=EYzOAwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&imgtk=AFLRE71dwS5aA5Ebt4LmimbUmWJN5PsDm7kKklg6DgFOUZQ_4-vUUxs_vKPAnXxchM0QZxXXwm8PGqKb1lOW-L2uKJkvb_nzV-f87xumPHlZ-cN_5c1DBT7JZvTFr2T0RxzB-z4_-rPK&source=gbs_api)
         private string _Title;
         private string _Subtitle;
         private string _Description;
         private int  _TotalPages;
         private List<ISBN> _ISBNS = new List<ISBN>();
         private List<Author> _Authors = new List<Author>();
-        private string _PublisherName; //verify if the type is correct
-        private DateTime _PublishedDate; //verify if the type is correct
+        private string _PublisherName; 
+        private DateTime _PublishedDate; 
         private LangType _Language; 
         private string _Genre; 
-        private BookFormat _BookFormat;
-        private ReadStatus _ReadingStatus;
-        private int _PageAt;
+        private BookFormat _BookFormat; //TODO: Get the available book format type - PDF, MOBI, etc
+        private string _MaturityRating; //TODO: Revise datatype / Is it inappropriate for kids?  
+        private string _BookPreviewLink;  //TODO: Revise datatype / Get the HTTPS of the book preview (Ex.: https://play.google.com/books/reader?id=EYzOAwAAQBAJ&pg=GBS.PP1&hl=en)
+        private ReadStatus _ReadingStatus; //TODO: Defaul = undread. Allow the user to edit it
+        private int _PageAt; //TODO: Default = 1. Get the page number where the user last read the book
 
-        public string Cover
+        public string CoverImgLink
         {
-            get { return _Cover; }
-            set { _Cover = value; }
+            get { return _CoverImgLink; }
+            set { _CoverImgLink = value; }
         }
         public string Title
         {
@@ -83,6 +86,17 @@ namespace P7_UrbanRead
         {
             get { return _BookFormat; }
             set { _BookFormat = value; }
+        }
+
+        public string MaturityRating
+        {
+            get { return _MaturityRating; }
+            set { _MaturityRating = value; } 
+        }
+        public string BookPreviewLink
+        {
+            get { return _BookPreviewLink; }   
+            set { _BookPreviewLink = value; }
         }
         public ReadStatus ReadingStatus
         {
