@@ -38,6 +38,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                     continue;
                 }
 
+                locBook.CoverImgLink = GB.VolumeInfo.ImageLinks.Thumbnail.ToString();
                 locBook.Title = GB.VolumeInfo.Title;
                 locBook.Subtitle = GB.VolumeInfo.Subtitle;
                 locBook.Description = GB.VolumeInfo.Description;
