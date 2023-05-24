@@ -87,12 +87,12 @@ namespace P7_UrbanRead
             set { _BookFormat = value; }
         }
 
-        public string MaturityRating
+        public List<MatRatType> MaturityRating
         {
             get { return _MaturityRating; }
             set { _MaturityRating = value; } 
         }
-        public List<MatRatType> BookPreviewLink
+        public string BookPreviewLink
         {
             get { return _BookPreviewLink; }   
             set { _BookPreviewLink = value; }
