@@ -8,9 +8,9 @@
         mature, 
         nonMature,
         Everyone,
-        Child_09,
-        Teen_913,
-        Teen_1317,
+        Child_6to9,
+        Teen_9to13,
+        Teen_13to17,
         Adult,
         Restricted
     }
