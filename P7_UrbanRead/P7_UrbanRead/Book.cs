@@ -9,7 +9,7 @@ namespace P7_UrbanRead
     internal class Book
     {
         //Sample book https://www.googleapis.com/books/v1/volumes/EYzOAwAAQBAJ
-        private string _CoverImgLink; //TODO: Get the HTTPS of the book cover image (field name imageLinks - thumbnail. Ex.: http://books.google.com/books/publisher/content?id=EYzOAwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&imgtk=AFLRE71dwS5aA5Ebt4LmimbUmWJN5PsDm7kKklg6DgFOUZQ_4-vUUxs_vKPAnXxchM0QZxXXwm8PGqKb1lOW-L2uKJkvb_nzV-f87xumPHlZ-cN_5c1DBT7JZvTFr2T0RxzB-z4_-rPK&source=gbs_api)
+        private string _CoverImgLink;
         private string _Title;
         private string _Subtitle;
         private string _Description;
@@ -20,7 +20,7 @@ namespace P7_UrbanRead
         private DateTime _PublishedDate; 
         private LangType _Language; 
         private string _Genre; 
-        private BookFormat _BookFormat; //TODO: Get the available book format type - PDF, MOBI, etc
+        private BookFormat _BookFormat; //Field used when the user uploads the purchased book. The field should accept any format and convert to others - PDF, MOBI, etc
         private string _MaturityRating; //TODO: Revise datatype / Is it inappropriate for kids?  
         private string _BookPreviewLink;  //TODO: Revise datatype / Get the HTTPS of the book preview (Ex.: https://play.google.com/books/reader?id=EYzOAwAAQBAJ&pg=GBS.PP1&hl=en)
         private ReadStatus _ReadingStatus; //TODO: Defaul = undread. Allow the user to edit it
