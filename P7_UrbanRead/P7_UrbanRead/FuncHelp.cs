@@ -122,26 +122,26 @@ namespace P7_UrbanRead
         /// <summary>
         /// Gets the Language and populates the data on the Book instance
         /// </summary>
-        /// <param name="GBlang">GoogleBookJson Language data</param>
+        /// <param name="lang">GoogleBookJson Language data</param>
         /// <param name="locBook">Book instance with its elements to be populated</param>
-        public static void GetLanguageType(string GBlang, Book locBook)
+        public static void GetLanguageType(string lang, Book locBook)
         {
-            GBlang = GBlang.ToLower();
-            if (GBlang != null)
+            lang = lang.ToLower();
+            if (!string.IsNullOrEmpty(lang))
             {
-                if (GBlang == "en")
+                if (lang == "en")
                 {
                     locBook.Language = LangType.English;
                 }
-                if (GBlang == "fr")
+                if (lang == "fr")
                 {
                     locBook.Language = LangType.French;
                 }
-                if (GBlang == "es")
+                if (lang == "es")
                 {
                     locBook.Language = LangType.Spanish;
                 }
-                if (GBlang == "pt-br" || GBlang == "pt")
+                if (lang == "pt-br" || lang == "pt")
                 {
                     locBook.Language = LangType.Portuguese;
                 }
@@ -173,7 +173,24 @@ namespace P7_UrbanRead
             }
         }
 
+        /// <summary>
+        /// Gets the Maturity Raiting and populates the data on the Book instance
+        /// </summary>
+        /// <param name="matRat">GoogleBookJson Maturity data</param>
+        /// <param name="locBook">Book instance with its elements to be populated</param>
+        public static void GetMaturityRating(string matRate, Book locBook)
+        {
+            matRate = matRate.ToLower();
+            if (!string.IsNullOrEmpty(matRate))
+            {
+                if (matRate == "mature")
+                {
+                    //TODO: Search on how to create a list of Enum 
+                    locBook.MaturityRating.Add(MatRatType.Mature);
+                }
+            }
 
+        }
 
     }
 }

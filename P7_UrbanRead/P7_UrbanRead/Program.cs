@@ -57,7 +57,8 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 //Sets Genre based on GoogleBook category data
                 FuncHelp.GetGenreType(GB.VolumeInfo.Categories, locBook);
 
-                //Gets the available Book formats
+                //Sets the high-level of Book Maturity Rating based on GoogleBook data
+                FuncHelp.GetMaturityRating(GB.VolumeInfo.MaturityRating, locBook);
 
    
 

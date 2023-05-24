@@ -5,8 +5,8 @@
     //Allow the user to select multiple options.
     enum MatRatType
     {
-        mature, 
-        nonMature,
+        Mature, 
+        NonMature,
         Everyone,
         Child_6to9,
         Teen_9to13,
