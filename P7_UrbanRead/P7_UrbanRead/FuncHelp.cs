@@ -44,25 +44,32 @@ namespace P7_UrbanRead
             {
                 foreach (var item in isbnIdentifiers)
                 {
-                    bool isntAlphaNumeric = long.TryParse(item.Identifier, out isbnNum);
-                    if (isntAlphaNumeric == true)
+                    if (item.Type != null)
                     {
-                        if (item.Type == "OTHER")
+                        bool isntAlphaNumeric = long.TryParse(item.Identifier, out isbnNum);
+                        if (isntAlphaNumeric == true)
                         {
-                            continue;
+                            if (item.Type == "OTHER")
+                            {
+                                continue;
+                            }
+                            if (item.Type == "ISBN_10")
+                            {
+                                isbnId.Isbn10 = isbnNum;
+                            }
+                            if (item.Type == "ISBN_13")
+                            {
+                                isbnId.Isbn13 = isbnNum;
+                            }
                         }
-                        if (item.Type == "ISBN_10")
+                        else
                         {
-                            isbnId.Isbn10 = isbnNum;
-                        }
-                        if (item.Type == "ISBN_13")
-                        {
-                            isbnId.Isbn13 = isbnNum;
+                            isbnId = null;
                         }
                     }
                     else
                     {
-                        isbnId = null;
+                        continue;
                     }
                 }
 
@@ -75,6 +82,36 @@ namespace P7_UrbanRead
             locBook.ISBNS.Add(isbnId);
         }
 
+        /// <summary>
+        ///  Gets the Book Cover Image and populates the data on the Book instance 
+        /// </summary>
+        public static void GetCoverImgLink(GoogleBooksJson.ImageLinks imageLinks, Book locBook)
+        {
+            string imgThumbnails;
+
+            if (imageLinks != null)
+            {
+                if (!String.IsNullOrEmpty(imageLinks.Thumbnail))
+                {
+                    imgThumbnails = imageLinks.Thumbnail.ToString();
+                }
+                else if (!String.IsNullOrEmpty(imageLinks.SmallThumbnail))
+                {
+                    imgThumbnails = imageLinks.SmallThumbnail.ToString();
+                }
+                else
+                {
+                    imgThumbnails = "Null";
+                }
+            }
+            else
+            {
+                imgThumbnails = "Null";
+            }
+
+            locBook.CoverImgLink = imgThumbnails;
+
+        }
 
         /// <summary>
         /// Gets the Authors'Names and populates the data on the Book instance 

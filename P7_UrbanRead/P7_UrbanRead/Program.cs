@@ -38,7 +38,9 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                     continue;
                 }
 
-                locBook.CoverImgLink = GB.VolumeInfo.ImageLinks.Thumbnail.ToString();
+                //Gets the cover of the book image link
+                FuncHelp.GetCoverImgLink(GB.VolumeInfo.ImageLinks, locBook);
+
                 locBook.Title = GB.VolumeInfo.Title;
                 locBook.Subtitle = GB.VolumeInfo.Subtitle;
                 locBook.Description = GB.VolumeInfo.Description;
