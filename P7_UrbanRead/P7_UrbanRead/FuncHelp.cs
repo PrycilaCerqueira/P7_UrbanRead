@@ -62,10 +62,6 @@ namespace P7_UrbanRead
                                 isbnId.Isbn13 = isbnNum;
                             }
                         }
-                        else
-                        {
-                            isbnId = null;
-                        }
                     }
                     else
                     {
