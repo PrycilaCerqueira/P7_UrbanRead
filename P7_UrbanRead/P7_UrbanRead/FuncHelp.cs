@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace P7_UrbanRead
 {
@@ -116,17 +117,22 @@ namespace P7_UrbanRead
         /// <param name="locBook">Book instance with its elements to be populated</param>
         public static void GetGBAuthorNames(List<string> aNames, Book locBook)
         {
-            for (int n = 0; n < aNames.Count; n++)
+            if (aNames != null)
             {
-                var authorsNames = new Author();
-                authorsNames.FullName = aNames[n];
-                if (authorsNames == null)
+                foreach (string name in aNames)
                 {
-                    continue;
+                    Author authorsName = new Author();
+                    authorsName.FullName = name;
+                    locBook.Authors.Add(authorsName);
                 }
-
-                locBook.Authors.Add(authorsNames);
             }
+            else
+            {
+                Author authorsName = new Author();
+                authorsName.FullName = "unknown";
+                locBook.Authors.Add(authorsName);
+            }
+            
 
         }
 
