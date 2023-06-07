@@ -6,7 +6,7 @@
     enum MatRatType
     {
         Mature, 
-        NonMature,
+        NotMature,
         Everyone,
         Child_6to9,
         Teen_9to13,

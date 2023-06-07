@@ -19,11 +19,11 @@ namespace P7_UrbanRead
         private DateTime _PublishedDate; 
         private LangType _Language; 
         private string _Genre; 
-        private BookFormat _BookFormat; //Field intended to be used when the user uploads the purchased book. The field should accept any format and convert to others - PDF, MOBI, etc
-        private List<MatRatType> _MaturityRating = new List<MatRatType>(); //TODO: Revise datatype / Is it inappropriate for kids?  
-        private string _BookPreviewLink;  //TODO: Revise datatype / Get the HTTPS of the book preview (Ex.: https://play.google.com/books/reader?id=EYzOAwAAQBAJ&pg=GBS.PP1&hl=en)
-        private ReadStatus _ReadingStatus; //TODO: Default = undread. Field intended to be allow the user to edit it
-        private int _PageAt; //TODO: Default = 1. Get the page number where the user last read the book
+        private BookFormat _BookFormat; 
+        private List<MatRatType> _MaturityRating = new List<MatRatType>();
+        private string _BookPreviewLink;  
+        private ReadStatus _ReadingStatus; 
+        private int _PageAt; 
 
         public string CoverImgLink
         {

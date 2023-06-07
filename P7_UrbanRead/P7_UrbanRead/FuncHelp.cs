@@ -224,8 +224,35 @@ namespace P7_UrbanRead
             {
                 if (matRate == "mature")
                 {
-                    //TODO: Search on how to create a list of Enum 
                     locBook.MaturityRating.Add(MatRatType.Mature);
+                }
+                if (matRate == "not_mature")
+                {
+                    locBook.MaturityRating.Add(MatRatType.NotMature);
+                }
+                if (matRate == "everyone")
+                {
+                    locBook.MaturityRating.Add(MatRatType.Everyone);
+                }
+                if (matRate == "child 6y to 9y")
+                {
+                    locBook.MaturityRating.Add(MatRatType.Child_6to9);
+                }
+                if (matRate == "teen 9y to 13y")
+                {
+                    locBook.MaturityRating.Add(MatRatType.Teen_9to13);
+                }
+                if (matRate == "teen 13y to 17y")
+                {
+                    locBook.MaturityRating.Add(MatRatType.Teen_13to17);
+                }
+                if (matRate == "adult")
+                {
+                    locBook.MaturityRating.Add(MatRatType.Adult);
+                }
+                if (matRate == "restricted")
+                {
+                    locBook.MaturityRating.Add(MatRatType.Restricted);
                 }
             }
 
