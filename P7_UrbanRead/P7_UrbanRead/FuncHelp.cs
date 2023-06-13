@@ -258,5 +258,13 @@ namespace P7_UrbanRead
 
         }
 
+        /// <summary>
+        /// Gets the link of the book preview and populates the data on the Book instance
+        /// </summary>
+        public static void GetBookPreviewLink()
+        {
+
+        }
+
     }
 }

@@ -45,6 +45,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 locBook.Subtitle = GB.VolumeInfo.Subtitle;
                 locBook.Description = GB.VolumeInfo.Description;
                 locBook.TotalPages = GB.VolumeInfo.PageCount;
+                locBook.BookPreviewLink = GB.VolumeInfo.PreviewLink;
 
                 //Gets the authors' names from GoogleBooksJson and passes it to Library
                 FuncHelp.GetGBAuthorNames(GB.VolumeInfo.Authors, locBook);
@@ -61,6 +62,8 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
 
                 //Sets the high-level of Book Maturity Rating based on GoogleBook data
                 FuncHelp.GetMaturityRating(GB.VolumeInfo.MaturityRating, locBook);
+
+               
 
    
 
