@@ -62,9 +62,10 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 //Sets the high-level of Book Maturity Rating based on GoogleBook data
                 FuncHelp.GetMaturityRating(GB.VolumeInfo.MaturityRating, locBook);
 
-               
+                //Get a reading sample of the book 
+                FuncHelp.GetBookReadingSample(GB.AccessInfo, locBook);
 
-   
+
 
                 library.Add(locBook);
 
