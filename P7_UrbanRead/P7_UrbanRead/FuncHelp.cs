@@ -267,7 +267,10 @@ namespace P7_UrbanRead
             {
                 if (bSample.AccessViewStatus == "SAMPLE")
                 {
-                    locBook.BookSampleLink = bSample.WebReaderLink;
+                    string sample = bSample.WebReaderLink;
+                    sample = sample.Replace("&hl=", "");
+                    
+                    locBook.BookSampleLink = sample;
                 }
                 else
                 {
