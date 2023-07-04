@@ -65,7 +65,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 //Get a reading sample of the book 
                 FuncHelp.GetBookReadingSample(GB.VolumeInfo.PreviewLink, locBook);
 
-
+   
 
                 library.Add(locBook);
 

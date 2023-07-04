@@ -262,24 +262,13 @@ namespace P7_UrbanRead
         /// <summary>
         /// Gets the link of the book preview and populates the data on the Book instance
         /// </summary>
-        public static void GetBookReadingSample(GoogleBooksJson.AccessInfo , string bookSample, Book locBook)
+        public static void GetBookPreviewLink()
         {
-            if (bookSample != null)
+            if (bSample != null)
             {
-                if (bookSample == "SAMPLE")
+                if (bSample.AccessViewStatus == "SAMPLE")
                 {
-                    //string sample = bSample;
-                    //sample = sample.Replace("&hl=", "");
-                    int letterLoc = bookSample.IndexOf("&");
-                    for (int num = bookSample.Length; num >= letterLoc; num--)
-                    {
-                        bookSample = bookSample.Remove(num);
-                    }
-
-                    bookSample = bookSample + "&hl=en#v=onepage&q&f=true";
-                    //sample = sample.Replace("&dq=harry+potter&hl=&as_ebook=1&cd=3&source=gbs_api", "&hl=en#v=onepage&q&f=true");
-
-                    locBook.BookSampleLink = bookSample;
+                    locBook.BookSampleLink = bSample.WebReaderLink;
                 }
                 else
                 {
