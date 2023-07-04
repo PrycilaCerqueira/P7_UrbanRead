@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace P7_UrbanRead
@@ -261,16 +262,24 @@ namespace P7_UrbanRead
         /// <summary>
         /// Gets the link of the book preview and populates the data on the Book instance
         /// </summary>
-        public static void GetBookReadingSample(GoogleBooksJson.AccessInfo bSample, Book locBook)
+        public static void GetBookReadingSample(GoogleBooksJson.AccessInfo , string bookSample, Book locBook)
         {
-            if (bSample != null)
+            if (bookSample != null)
             {
-                if (bSample.AccessViewStatus == "SAMPLE")
+                if (bookSample == "SAMPLE")
                 {
-                    string sample = bSample.WebReaderLink;
-                    sample = sample.Replace("&hl=", "");
-                    
-                    locBook.BookSampleLink = sample;
+                    //string sample = bSample;
+                    //sample = sample.Replace("&hl=", "");
+                    int letterLoc = bookSample.IndexOf("&");
+                    for (int num = bookSample.Length; num >= letterLoc; num--)
+                    {
+                        bookSample = bookSample.Remove(num);
+                    }
+
+                    bookSample = bookSample + "&hl=en#v=onepage&q&f=true";
+                    //sample = sample.Replace("&dq=harry+potter&hl=&as_ebook=1&cd=3&source=gbs_api", "&hl=en#v=onepage&q&f=true");
+
+                    locBook.BookSampleLink = bookSample;
                 }
                 else
                 {

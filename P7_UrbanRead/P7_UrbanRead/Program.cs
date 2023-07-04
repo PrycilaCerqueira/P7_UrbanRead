@@ -20,7 +20,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
 
             Console.Write("Book search: ");
             string bookTopic= Console.ReadLine().Trim().ToLower();
-
+            
             var client = new WebClient();
             var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={bookTopic}&download=epub&maxResults=40&key={apiKey}");
             var localData = JsonConvert.DeserializeObject<GoogleBooksJson.Root>(jsonData);
@@ -63,7 +63,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 FuncHelp.GetMaturityRating(GB.VolumeInfo.MaturityRating, locBook);
 
                 //Get a reading sample of the book 
-                FuncHelp.GetBookReadingSample(GB.AccessInfo, locBook);
+                FuncHelp.GetBookReadingSample(GB.VolumeInfo.PreviewLink, locBook);
 
 
 
