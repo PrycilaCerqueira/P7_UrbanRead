@@ -63,7 +63,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 FuncHelp.GetMaturityRating(GB.VolumeInfo.MaturityRating, locBook);
 
                 //Get a reading sample of the book 
-                FuncHelp.GetBookReadingSample(GB.VolumeInfo.PreviewLink, locBook);
+                FuncHelp.GetBookReadingSamples(GB.AccessInfo.AccessViewStatus,GB.AccessInfo.WebReaderLink, GB.VolumeInfo.PreviewLink, locBook);
 
    
 

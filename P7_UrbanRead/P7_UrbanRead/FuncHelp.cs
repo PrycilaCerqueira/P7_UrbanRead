@@ -262,18 +262,19 @@ namespace P7_UrbanRead
         /// <summary>
         /// Gets the link of the book preview and populates the data on the Book instance
         /// </summary>
-        public static void GetBookPreviewLink()
+        public static void GetBookReadingSamples(string sampleStatus, string webLink, string previewlink, Book locBook)
         {
-            if (bSample != null)
+
+            if (sampleStatus == "SAMPLE")
             {
-                if (bSample.AccessViewStatus == "SAMPLE")
-                {
-                    locBook.BookSampleLink = bSample.WebReaderLink;
-                }
-                else
-                {
-                    locBook.BookSampleLink = "Null";
-                }
+                webLink = webLink.Replace("&hl=", "");
+                locBook.BookSampleLinks.Add(webLink);
+
+                locBook.BookSampleLinks.Add(previewlink);
+            }         
+            else
+            {
+                locBook.BookSampleLinks.Add("Null");
             }
         }
 
