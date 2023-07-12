@@ -14,6 +14,11 @@ namespace P7_UrbanRead
 {
     internal class FuncHelp
     {
+        /// <summary>
+        /// Establishes the API connection with Google Books to retrieve the books data
+        /// </summary>
+        /// <param name="bookTopic">Topic of the Book</param>
+        /// <returns>Google Books findings of the topic</returns>
         public static GoogleBooksJson.Root GoogleBookAPIConnector(string bookTopic)
         {
             string apiKey = Secret.gbKey;
