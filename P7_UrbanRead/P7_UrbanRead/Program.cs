@@ -16,14 +16,17 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
     {
         static void Main(string[] args)
         {
-            string apiKey = Secret.gbKey;
+            
 
             Console.Write("Book search: ");
             string bookTopic= Console.ReadLine().Trim().ToLower();
-            
-            var client = new WebClient();
-            var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={bookTopic}&download=epub&maxResults=40&key={apiKey}");
-            var localData = JsonConvert.DeserializeObject<GoogleBooksJson.Root>(jsonData);
+
+            //Establishes the API connection with Google Books to retrieve the books data 
+            var localData = FuncHelp.GoogleBookAPIConnector(bookTopic); 
+
+            //var client = new WebClient();
+            //var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={bookTopic}&filter=partial&maxResults=40&key={apiKey}");
+            //var localData = JsonConvert.DeserializeObject<GoogleBooksJson.Root>(jsonData);
 
             var library = new List<Book>();
             for (int i = 0; i < localData.Items.Count; i++)

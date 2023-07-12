@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,15 @@ namespace P7_UrbanRead
 {
     internal class FuncHelp
     {
+        public static GoogleBooksJson.Root GoogleBookAPIConnector(string bookTopic)
+        {
+            string apiKey = Secret.gbKey;
+            var client = new WebClient();
+            var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={bookTopic}&filter=partial&maxResults=40&key={apiKey}");
+            var localData = JsonConvert.DeserializeObject<GoogleBooksJson.Root>(jsonData);
+            return localData;
+        }
+
         /// <summary>
         /// Verifies whether the ISBN has a valid format or not 
         /// </summary>
