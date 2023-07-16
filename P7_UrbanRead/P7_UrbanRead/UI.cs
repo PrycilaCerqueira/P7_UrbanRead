@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,19 +24,29 @@ namespace P7_UrbanRead
             int bookTypeNum;
             do
             {
-                Console.Write("\nSelect book type\n1) Only free ebooks\n2) Only paied ebooks\n3) All ebooks\n4) All booksn\nNumber: ");
+                Console.Write("\nSelect book type\n1) Only free ebooks\n2) Only paid ebooks\n3) All ebooks\n4) All books\nNumber: ");
                 bookTypeNum = Int32.Parse(Console.ReadLine().Trim());
+
             } while (bookTypeNum < 1 || bookTypeNum > 4);
             
             switch (bookTypeNum)
             {
-
+                case 1:
+                    searchParameters.Add("free-ebooks");
+                    break;
+                case 2:
+                    searchParameters.Add("paid-ebooks");
+                    break;
+                case 3:
+                    searchParameters.Add("ebooks");
+                    break;
+                case 4:
+                    searchParameters.Add("partial");
+                    break;
+                default:
+                    searchParameters.Add("partial");
+                    break;
             }
-            
-           
-
-
-
 
             return searchParameters;
 

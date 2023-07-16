@@ -23,8 +23,6 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
             //Establishes the API connection with Google Books to retrieve the books data 
             var localData = FuncHelp.GoogleBookAPIConnector(searchParameters); 
 
-
-
             var library = new List<Book>();
             for (int i = 0; i < localData.Items.Count; i++)
             {
