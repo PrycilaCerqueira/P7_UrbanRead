@@ -18,7 +18,21 @@ namespace P7_UrbanRead
 
             Console.Write("Book search: ");
             string bookTopic = Console.ReadLine().Trim().ToLower();
+            searchParameters.Add(bookTopic);
 
+            int bookTypeNum;
+            do
+            {
+                Console.Write("\nSelect book type\n1) Only free ebooks\n2) Only paied ebooks\n3) All ebooks\n4) All booksn\nNumber: ");
+                bookTypeNum = Int32.Parse(Console.ReadLine().Trim());
+            } while (bookTypeNum < 1 || bookTypeNum > 4);
+            
+            switch (bookTypeNum)
+            {
+
+            }
+            
+           
 
 
 
