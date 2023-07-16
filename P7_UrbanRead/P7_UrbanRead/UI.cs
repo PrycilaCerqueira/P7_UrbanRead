@@ -12,12 +12,18 @@ namespace P7_UrbanRead
         /// Menu for the users to refine their book search
         /// </summary>
         /// <returns>All the search parameters</returns>
-        public static string BookSearchMenu()
+        public static List <string> BookSearchMenu()
         {
+            List<string> searchParameters = new List<string>();
+
             Console.Write("Book search: ");
             string bookTopic = Console.ReadLine().Trim().ToLower();
 
-            return bookTopic;
+
+
+
+
+            return searchParameters;
 
         } 
     }

@@ -19,12 +19,18 @@ namespace P7_UrbanRead
         /// </summary>
         /// <param name="bookTopic">Topic of the Book</param>
         /// <returns>Google Books findings of the topic</returns>
-        public static GoogleBooksJson.Root GoogleBookAPIConnector(string bookTopic)
+        public static GoogleBooksJson.Root GoogleBookAPIConnector(List<string> parameters)
         {
+
+            string bookTopic = parameters[0];
+            string filter = parameters[1];
+
             string apiKey = Secret.gbKey;
+            
             var client = new WebClient();
-            var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={bookTopic}&filter=partial&maxResults=40&key={apiKey}");
+            var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={bookTopic}&filter={filter}&maxResults=40&key={apiKey}");
             var localData = JsonConvert.DeserializeObject<GoogleBooksJson.Root>(jsonData);
+            
             return localData;
         }
 

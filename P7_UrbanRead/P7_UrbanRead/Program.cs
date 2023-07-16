@@ -17,12 +17,11 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
         static void Main(string[] args)
         {
             
-
             //User's input their search parameters
-            string bookTopic= UI.BookSearchMenu();
+            List<string> searchParameters= UI.BookSearchMenu();
 
             //Establishes the API connection with Google Books to retrieve the books data 
-            var localData = FuncHelp.GoogleBookAPIConnector(bookTopic); 
+            var localData = FuncHelp.GoogleBookAPIConnector(searchParameters); 
 
 
 
