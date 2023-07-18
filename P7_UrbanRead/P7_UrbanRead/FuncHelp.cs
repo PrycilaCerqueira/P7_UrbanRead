@@ -28,7 +28,7 @@ namespace P7_UrbanRead
             string apiKey = Secret.gbKey;
             
             var client = new WebClient();
-            var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={bookTopic}&filter={filter}&maxResults=40&key={apiKey}");
+            var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={bookTopic}&filter={filter}&printType=books&maxResults=40&key={apiKey}");
             var localData = JsonConvert.DeserializeObject<GoogleBooksJson.Root>(jsonData);
             
             return localData;
@@ -85,6 +85,10 @@ namespace P7_UrbanRead
                             {
                                 isbnId.Isbn13 = isbnNum;
                             }
+                        }
+                        else
+                        {
+                            isbnId = null;
                         }
                     }
                     else
