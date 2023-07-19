@@ -9,6 +9,7 @@ using System.Reflection.PortableExecutable;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using static GoogleBooksJson;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace P7_UrbanRead // Note: actual namespace depends on the project name.
 {
@@ -63,15 +64,18 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 //Get a reading sample of the book 
                 FuncHelp.GetBookReadingSamples(GB.AccessInfo.AccessViewStatus,GB.AccessInfo.WebReaderLink, GB.VolumeInfo.PreviewLink, locBook);
 
-                
+                // Set books reading status 
+                FuncHelp.SetReadingStatus(locBook);
 
-   
 
                 library.Add(locBook);
 
             }
 
             
+        
+
+
             Console.WriteLine();
            
 
