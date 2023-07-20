@@ -41,10 +41,10 @@ namespace P7_UrbanRead
                     searchParameters.Add("ebooks");
                     break;
                 case 4:
-                    searchParameters.Add("full");
+                    searchParameters.Add("partial");
                     break;
                 default:
-                    searchParameters.Add("full");
+                    searchParameters.Add("partial");
                     break;
             }
 
