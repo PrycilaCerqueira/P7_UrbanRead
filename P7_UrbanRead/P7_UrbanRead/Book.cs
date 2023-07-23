@@ -23,8 +23,7 @@ namespace P7_UrbanRead
         private BookFormat _BookFormat; 
         private List<MatRatType> _MaturityRating = new List<MatRatType>();
         private List<string> _BookSampleLinks = new List<string>();  
-        private ReadStatus _ReadingStatus; 
-        private int _PageAt; 
+        
 
         public string CoverImgLink
         {
@@ -98,15 +97,6 @@ namespace P7_UrbanRead
             get { return _BookSampleLinks; }   
             set { _BookSampleLinks = value; }
         }
-        public ReadStatus ReadingStatus
-        {
-            get { return _ReadingStatus; }
-            set { _ReadingStatus = value; }
-        }
-        public int PageAt
-        {
-            get { return _PageAt; }
-            set { _PageAt = value; }
-        }
+
     }
 }
