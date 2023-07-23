@@ -65,7 +65,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
                 FuncHelp.GetBookReadingSamples(GB.AccessInfo.AccessViewStatus,GB.AccessInfo.WebReaderLink, GB.VolumeInfo.PreviewLink, locBook);
 
                 // Set books reading status 
-                FuncHelp.SetReadingStatus(locBook);
+                //FuncHelp.SetReadingStatus(locBook);
 
 
                 library.Add(locBook);

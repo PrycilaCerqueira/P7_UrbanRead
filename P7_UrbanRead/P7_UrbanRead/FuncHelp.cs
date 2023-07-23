@@ -308,13 +308,13 @@ namespace P7_UrbanRead
         /// Function will return the book reading status based on the page at users' are 
         /// </summary>
         /// <param name="book">Library Book</param>
-        public static void SetReadingStatus(Book book)
+        public static void SetReadingStatus(ActiveBook book)
         {
-            if (book.PageAt == book.TotalPages)
+            if (book.PageAt == book.ActBook.TotalPages)
             {
                 book.ReadingStatus = ReadStatus.Finished;
             }
-            if (book.PageAt > 0 && book.PageAt != book.TotalPages)
+            if (book.PageAt > 0 && book.PageAt != book.ActBook.TotalPages)
             {
                 book.ReadingStatus = ReadStatus.InProgress;
             }

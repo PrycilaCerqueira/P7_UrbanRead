@@ -11,9 +11,7 @@ namespace P7_UrbanRead
         private Book _ActBook;
         private ReadStatus _ReadingStatus;
         private int _PageAt;
-
-
-        public Book ActeBook
+        public Book ActBook
         {
             get { return _ActBook; }
             set { _ActBook = value; }
