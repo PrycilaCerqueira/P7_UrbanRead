@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "P7_UrbanRead": {
+      "commandName": "Project"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    }
+  }
+}
