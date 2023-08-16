@@ -71,7 +71,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
 
             }
 
-
+            XML.ExportFile(library);
 
 
             // Set books reading status 
