@@ -1,6 +1,6 @@
 ﻿namespace P7_UrbanRead
 {
-    enum BookFormat
+    public enum BookFormat
     {
         HardCopy,
         PDF,

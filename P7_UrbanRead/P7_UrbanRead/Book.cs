@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace P7_UrbanRead
 {
-    internal class Book
+    public class Book
     {
         private string _CoverImgLink;
         private string _Title;

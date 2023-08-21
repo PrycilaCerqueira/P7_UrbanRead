@@ -1,6 +1,6 @@
 ﻿namespace P7_UrbanRead
 {
-    enum LangType
+    public enum LangType
     {
         Others,
         English,

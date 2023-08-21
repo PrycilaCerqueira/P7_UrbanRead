@@ -7,7 +7,7 @@ using static System.Reflection.Metadata.BlobBuilder;
 
 namespace P7_UrbanRead
 {
-    internal class ISBN
+    public class ISBN
     {
         private long _Isbn10;
         private long _Isbn13;

@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace P7_UrbanRead
 {
-    internal class Author
+    public class Author
     {
         private string _FullName;
 

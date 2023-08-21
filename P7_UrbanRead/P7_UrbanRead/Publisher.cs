@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace P7_UrbanRead
 {
-    internal class Publisher
+    public class Publisher
     {
         private string _PublisherName;
         private DateTime _PublishedDate;

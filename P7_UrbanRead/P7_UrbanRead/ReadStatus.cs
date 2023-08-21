@@ -1,6 +1,6 @@
 ﻿namespace P7_UrbanRead
 {
-    enum ReadStatus
+    public enum ReadStatus
     {
         Unread,
         InProgress,
