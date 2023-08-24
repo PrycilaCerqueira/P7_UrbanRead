@@ -12,7 +12,7 @@ using System.Xml.Linq;
 
 namespace P7_UrbanRead
 {
-    internal class FuncHelp
+    internal class Help
     {
         /// <summary>
         /// Establishes the API connection with Google Books to retrieve the books data
