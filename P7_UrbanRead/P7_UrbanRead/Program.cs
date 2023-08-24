@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http.Json;
 using System.Reflection;
 using System.Reflection.PortableExecutable;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using static GoogleBooksJson;
@@ -17,17 +18,18 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
     {
         static void Main(string[] args)
         {
+
+           
             
             //User's input their search parameters
             List<string> searchParameters= UI.BookSearchMenu();
 
             //Establishes the API connection with Google Books to retrieve the books data 
-            GoogleBooksJson.Root GBCollection = FuncHelp.GoogleBookAPIConnector(searchParameters); 
+            GoogleBooksJson.Root GBCollection = FuncHelp.GoogleBookAPIConnector(searchParameters);
 
             List<Book> library = FuncHelp.FetchGoogleBooks(GBCollection);
-
-
             XML.ExportFile(library);
+            XML.ImportFile();
 
 
             // Set books reading status 
