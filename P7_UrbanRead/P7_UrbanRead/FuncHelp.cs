@@ -35,6 +35,61 @@ namespace P7_UrbanRead
         }
 
         /// <summary>
+        /// Fetchs GoogleBooks book reference into a local library  
+        /// </summary>
+        /// <param name="GBCollection">GoogleBooks book collection</param>
+        /// <returns>Book library</returns>
+        public static List<Book> FetchGoogleBooks(GoogleBooksJson.Root GBCollection)
+        {
+            var library = new List<Book>();
+            for (int i = 0; i < GBCollection.Items.Count; i++)
+            {
+                var gb = GBCollection.Items[i];
+                var bookRef = new Book();
+
+                //Verifies whether or not the ISBNs format and values are valid to add the bookRef to the internal library.
+                if (isIsbnValid(gb.VolumeInfo.IndustryIdentifiers, bookRef) == false)
+                {
+                    library.Remove(bookRef);
+                    continue;
+                }
+
+                //Gets the cover of the bookRef image link
+                GetCoverImgLink(gb.VolumeInfo.ImageLinks, bookRef);
+
+                bookRef.Title = gb.VolumeInfo.Title;
+                bookRef.Subtitle = gb.VolumeInfo.Subtitle;
+                bookRef.Description = gb.VolumeInfo.Description;
+                bookRef.TotalPages = gb.VolumeInfo.PageCount;
+
+                //Gets the authors' names from GoogleBooksJson and passes it to Library
+                GetGBAuthorNames(gb.VolumeInfo.Authors, bookRef);
+
+                //Gets the Publisher data from GoogleBookJson
+                bookRef.PublisherName = gb.VolumeInfo.Publisher;
+                GetGBPublishDates(gb.VolumeInfo.PublishedDate, bookRef);
+
+                //Sets the language type based on the GoogleBook language data
+                GetLanguageType(gb.VolumeInfo.Language, bookRef);
+
+                //Sets Genre based on GoogleBook category data
+                GetGenreType(gb.VolumeInfo.Categories, bookRef);
+
+                //Sets the high-level of Book Maturity Rating based on GoogleBook data
+                GetMaturityRating(gb.VolumeInfo.MaturityRating, bookRef);
+
+                //Get a reading sample of the bookRef 
+                GetBookReadingSamples(gb.AccessInfo.AccessViewStatus, gb.AccessInfo.WebReaderLink, gb.VolumeInfo.PreviewLink, bookRef);
+
+                library.Add(bookRef);
+
+            }
+
+            return library;
+
+        }
+
+        /// <summary>
         /// Verifies whether the ISBN has a valid format or not 
         /// </summary>
         /// <param name="isbnIdentifiers">GoogleBookJson ISBN data</param>
@@ -286,7 +341,7 @@ namespace P7_UrbanRead
         }
 
         /// <summary>
-        /// Gets the link of the book preview and populates the data on the Book instance
+        /// Gets the link of the bookRef preview and populates the data on the Book instance
         /// </summary>
         public static void GetBookReadingSamples(string sampleStatus, string webLink, string previewlink, Book locBook)
         {
@@ -305,7 +360,7 @@ namespace P7_UrbanRead
         }
 
         /// <summary>
-        /// Function will return the book reading status based on the page at users' are 
+        /// Function will return the bookRef reading status based on the page at users' are 
         /// </summary>
         /// <param name="book">Library Book</param>
         public static void SetReadingStatus(ActiveBook book)
