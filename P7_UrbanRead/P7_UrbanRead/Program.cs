@@ -27,7 +27,7 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
             //Establishes the API connection with Google Books to retrieve the books data 
             GoogleBooksJson.Root GBCollection = Help.GoogleBookAPIConnector(searchParameters);
 
-            List<Book> library = Help.FetchGoogleBooks(GBCollection);
+            List<Book> library = Help.LoadGoogleBooks(GBCollection);
             XML.ExportFile(library);
             XML.ImportFile();
 

@@ -39,7 +39,7 @@ namespace P7_UrbanRead
         /// </summary>
         /// <param name="GBCollection">GoogleBooks book collection</param>
         /// <returns>Book library</returns>
-        public static List<Book> FetchGoogleBooks(GoogleBooksJson.Root GBCollection)
+        public static List<Book> LoadGoogleBooks(GoogleBooksJson.Root GBCollection)
         {
             var library = new List<Book>();
             for (int i = 0; i < GBCollection.Items.Count; i++)
