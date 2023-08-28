@@ -1,14 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Net;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Linq;
 
 namespace P7_UrbanRead
 {
@@ -39,7 +31,7 @@ namespace P7_UrbanRead
         /// </summary>
         /// <param name="GBCollection">GoogleBooks book collection</param>
         /// <returns>Book library</returns>
-        public static List<Book> LoadGoogleBooks(GoogleBooksJson.Root GBCollection)
+        public static List<Book> LoadGoogleBooksData(GoogleBooksJson.Root GBCollection)
         {
             var library = new List<Book>();
             for (int i = 0; i < GBCollection.Items.Count; i++)

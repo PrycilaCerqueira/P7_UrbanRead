@@ -1,18 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Immutable;
-using System.Globalization;
-using System.Net;
-using System.Net.Http.Json;
-using System.Reflection;
-using System.Reflection.PortableExecutable;
-using System.Runtime.InteropServices;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using static GoogleBooksJson;
-using static System.Reflection.Metadata.BlobBuilder;
-
-namespace P7_UrbanRead // Note: actual namespace depends on the project name.
+﻿namespace P7_UrbanRead // Note: actual namespace depends on the project name.
 {
     internal class Program
     {
@@ -21,16 +7,22 @@ namespace P7_UrbanRead // Note: actual namespace depends on the project name.
 
            
             
-            //User's input their search parameters
+            //Users' input their search parameters
             List<string> searchParameters= UI.BookSearchMenu();
 
             //Establishes the API connection with Google Books to retrieve the books data 
             GoogleBooksJson.Root GBCollection = Help.GoogleBookAPIConnector(searchParameters);
-
-            List<Book> library = Help.LoadGoogleBooks(GBCollection);
+            List<Book> library = Help.LoadGoogleBooksData(GBCollection);
+            
+            //Save the library file into the users' profile folder for a fast load
             XML.ExportFile(library);
             XML.ImportFile();
+            library = XML.LoadLocalLibrary();
 
+            if (library == null)
+            {
+
+            }
 
             // Set books reading status 
             //FuncHelp.SetReadingStatus(locBook);

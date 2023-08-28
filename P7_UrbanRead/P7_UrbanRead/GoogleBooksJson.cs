@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-    internal class GoogleBooksJson
+internal class GoogleBooksJson
     {
         //https://developers.google.com/books/docs/v1/using
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
