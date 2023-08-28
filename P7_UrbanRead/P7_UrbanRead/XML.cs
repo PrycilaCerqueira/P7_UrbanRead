@@ -1,4 +1,9 @@
-﻿using System.Xml.Serialization;
+﻿using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
+using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
+using System.Linq.Expressions;
 
 namespace P7_UrbanRead
 {
@@ -8,7 +13,8 @@ namespace P7_UrbanRead
         static string FOLDER = @$"C:\Users\{USERNAME}\Documents\UrbanRead";
         static string FILE = System.IO.Path.Combine(FOLDER, "Book_Library.xml");
         
-               
+
+       
         /// <summary>
         /// Create the XML repository folder on the user's PC profile
         /// </summary>

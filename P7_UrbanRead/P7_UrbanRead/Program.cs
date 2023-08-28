@@ -16,7 +16,9 @@
                 GoogleBooksJson.Root GBCollection = Help.GoogleBookAPIConnector(searchParameters);
                 library = Help.LoadGoogleBooksData(GBCollection);
             }
-                        
+
+            var searchResult = library.Where(b => b.Title.Contains(searchParameters[0]));
+
             //Save the library file into the users' profile folder for a fast load
             XML.ExportFile(library);
             
