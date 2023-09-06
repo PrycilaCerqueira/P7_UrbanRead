@@ -372,10 +372,11 @@ namespace P7_UrbanRead
 
         }
 
-        public List<Book> SearchOnGoogleBooks(string topic, int bookType)
+        /*public List<Book> SearchOnGoogleBooks(string topic, int bookType)
         {
             //  return Help.SearchOnGoogleBooks(string topic, int bookType);
         }
+        */
         public void SearchOnLocalLibrary()
         {
 

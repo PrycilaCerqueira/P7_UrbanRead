@@ -1,11 +1,16 @@
 ﻿@page "/fetchbooks"
 
-<PageTitle>Book Search</PageTitle>
+<PageTitle>Urban Library</PageTitle>
 
 @using WebUI.Data
 @inject MainDataService SearchBook
 
 <h1>Book Search</h1>
+<form id="ULsearch">
+     <input type="text" id="query" name="q" placeholder="">
+     <button>Search</button>
+</form>
+
 
 @code {
 
