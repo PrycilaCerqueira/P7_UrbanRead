@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace P7_UrbanRead
 {
-    internal class XML
+    public class XML
     {
         static string USERNAME = Environment.UserName;
         static string FOLDER = @$"C:\Users\{USERNAME}\Documents\UrbanRead";

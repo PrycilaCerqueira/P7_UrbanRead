@@ -4,7 +4,7 @@ using System.Net;
 
 namespace P7_UrbanRead
 {
-    internal class Help
+    public class Help
     {
         /// <summary>
         /// Establishes the API connection with Google Books to retrieve the books data
@@ -371,6 +371,21 @@ namespace P7_UrbanRead
             }
 
         }
+
+        public List<Book> SearchOnGoogleBooks(string topic, int bookType)
+        {
+            //  return Help.SearchOnGoogleBooks(string topic, int bookType);
+        }
+        public void SearchOnLocalLibrary()
+        {
+
+        }
+
+        public void SearchOnUserBookshelf()
+        {
+
+        }
+
 
     }
 }

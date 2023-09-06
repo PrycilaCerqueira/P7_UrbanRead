@@ -17,7 +17,9 @@
                 library = Help.LoadGoogleBooksData(GBCollection);
             }
 
-            var searchResult = library.Where(b => b.Title.Contains(searchParameters[0]));
+            var lowercaserSearchTerm = searchParameters[0].ToLower();
+
+            var searchResult = library.Where(b => b.Title.ToLower().Contains(lowercaserSearchTerm));
 
             //Save the library file into the users' profile folder for a fast load
             XML.ExportFile(library);

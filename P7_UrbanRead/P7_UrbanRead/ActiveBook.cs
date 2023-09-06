@@ -1,6 +1,6 @@
 ﻿namespace P7_UrbanRead
 {
-    internal class ActiveBook
+    public class ActiveBook
     {
         private Book _ActBook;
         private ReadStatus _ReadingStatus;
