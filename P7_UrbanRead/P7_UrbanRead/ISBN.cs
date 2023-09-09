@@ -1,4 +1,6 @@
-﻿namespace P7_UrbanRead
+﻿using System.Text;
+
+namespace P7_UrbanRead
 {
     public class ISBN
     {
@@ -15,6 +17,12 @@
             get { return _Isbn13; }
             set { _Isbn13 = value; }
         }
-                
+
+        public override string ToString()
+        {
+           return $"{Isbn13}, {Isbn10}.";
+        }
+
+
     }
 }

@@ -17,9 +17,14 @@
                 library = Help.LoadGoogleBooksData(GBCollection);
             }
 
-            var lowercaserSearchTerm = searchParameters[0].ToLower();
+            var lowercaseSearchTerm = searchParameters[0].ToLower();
+            var searchResult = library.Where(b => b.Title.ToLower().Contains(lowercaseSearchTerm)).ToList();
 
-            var searchResult = library.Where(b => b.Title.ToLower().Contains(lowercaserSearchTerm));
+            foreach (Book result in searchResult)
+            {
+                Console.WriteLine();
+                Console.WriteLine(result.ToString());
+            }
 
             //Save the library file into the users' profile folder for a fast load
             XML.ExportFile(library);

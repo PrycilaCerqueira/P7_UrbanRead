@@ -1,4 +1,6 @@
-﻿namespace P7_UrbanRead
+﻿using System.Text;
+
+namespace P7_UrbanRead
 {
     public class Book
     {
@@ -91,5 +93,34 @@
             set { _BookSampleLinks = value; }
         }
 
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Cover: "); 
+            sb.AppendLine(CoverImgLink);
+            sb.Append("Title: ");
+            sb.AppendLine(Title);
+
+            if (Subtitle != null)
+            {
+                sb.Append("Subtitle: ");
+                sb.AppendLine(Subtitle);
+            }
+
+            sb.Append("Description: ");
+            sb.AppendLine(Description);
+            sb.Append("Total of pages: ");
+            sb.AppendLine(TotalPages.ToString());
+
+            sb.Append("ISBNs: ");
+            foreach( ISBN i in ISBNS)
+            {
+                sb.AppendLine(i.ToString());
+            }
+            
+            return sb.ToString();
+           
+
+        }
     }
 }

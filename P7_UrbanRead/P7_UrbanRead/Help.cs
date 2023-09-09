@@ -6,6 +6,7 @@ namespace P7_UrbanRead
 {
     public class Help
     {
+
         /// <summary>
         /// Establishes the API connection with Google Books to retrieve the books data
         /// </summary>
