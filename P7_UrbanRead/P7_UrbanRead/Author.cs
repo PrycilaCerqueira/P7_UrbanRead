@@ -10,7 +10,12 @@
             set { _FullName = value; }
         }
 
-        
+        public override string ToString()
+        {
+            return $"{FullName}";
+        }
+
+
 
     }
 }

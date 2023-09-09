@@ -117,6 +117,21 @@ namespace P7_UrbanRead
             {
                 sb.AppendLine(i.ToString());
             }
+
+            sb.Append("Authors: ");
+            foreach (Author a in Authors)
+            {
+                int aCount = Authors.Count;
+                if (aCount <= 1)
+                {
+                    sb.Append(a.ToString());
+                }
+                else
+                {
+                    sb.Append(a.ToString() + ", ");
+                }                   
+            }
+            sb.AppendLine(".");
             
             return sb.ToString();
            
