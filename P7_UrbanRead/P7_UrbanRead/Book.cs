@@ -49,7 +49,7 @@ namespace P7_UrbanRead
         {
             get { return _PublishedDate; }
             set { _PublishedDate = value; }
-        }
+        } 
         public List<ISBN> ISBNS
         {
             get { return _ISBNS; }
@@ -64,23 +64,23 @@ namespace P7_UrbanRead
         {
             get { return _PublisherName; }
             set { _PublisherName = value; }
-        }
+        } 
         public LangType Language
         {
             get { return _Language; }
             set { _Language = value; }
-        }
+        } 
         public string Genre
         {
             get { return _Genre; }
             set { _Genre = value; }
-        }
+        }  
 
         public BookFormat Type
         {
             get { return _BookFormat; }
             set { _BookFormat = value; }
-        }
+        } 
 
         public List<MatRatType> MaturityRating
         {
@@ -128,6 +128,31 @@ namespace P7_UrbanRead
                 else if (a <= 0)
                 {
                     sb.AppendLine(Authors[a].ToString());
+                }
+            }
+
+            sb.Append("Maturity: ");
+            foreach (MatRatType mrt in MaturityRating)
+            {
+                sb.AppendLine(mrt.ToString());
+            }
+
+            sb.Append("Genre: ");
+            sb.AppendLine(Genre.ToString());
+
+            if (BookSampleLinks != null)
+            {
+                sb.Append("Reading Samples: ");
+                for (int s = BookSampleLinks.Count - 1; s >= 0; s--)
+                {
+                    if (s > 0)
+                    {
+                        sb.Append(BookSampleLinks[s].ToString() + ", ");
+                    }
+                    else if (s <= 0)
+                    {
+                        sb.AppendLine(BookSampleLinks[s].ToString());
+                    }
                 }
             }
 
