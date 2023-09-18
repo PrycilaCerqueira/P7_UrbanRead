@@ -98,6 +98,7 @@ namespace P7_UrbanRead
             StringBuilder sb = new StringBuilder();
             sb.Append("Cover: "); 
             sb.AppendLine(CoverImgLink);
+            
             sb.Append("Title: ");
             sb.AppendLine(Title);
 
@@ -109,9 +110,7 @@ namespace P7_UrbanRead
 
             sb.Append("Description: ");
             sb.AppendLine(Description);
-            sb.Append("Total of pages: ");
-            sb.AppendLine(TotalPages.ToString());
-
+            
             sb.Append("ISBNs: ");
             foreach( ISBN i in ISBNS)
             {
@@ -130,6 +129,18 @@ namespace P7_UrbanRead
                     sb.AppendLine(Authors[a].ToString());
                 }
             }
+
+            sb.Append("Publisher: ");
+            sb.AppendLine(PublisherName.ToString());
+            
+            sb.Append("Published date: ");
+            sb.AppendLine(PublishedDate.ToShortDateString());
+
+            sb.Append("Total of pages: ");
+            sb.AppendLine(TotalPages.ToString());
+
+            sb.Append("Language: ");
+            sb.AppendLine(Language.ToString());
 
             sb.Append("Maturity: ");
             foreach (MatRatType mrt in MaturityRating)
