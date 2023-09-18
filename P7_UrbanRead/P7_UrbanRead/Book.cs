@@ -119,23 +119,19 @@ namespace P7_UrbanRead
             }
 
             sb.Append("Authors: ");
-            foreach (Author a in Authors)
+            for (int a = Authors.Count - 1; a >=0 ; a--)
             {
-                int aCount = Authors.Count;
-                if (aCount <= 1)
+                if (a > 0)
                 {
-                    sb.Append(a.ToString());
+                    sb.Append(Authors[a].ToString() + ", ");
                 }
-                else
+                else if (a <= 0)
                 {
-                    sb.Append(a.ToString() + ", ");
-                }                   
+                    sb.AppendLine(Authors[a].ToString());
+                }
             }
-            sb.AppendLine(".");
-            
-            return sb.ToString();
-           
 
+            return sb.ToString();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace P7_UrbanRead
 
         public override string ToString()
         {
-           return $"{Isbn13}, {Isbn10}.";
+           return $"{Isbn13}, {Isbn10}";
         }
 
 
