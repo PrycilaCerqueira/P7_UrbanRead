@@ -17,8 +17,22 @@
                 library = Help.LoadGoogleBooksData(GBCollection);
             }
 
-            var lowercaseSearchTerm = searchParameters[0].ToLower();
-            var searchResult = library.Where(b => b.Title.ToLower().Contains(lowercaseSearchTerm)).ToList();
+            var lowerCaseSearchTerm = searchParameters[0].ToLower();
+            var searchResult = library.Where(b => b.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
+
+            if(searchResult.Count < 1)
+            {
+                //Establishes the API connection with Google Books to retrieve the books data 
+                GoogleBooksJson.Root GBCollection = Help.GoogleBookAPIConnector(searchParameters);
+                
+                List <Book> addToLib = new List<Book>();
+                addToLib = Help.LoadGoogleBooksData(GBCollection);
+                
+                library.AddRange(addToLib);
+
+            }
+
+            searchResult = library.Where(b => b.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
 
             foreach (Book result in searchResult)
             {
