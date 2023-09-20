@@ -373,20 +373,49 @@ namespace P7_UrbanRead
 
         }
 
-        /*public List<Book> SearchOnGoogleBooks(string topic, int bookType)
+        /// <summary>
+        /// Search for books based on the user's paramenters imput (Local Library and GoogleBooks ) 
+        /// </summary>
+        /// <returns>List of book records</returns>
+        public static List<Book> initiateBookSearch()
         {
-            //  return Help.SearchOnGoogleBooks(string topic, int bookType);
-        }
-        */
-        public void SearchOnLocalLibrary()
-        {
+            List<string> searchParameters = UI.BookSearchMenu();
 
-        }
+            //Loads the Local Library if file exists 
+            List<Book> library = XML.LoadLocalLibrary();
 
-        public void SearchOnUserBookshelf()
-        {
+            //If Local Library file doesn't have data, establishe API connection with Google Books to retrieve books 
+            if (library == null)
+            {
+                GoogleBooksJson.Root GBCollection = Help.GoogleBookAPIConnector(searchParameters);
+                library = Help.LoadGoogleBooksData(GBCollection);
 
+                XML.ExportFile(library); //Save the incremented library file into the users' profile folder for a fast load
+            }
+
+            //Search for the book title in the Local Library
+            var lowerCaseSearchTerm = searchParameters[0].ToLower();
+            var searchResult = library.Where(b => b.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
+
+            //If Local Library does not contain the book title, establishe API connection and add the new range of books into the Local Library
+            if (searchResult.Count < 1)
+            {
+                GoogleBooksJson.Root GBCollection = Help.GoogleBookAPIConnector(searchParameters);
+
+                List<Book> addToLib = new List<Book>();
+                addToLib = Help.LoadGoogleBooksData(GBCollection);
+
+                library.AddRange(addToLib);
+                XML.ExportFile(library); //Save the incremented library file into the users' profile folder for a fast load
+
+                searchResult = library.Where(b => b.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
+            }
+
+            return searchResult;
         }
+    
+        
+
 
 
     }
