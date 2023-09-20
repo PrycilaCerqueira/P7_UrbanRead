@@ -395,10 +395,10 @@ namespace P7_UrbanRead
 
             //Search for the book title in the Local Library
             var lowerCaseSearchTerm = searchParameters[0].ToLower();
-            var searchResult = library.Where(b => b.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
+            var searchResults = library.Where(b => b.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
 
             //If Local Library does not contain the book title, establishe API connection and add the new range of books into the Local Library
-            if (searchResult.Count < 1)
+            if (searchResults.Count < 1)
             {
                 GoogleBooksJson.Root GBCollection = Help.GoogleBookAPIConnector(searchParameters);
 
@@ -408,10 +408,10 @@ namespace P7_UrbanRead
                 library.AddRange(addToLib);
                 XML.ExportFile(library); //Save the incremented library file into the users' profile folder for a fast load
 
-                searchResult = library.Where(b => b.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
+                searchResults = library.Where(b => b.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
             }
 
-            return searchResult;
+            return searchResults;
         }
     
         

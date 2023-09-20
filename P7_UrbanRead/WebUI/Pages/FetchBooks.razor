@@ -7,7 +7,7 @@
 
 <h1>Urban Library</h1>
 
-<p>@searchResult</p>
+<p>@searchResults</p>
 
 <form id="ULsearch">
      <input type="search" id="query" name="q" placeholder="Book...">
@@ -15,13 +15,43 @@
 </form>
 
 
+@if (searchResults == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Cover</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Authors</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var result in searchResults)
+            {
+                <tr>
+                    <td>@result.Cover</td>
+                    <td>@result.Title</td>
+                    <td>@result.Description</td>
+                    <td>@result.Authors</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
 @code {
 
-    private List<string> searchResult;
+    private List<string> searchResults = new List<string>();
 
-    private List<string> FetchBook()
+    public void FetchBook()
     {
-        searchResult = MainDataService.SearchBook();
+        searchResults = MainDataService.SearchBook();
 
 
     }

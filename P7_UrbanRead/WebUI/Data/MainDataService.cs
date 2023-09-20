@@ -7,14 +7,14 @@ namespace WebUI.Data
     {      
         public List<string> SearchBook()
         {
-            List<Book> searchResult = Help.initiateBookSearch();
+            List<Book> searchResults = Help.initiateBookSearch();
 
-            List <string> searchResultToString = new List<string>();
-            foreach (Book result in searchResult)
+            List <string> searchResultsToString = new List<string>();
+            foreach (Book result in searchResults)
             {
-                searchResultToString.Add(result.ToString());
+                searchResultsToString.Add(result.ToString());
             }
-            return searchResultToString;
+            return searchResultsToString;
 
         }
     }
