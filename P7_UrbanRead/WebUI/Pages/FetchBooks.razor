@@ -16,12 +16,14 @@
 
 
 @code {
-    
+
     private List<string> searchResult;
-      
-    private void FetchBook()
+
+    private List<string> FetchBook()
     {
-        //searchResult = SearchBook();
+        searchResult = MainDataService.SearchBook();
+
+
     }
     
 }

@@ -374,7 +374,7 @@ namespace P7_UrbanRead
         }
 
         /// <summary>
-        /// Search for books based on the user's paramenters imput (Local Library and GoogleBooks ) 
+        /// Search for books based on the user's paramenters input (Local Library and GoogleBooks ) 
         /// </summary>
         /// <returns>List of book records</returns>
         public static List<Book> initiateBookSearch()

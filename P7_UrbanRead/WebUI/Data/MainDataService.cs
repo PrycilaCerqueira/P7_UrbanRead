@@ -5,15 +5,17 @@ namespace WebUI.Data
 {
     public class MainDataService
     {      
-        private List<Book> _library;
-        public void Init()
+        public List<string> SearchBook()
         {
-            _library = XML.LoadLocalLibrary();
-        }   
-        
-        public string SearchBook()
-        {
-            return _library.ToString();
+            List<Book> searchResult = Help.initiateBookSearch();
+
+            List <string> searchResultToString = new List<string>();
+            foreach (Book result in searchResult)
+            {
+                searchResultToString.Add(result.ToString());
+            }
+            return searchResultToString;
+
         }
     }
 }
