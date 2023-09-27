@@ -5,9 +5,13 @@ namespace WebUI.Data
 {
     public class MainDataService
     {      
-        public static List<Book> SearchBook()
+        public static List<Book> SearchBook(string searchTerm,List<string> parameters = null)
         {
-            List<Book> searchResults = Help.initiateBookSearch();
+            if(parameters != null)
+            {
+                //handle parameters
+            }
+            List<Book> searchResults = Help.initiateBookSearch(parameters, searchTerm);
             return searchResults;
         }
     }

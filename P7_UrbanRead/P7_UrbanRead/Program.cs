@@ -4,7 +4,8 @@
     {
         static void Main(string[] args)
         {
-            var searchResult = Help.initiateBookSearch();
+            List<string> searchParameters = UI.BookSearchMenu();
+            var searchResult = Help.initiateBookSearch(searchParameters);
 
             foreach (Book result in searchResult)
             {

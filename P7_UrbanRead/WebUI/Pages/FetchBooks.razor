@@ -1,58 +1,66 @@
 ﻿@page "/fetchbooks"
 
 @using WebUI.Data
-@using P7_UrbanRead Book
+@using P7_UrbanRead
 @inject MainDataService SearchBook
 
 <PageTitle>Urban Library Search</PageTitle>
 
 <h1>Urban Library</h1>
+<div>
+    <form id="ULsearch">
+        @*<input type="search" id="query" name="q" placeholder="Book...">*@
+        <InputText type="search" id="query" name="q" placeholder="Book..." @bind-Value="_searchTerm" />
+        <button class="btn btn-primary" @onclick="FetchBook">Search</button>
+    </form>
+</div>
 
-<p>@searchResults</p>
-
-<form id="ULsearch">
-     <input type="search" id="query" name="q" placeholder="Book...">
-     <button class="btn btn-primary" onclick="">Search</button>
-</form>
-
-
-@if (searchResults == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Cover</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Authors</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var result in searchResults)
-            {
-                <tr>
-                    <td>@result.CoverImgLink</td>
-                    <td>@result.Title</td>
-                    <td>@result.Description</td>
-                    <td>@result.Authors</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-
+<div>
+    @if (_resultsVisible)
+    {
+        @if (searchResults == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Cover</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Authors</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var result in searchResults)
+                    {
+                        <tr>
+                            <td>@result.CoverImgLink</td>
+                            <td>@result.Title</td>
+                            <td>@result.Description</td>
+                            <td>@result.Authors</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+</div>
 
 @code {
 
     private List<Book> searchResults = new List<Book>();
 
-    public void FetchBook()
+    private string _searchTerm;
+    private bool _resultsVisible = false;
+
+    private void FetchBook()
     {
-        searchResults = MainDataService.SearchBook();
+        _resultsVisible = true;
+        searchResults = MainDataService.SearchBook(_searchTerm);
+        searchResults.ToString();
 
         /*
         List<string> searchResultsToString = new List<string>();
@@ -63,5 +71,5 @@ else
         */
 
     }
-    
+
 }
