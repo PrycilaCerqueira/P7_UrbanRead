@@ -9,16 +9,32 @@
 <h1>Urban Library</h1>
 <div>
     <form id="ULsearch">
-        @*<input type="search" id="query" name="q" placeholder="Book...">*@
-        <InputText type="search" id="query" name="q" placeholder="Book..." @bind-Value="_searchTerm" />
-        <button class="btn btn-primary" @onclick="FetchBook">Search</button>
+        <p>
+            <InputText type="search" id="query" name="q" placeholder="Book..." @bind-Value="_searchTerm"></InputText>
+            <button class="btn btn-primary" @onclick="FetchBook">Search</button>
+        </p>
+
+        <p>
+            <label>
+                <input type="radio"
+                       value="ISBN"
+                       name="group"
+                       checked ="@(selectedGroup)"
+                
+                <input/>
+
+                
+            </label>
+        </p>
+
+
     </form>
 </div>
 
 <div>
     @if (_resultsVisible)
     {
-        @if (searchResults == null)
+        @if (_searchResults == null)
         {
             <p><em>Loading...</em></p>
         }
@@ -34,7 +50,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var result in searchResults)
+                    @foreach (var result in _searchResults)
                     {
                         <tr>
                             <td>@result.CoverImgLink</td>
@@ -51,7 +67,7 @@
 
 @code {
 
-    private List<Book> searchResults = new List<Book>();
+    private List<Book> _searchResults = new List<Book>();
 
     private string _searchTerm;
     private bool _resultsVisible = false;
@@ -59,8 +75,8 @@
     private void FetchBook()
     {
         _resultsVisible = true;
-        searchResults = MainDataService.SearchBook(_searchTerm);
-        searchResults.ToString();
+        _searchResults = MainDataService.SearchBook(_searchTerm);
+        _searchResults.ToString();
 
         /*
         List<string> searchResultsToString = new List<string>();

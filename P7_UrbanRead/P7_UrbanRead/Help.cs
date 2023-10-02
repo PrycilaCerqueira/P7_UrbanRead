@@ -382,7 +382,7 @@ namespace P7_UrbanRead
            
 
             //Loads the Local Library if file exists 
-            List<Book> library = XML.LoadLocalLibrary();
+           // List<Book> library = XML.LoadLocalLibrary();
 
             //If Local Library file doesn't have data, establishe API connection with Google Books to retrieve books 
             if (library == null)
