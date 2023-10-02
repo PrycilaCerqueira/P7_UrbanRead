@@ -1,4 +1,4 @@
-﻿@page "/fetchbooks"
+﻿@page "/fetchsearchresults"
 
 @using WebUI.Data
 @using P7_UrbanRead
@@ -15,18 +15,12 @@
         </p>
 
         <p>
-            <label>
-                <input type="radio"
-                       value="ISBN"
-                       name="group"
-                       checked ="@(selectedGroup)"
-                
-                <input/>
-
-                
-            </label>
+           <Input type="radio" value="intitle" name="group" checked ="@(_selectedGroup == "intitle")" @onclick="@(()=>_selectedGroup = "intitle")"/>Title <br>
+           <Input type="radio" value="isbn" name="group" checked="@(_selectedGroup == "isbn")" @onclick="@(()=>_selectedGroup = "isbn")" />ISBN
+           
         </p>
 
+        @_selectedGroup
 
     </form>
 </div>
@@ -67,10 +61,12 @@
 
 @code {
 
+    private bool _resultsVisible = false;
     private List<Book> _searchResults = new List<Book>();
 
     private string _searchTerm;
-    private bool _resultsVisible = false;
+    private string _selectedGroup = "intitle";
+
 
     private void FetchBook()
     {
