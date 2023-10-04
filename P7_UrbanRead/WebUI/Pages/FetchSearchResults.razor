@@ -1,0 +1,106 @@
+﻿@page "/fetchsearchresults"
+
+@using WebUI.Data
+@using P7_UrbanRead
+@inject MainDataService SearchBook
+
+<PageTitle>Urban Library Search</PageTitle>
+
+<h1>Urban Library</h1>
+
+<div id="divsearch">
+    <form id="ULsearch">
+       
+        <div id="divsearchtxtbox">
+                <InputText type="search" id="query" name="q" placeholder="Book..." @bind-Value="_searchTopic"></InputText>
+                <button class="btn btn-primary" @onclick="FetchResults">Search</button>
+        </div>
+ 
+        <div id="divterms">
+            <p> 
+                Categories: <br>
+                <Input type="radio" value="none" name="term" checked="@(_selectedTerm == "none")" @onclick="@(()=>_selectedTerm = null)" /> Subject <br>
+                <Input type="radio" value="intitle" name="term" checked ="@(_selectedTerm == "intitle")" @onclick="@(()=>_selectedTerm = "intitle")"/> Title <br>
+                <Input type="radio" value="inauthor" name="term" checked="@(_selectedTerm == "inauthor")" @onclick="@(()=>_selectedTerm = "inauthor")" /> Author <br>
+                <Input type="radio" value="isbn" name="term" checked="@(_selectedTerm == "isbn")" @onclick="@(()=>_selectedTerm = "isbn")" /> ISBN <br>
+            </p>
+        </div>
+
+        <div id="divfilters">
+            <p>
+                Filters: <br>
+                <Input type="radio" value="all" name="filter" checked="@(_selectedFilter == "all")" @onclick="@(()=>_selectedFilter = "partial")" /> All Books <br>
+                <Input type="radio" value="ebooks" name="filter" checked="@(_selectedFilter == "ebooks")" @onclick="@(()=>_selectedFilter = "ebooks")" /> All Ebooks <br>
+                <Input type="radio" value="free-ebooks" name="filter" checked="@(_selectedFilter == "free-ebooks")" @onclick="@(()=>_selectedFilter = "free-ebooks")" /> Only Free Ebooks <br>
+                <Input type="radio" value="paid-ebooks" name="filter" checked="@(_selectedFilter == "paid-ebooks")" @onclick="@(()=>_selectedFilter = "paid-ebooks")" /> Only Paid Ebooks <br>
+            </p>
+        </div>
+        
+        @_searchTopic
+        @_selectedTerm
+        @_selectedFilter
+
+    </form>
+</div>
+
+<div id="divserachresults">
+    @if (_resultsVisible)
+    {
+        @if (_searchResults == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Cover</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Authors</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var result in _searchResults)
+                    {
+                        <tr>
+                            <td>@result.CoverImgLink</td>
+                            <td>@result.Title</td>
+                            <td>@result.Description</td>
+                            <td>@result.Authors</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+</div>
+
+@code {
+
+    private bool _resultsVisible = false;
+    private List<Book> _searchResults = new List<Book>();
+
+    private string _searchTopic;
+    private string _selectedTerm = null;
+    private string _selectedFilter = "partial";
+
+
+    private void FetchResults()
+    {
+        _resultsVisible = true;
+        _searchResults = MainDataService.SearchBook(_searchTopic, _selectedTerm, _selectedFilter);
+        _searchResults.ToString();
+
+        /*
+        List<string> searchResultsToString = new List<string>();
+        foreach (Book result in searchResults)
+        {
+            searchResultsToString.Add(result.ToString());
+        }
+        */
+
+    }
+
+}
