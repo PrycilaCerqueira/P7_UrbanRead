@@ -12,16 +12,18 @@ namespace P7_UrbanRead
         /// </summary>
         /// <param name="bookTopic">Topic of the Book</param>
         /// <returns>Google Books findings of the topic</returns>
-        public static GoogleBooksJson.Root GoogleBookAPIConnector(List<string> parameters)
+        public GoogleBooksJson.Root GoogleBookAPIConnector(string sTopic, string sTerm, string sFilter)
         {
 
-            string bookTopic = parameters[0];
-            string filter = parameters[1];
+            if (sTerm == null)
+            {
+                //handle parameters
+            }
 
             string apiKey = Secret.gbKey;
             
             var client = new WebClient();
-            var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={bookTopic}&filter={filter}&printType=books&maxResults=40&key={apiKey}");
+            var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={sTopic}&filter={}&printType=books&maxResults=40&key={apiKey}");
             var localData = JsonConvert.DeserializeObject<GoogleBooksJson.Root>(jsonData);
             
             return localData;
@@ -373,6 +375,7 @@ namespace P7_UrbanRead
 
         }
 
+        /*
         /// <summary>
         /// Search for books based on the user's paramenters input (Local Library and GoogleBooks ) 
         /// </summary>
@@ -382,7 +385,7 @@ namespace P7_UrbanRead
            
 
             //Loads the Local Library if file exists 
-            List<Book> library = XML.LoadLocalLibrary();
+            //List<Book> library = XML.LoadLocalLibrary();
 
             //If Local Library file doesn't have data, establishe API connection with Google Books to retrieve books 
             if (library == null)
@@ -413,6 +416,7 @@ namespace P7_UrbanRead
 
             return searchResults;
         }
+        */
     
         
 
