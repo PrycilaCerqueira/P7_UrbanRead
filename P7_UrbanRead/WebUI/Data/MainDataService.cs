@@ -8,11 +8,20 @@ namespace WebUI.Data
         
         private static List<Book> _library = new List<Book>(); 
         
+
+        /// <summary>
+        /// Initialize the internal Library during the program startup
+        /// </summary>
         protected static void Init()
         {
             _library = XML.LoadLocalLibrary();
         }
-        
+
+
+        /// <summary>
+        /// Search for books based on the user's paramenters input (Local Library and GoogleBooks) 
+        /// </summary>
+        /// <returns>List of book records</returns>
         public static List<Book> SearchBook(string sTopic, string sCategory, string sFilter)
         {
 
