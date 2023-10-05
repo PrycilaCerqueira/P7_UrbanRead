@@ -36,7 +36,7 @@
             </p>
         </div>
         
-        @_searchTopic
+
         @_selectedTerm
         @_selectedFilter
 
@@ -89,9 +89,13 @@
 
     private void FetchResults()
     {
-        _resultsVisible = true;
-        _searchResults = MainDataService.SearchBook(_searchTopic, _selectedTerm, _selectedFilter);
-        _searchResults.ToString();
+        if (!String.IsNullOrEmpty(_searchTopic))
+        {
+            _resultsVisible = true;
+            _searchResults = MainDataService.SearchBook(_searchTopic, _selectedTerm, _selectedFilter);
+            _searchResults.ToString();    
+        }
+
 
         /*
         List<string> searchResultsToString = new List<string>();
