@@ -4,24 +4,6 @@
     {
         static void Main(string[] args)
         {
-            List<string> searchParameters = UI.BookSearchMenu();
-            var searchResult = Help.initiateBookSearch(searchParameters);
-
-            foreach (Book result in searchResult)
-            {
-                Console.WriteLine();
-                Console.WriteLine(result.ToString());
-            }
-
-            
-            
-            // Set books reading status 
-            //FuncHelp.SetReadingStatus(locBook);
-
-
-
-
-            Console.WriteLine();
            
 
         }
