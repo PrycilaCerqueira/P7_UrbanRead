@@ -70,7 +70,7 @@ namespace P7_UrbanRead
         /// <summary>
         /// Load local Library file into the program 
         /// </summary>
-        /// <returns>Deserializer Library</returns>
+        /// <returns>Deserialized Library</returns>
         public static List<Book> LoadLocalLibrary()
         {
             List<Book> library;

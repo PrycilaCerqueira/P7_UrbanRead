@@ -6,13 +6,14 @@ namespace WebUI.Data
     public class MainDataService
     {
         
-        private List<Book> _library = new List<Book>(); 
-        public void Init()
+        private static List<Book> _library = new List<Book>(); 
+        
+        protected static void Init()
         {
             _library = XML.LoadLocalLibrary();
         }
         
-        public List<Book> SearchBook(string sTopic, string sCategory, string sFilter)
+        public static List<Book> SearchBook(string sTopic, string sCategory, string sFilter)
         {
 
             //If Local Library file doesn't have data, establishe API connection with Google Books to retrieve books 
@@ -45,5 +46,5 @@ namespace WebUI.Data
             return searchResults;
         }
     }
-    }
 }
+

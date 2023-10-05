@@ -12,10 +12,10 @@ namespace P7_UrbanRead
         /// </summary>
         /// <param name="bookTopic">Topic of the Book</param>
         /// <returns>Google Books findings of the topic</returns>
-        public GoogleBooksJson.Root GoogleBookAPIConnector(string sTopic, string sCategory, string sFilter)
+        public static GoogleBooksJson.Root GoogleBookAPIConnector(string sTopic, string sCategory, string sFilter)
         {
             string apiKey = Secret.gbKey;
-            string jsonData;
+            string jsonData = "";
 
             var client = new WebClient();
 
