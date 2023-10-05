@@ -19,10 +19,10 @@
         <div id="divterms">
             <p> 
                 Categories: <br>
-                <Input type="radio" value="none" name="term" checked="@(_selectedTerm == "none")" @onclick="@(()=>_selectedTerm = null)" /> Subject <br>
-                <Input type="radio" value="intitle" name="term" checked ="@(_selectedTerm == "intitle")" @onclick="@(()=>_selectedTerm = "intitle")"/> Title <br>
-                <Input type="radio" value="inauthor" name="term" checked="@(_selectedTerm == "inauthor")" @onclick="@(()=>_selectedTerm = "inauthor")" /> Author <br>
-                <Input type="radio" value="isbn" name="term" checked="@(_selectedTerm == "isbn")" @onclick="@(()=>_selectedTerm = "isbn")" /> ISBN <br>
+                <Input type="radio" value="none" name="Category" checked="@(_selectedCategory == "none")" @onclick="@(()=>_selectedCategory = null)" /> Subject <br>
+                <Input type="radio" value="intitle" name="Category" checked="@(_selectedCategory == "intitle")" @onclick="@(()=>_selectedCategory = "intitle")" /> Title <br>
+                <Input type="radio" value="inauthor" name="Category" checked="@(_selectedCategory == "inauthor")" @onclick="@(()=>_selectedCategory = "inauthor")" /> Author <br>
+                <Input type="radio" value="isbn" name="Category" checked="@(_selectedCategory == "isbn")" @onclick="@(()=>_selectedCategory = "isbn")" /> ISBN <br>
             </p>
         </div>
 
@@ -37,7 +37,7 @@
         </div>
         
 
-        @_selectedTerm
+        @_selectedCategory
         @_selectedFilter
 
     </form>
@@ -83,7 +83,7 @@
     private List<Book> _searchResults = new List<Book>();
 
     private string _searchTopic;
-    private string _selectedTerm = null;
+    private string _selectedCategory = null;
     private string _selectedFilter = "partial";
 
 
@@ -92,7 +92,7 @@
         if (!String.IsNullOrEmpty(_searchTopic))
         {
             _resultsVisible = true;
-            _searchResults = MainDataService.SearchBook(_searchTopic, _selectedTerm, _selectedFilter);
+            _searchResults = MainDataService.SearchBook(_searchTopic, _selectedCategory, _selectedFilter);
             _searchResults.ToString();    
         }
 

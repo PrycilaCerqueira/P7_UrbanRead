@@ -12,23 +12,22 @@ namespace P7_UrbanRead
         /// </summary>
         /// <param name="bookTopic">Topic of the Book</param>
         /// <returns>Google Books findings of the topic</returns>
-        public GoogleBooksJson.Root GoogleBookAPIConnector(string sTopic, string sTerm, string sFilter)
+        public GoogleBooksJson.Root GoogleBookAPIConnector(string sTopic, string sCategory, string sFilter)
         {
+            string apiKey = Secret.gbKey;
+            string jsonData;
+
             var client = new WebClient();
 
-            if (sTerm == null)
+            if (sCategory == null)
             {
-                var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={sTopic}&filter={sFilter}&printType=books&maxResults=40&key={apiKey}");
+                jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={sTopic}&filter={sFilter}&printType=books&maxResults=40&key={apiKey}");
             }
-            if (sTerm == "isbn" || sTerm == "inauthor" || sTerm == "intitle")
+            if (sCategory == "isbn" || sCategory == "inauthor" || sCategory == "intitle")
             {
-                var jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={sTopic}&filter={sFilter}&printType=books&maxResults=40&key={apiKey}");
-
+                jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={sCategory}:{sTopic}&filter={sFilter}&printType=books&maxResults=40&key={apiKey}");
             }
 
-
-            string apiKey = Secret.gbKey;
-            
             var localData = JsonConvert.DeserializeObject<GoogleBooksJson.Root>(jsonData);
             
             return localData;
