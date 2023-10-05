@@ -8,7 +8,7 @@
 
 <h1>Urban Library</h1>
 
-<div id="divsearch">
+<div id="divsearchmenu">
     <form id="ULsearch">
        
         <div id="divsearchtxtbox">
@@ -35,18 +35,13 @@
                 <Input type="radio" value="paid-ebooks" name="filter" checked="@(_selectedFilter == "paid-ebooks")" @onclick="@(()=>_selectedFilter = "paid-ebooks")" /> Only Paid Ebooks <br>
             </p>
         </div>
-        
-
-        @_selectedCategory
-        @_selectedFilter
-
     </form>
 </div>
 
 <div id="divserachresults">
     @if (_resultsVisible)
     {
-        @if (_searchResults == null)
+        @if (_searchResultsToString == null)
         {
             <p><em>Loading...</em></p>
         }
@@ -55,20 +50,14 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Cover</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Authors</th>
+                        <th>Search Results</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var result in _searchResults)
+                    @foreach (var result in _searchResultsToString)
                     {
                         <tr>
-                            <td>@result.CoverImgLink</td>
-                            <td>@result.Title</td>
-                            <td>@result.Description</td>
-                            <td>@result.Authors</td>
+                            <td>@result</td>
                         </tr>
                     }
                 </tbody>
@@ -79,8 +68,9 @@
 
 @code {
 
-    private bool _resultsVisible = false;
+    private bool _resultsVisible = true;
     private List<Book> _searchResults = new List<Book>();
+    private List<string> _searchResultsToString = new List<string>();
 
     private string _searchTopic;
     private string _selectedCategory = null;
@@ -92,18 +82,14 @@
         if (!String.IsNullOrEmpty(_searchTopic))
         {
             _resultsVisible = true;
-            _searchResults = MainDataService.SearchBook(_searchTopic, _selectedCategory, _selectedFilter);
-            //_searchResults.ToString();    
+            _searchResults = MainDataService.SearchBook(_searchTopic, _selectedCategory, _selectedFilter);    
         }
-
-
-        /*
-        List<string> searchResultsToString = new List<string>();
-        foreach (Book result in searchResults)
+        
+        foreach (Book result in _searchResults)
         {
-            searchResultsToString.Add(result.ToString());
+            _searchResultsToString.Add(result.ToString());
         }
-        */
+        
 
     }
 
