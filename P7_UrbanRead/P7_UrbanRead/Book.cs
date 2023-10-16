@@ -95,6 +95,8 @@ namespace P7_UrbanRead
 
         public override string ToString()
         {
+            return Title + " " + Subtitle + "Samples:" + BookSampleLinks.Count;
+
             StringBuilder sb = new StringBuilder();
             sb.Append("Cover: "); 
             sb.AppendLine(CoverImgLink);

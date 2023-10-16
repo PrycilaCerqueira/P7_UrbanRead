@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.IdentityModel.Tokens;
 using P7_UrbanRead;
 
 namespace WebUI.Data
@@ -19,13 +20,13 @@ namespace WebUI.Data
 
 
         /// <summary>
-        /// Search for books based on the user's paramenters input (Local Library and GoogleBooks) 
+        /// Search for books based on the user's parameters input (Local Library and GoogleBooks) 
         /// </summary>
         /// <returns>List of book records</returns>
         public static List<Book> SearchBook(string sTopic, string sCategory, string sFilter)
         {
 
-            //If Local Library file doesn't have data, establishe API connection with Google Books to retrieve books 
+            //If Local Library file doesn't have data, establishes API connection with Google Books to retrieve books 
             if (_library == null)
             {
                 GoogleBooksJson.Root GBCollection = Help.GoogleBookAPIConnector(sTopic, sCategory, sFilter);
@@ -38,7 +39,7 @@ namespace WebUI.Data
             var lowerCaseSearchTerm = sTopic.ToLower();
             var searchResults = _library.Where(b => b.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
 
-            //If Local Library does not contain the book title, establishe API connection and add the new range of books into the Local Library
+            //If Local Library does not contain the book title, establishes API connection and add the new range of books into the Local Library
             if (searchResults.Count < 1)
             {
                 GoogleBooksJson.Root GBCollection = Help.GoogleBookAPIConnector(sTopic, sCategory, sFilter);
@@ -51,6 +52,7 @@ namespace WebUI.Data
 
                 searchResults = _library.Where(b => b.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
             }
+
 
             return searchResults;
         }
