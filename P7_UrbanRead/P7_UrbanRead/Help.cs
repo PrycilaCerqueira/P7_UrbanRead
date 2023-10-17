@@ -19,7 +19,7 @@ namespace P7_UrbanRead
 
             var client = new WebClient();
 
-            if (sCategory == null)
+            if (sCategory == "")
             {
                 jsonData = client.DownloadString($"https://www.googleapis.com/books/v1/volumes?q={sTopic}&filter={sFilter}&printType=books&maxResults=40&key={apiKey}");
             }
