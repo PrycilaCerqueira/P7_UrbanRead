@@ -35,25 +35,37 @@
             @foreach(var cat in categories)
             {
                 <div class="form-check-inline">
-                <InputRadio class="form-check-input" Value="cat.rdValue"/>
-                <label class="form-check-label">@cat.rdLabel</label>
+                    <InputRadio class="form-check-input" Value="cat.rdValue"></InputRadio>
+                    <label class="form-check-label">@cat.rdLabel</label>
                 </div>
             }
-
         </InputRadioGroup>
     </div>
-    @_selectedCategory;
+   
 
     <div id="filterRadio">
-        <p>
+        @*<p>
             Filters: <br>
             <Input type="radio" value="all" name="filter" checked="@(_selectedFilter == "all")" @onclick="@(()=>_selectedFilter = "partial")" /> All Books <br>
             <Input type="radio" value="ebooks" name="filter" checked="@(_selectedFilter == "ebooks")" @onclick="@(()=>_selectedFilter = "ebooks")" /> All Ebooks <br>
             <Input type="radio" value="free-ebooks" name="filter" checked="@(_selectedFilter == "free-ebooks")" @onclick="@(()=>_selectedFilter = "free-ebooks")" /> Only Free Ebooks <br>
             <Input type="radio" value="paid-ebooks" name="filter" checked="@(_selectedFilter == "paid-ebooks")" @onclick="@(()=>_selectedFilter = "paid-ebooks")" /> Only Paid Ebooks <br>
-        </p>
-    </div>
+        </p>*@
 
+        <InputRadioGroup @bind-Value=_selectedFilter> Filters:
+            @foreach(var flt in filters)
+            {
+                <div class="form-check-inline">
+                    <InputRadio class="form-check-input" Value="flt.rdValue"></InputRadio>
+                    <label class="form-check-label">@flt.rdLabel</label>
+                </div>
+                
+            }
+        </InputRadioGroup>
+
+    </div>
+    @_selectedCategory;
+    @_selectedFilter;
 </div>
 
 <div id="divserachresults">
@@ -94,7 +106,7 @@
     private List<Book> _searchResults = new List<Book>();
 
     private string _searchTopic;
-    private string _selectedCategory;
+    private string _selectedCategory = "";
     private string _selectedFilter = "partial";
 
     private void FetchResults()
@@ -110,9 +122,17 @@
     List<RadioOptions> categories = new List<RadioOptions>()
     {
         new RadioOptions(){rdLabel = "Subject", rdValue = ""},
-        new RadioOptions() { rdLabel = "Title", rdValue = "intitle"},
-        new RadioOptions() { rdLabel = "Author", rdValue = "inauthor"},
-        new RadioOptions() { rdLabel = "ISBN", rdValue = "isbn"},
+        new RadioOptions(){rdLabel = "Title", rdValue = "intitle"},
+        new RadioOptions(){rdLabel = "Author", rdValue = "inauthor"},
+        new RadioOptions(){rdLabel = "ISBN", rdValue = "isbn"},
+    };
+
+    List<RadioOptions> filters = new List<RadioOptions>()
+    {
+        new RadioOptions(){rdLabel = "All Books", rdValue = "partial"},
+        new RadioOptions(){rdLabel = "All eBooks", rdValue = "ebooks"},
+        new RadioOptions(){rdLabel = "Only Free eBooks", rdValue = "free-ebooks"},
+        new RadioOptions(){rdLabel = "Only Paid eBooks", rdValue = "paid-ebooks"},
     };
 
     public class RadioOptions
