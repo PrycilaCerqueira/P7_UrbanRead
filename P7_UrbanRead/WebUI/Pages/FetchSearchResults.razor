@@ -20,17 +20,31 @@
         <button class="btn btn-primary" @onclick="FetchResults">Search</button>
     </div>
 
-    <div id="divterms">
-        <p>
-            Categories: <br>
+    <div id="catergoryRadio">
+        @*<p>
+
+             Categories: <br>
             <Input type="radio" value="none" name="Category" checked="@(_selectedCategory == "none")" @onclick="@(()=>_selectedCategory = null)" /> Subject <br>
             <Input type="radio" value="intitle" name="Category" checked="@(_selectedCategory == "intitle")" @onclick="@(()=>_selectedCategory = "intitle")" /> Title <br>
             <Input type="radio" value="inauthor" name="Category" checked="@(_selectedCategory == "inauthor")" @onclick="@(()=>_selectedCategory = "inauthor")" /> Author <br>
             <Input type="radio" value="isbn" name="Category" checked="@(_selectedCategory == "isbn")" @onclick="@(()=>_selectedCategory = "isbn")" /> ISBN <br>
-        </p>
-    </div>
+        </p> *@
 
-    <div id="divfilters">
+        <InputRadioGroup @bind-Value=_selectedCategory> Categories:
+
+            @foreach(var cat in categories)
+            {
+                <div class="form-check-inline">
+                <InputRadio class="form-check-input" Value="cat.rdValue"/>
+                <label class="form-check-label">@cat.rdLabel</label>
+                </div>
+            }
+
+        </InputRadioGroup>
+    </div>
+    @_selectedCategory;
+
+    <div id="filterRadio">
         <p>
             Filters: <br>
             <Input type="radio" value="all" name="filter" checked="@(_selectedFilter == "all")" @onclick="@(()=>_selectedFilter = "partial")" /> All Books <br>
@@ -78,11 +92,10 @@
 
 
     private List<Book> _searchResults = new List<Book>();
-   
-    private string _searchTopic;
-    private string _selectedCategory = null;
-    private string _selectedFilter = "partial";
 
+    private string _searchTopic;
+    private string _selectedCategory;
+    private string _selectedFilter = "partial";
 
     private void FetchResults()
     {
@@ -94,4 +107,20 @@
 
     }
 
+    List<RadioOptions> categories = new List<RadioOptions>()
+    {
+        new RadioOptions(){rdLabel = "Subject", rdValue = ""},
+        new RadioOptions() { rdLabel = "Title", rdValue = "intitle"},
+        new RadioOptions() { rdLabel = "Author", rdValue = "inauthor"},
+        new RadioOptions() { rdLabel = "ISBN", rdValue = "isbn"},
+    };
+
+    public class RadioOptions
+    {
+        public string rdLabel { get; set; }
+        public string rdValue { get; set; }
+    }
+
+
 }
+
