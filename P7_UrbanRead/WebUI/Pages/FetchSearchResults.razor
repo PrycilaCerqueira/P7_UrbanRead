@@ -2,34 +2,21 @@
 
 @using WebUI.Data
 @using P7_UrbanRead
-
+@using Microsoft.AspNetCore.Components.QuickGrid
 @inject MainDataService SearchBook
 
 <PageTitle>Urban Library Search</PageTitle>
 
 <h1>Urban Library</h1>
-@* <QuickGrid Items="@_searchResultsB">
-     <PropertyColumn Property="@(p => p.Title)" Sortable="true" />
 
-</QuickGrid> *@
 <div id="divsearchmenu">
-
 
     <div id="divsearchtxtbox">
         <InputText type="search" id="query" name="q" placeholder="Book..." @bind-Value="_searchTopic"></InputText>
         <button class="btn btn-primary" @onclick="FetchResults">Search</button>
     </div>
 
-    <div id="catergoryRadio">
-        @*<p>
-
-             Categories: <br>
-            <Input type="radio" value="none" name="Category" checked="@(_selectedCategory == "none")" @onclick="@(()=>_selectedCategory = null)" /> Subject <br>
-            <Input type="radio" value="intitle" name="Category" checked="@(_selectedCategory == "intitle")" @onclick="@(()=>_selectedCategory = "intitle")" /> Title <br>
-            <Input type="radio" value="inauthor" name="Category" checked="@(_selectedCategory == "inauthor")" @onclick="@(()=>_selectedCategory = "inauthor")" /> Author <br>
-            <Input type="radio" value="isbn" name="Category" checked="@(_selectedCategory == "isbn")" @onclick="@(()=>_selectedCategory = "isbn")" /> ISBN <br>
-        </p> *@
-
+    <div id="divcatergoryradio">
         <InputRadioGroup @bind-Value=_selectedCategory> Categories:
 
             @foreach(var cat in categories)
@@ -42,68 +29,30 @@
         </InputRadioGroup>
     </div>
    
-
-    <div id="filterRadio">
-        @*<p>
-            Filters: <br>
-            <Input type="radio" value="all" name="filter" checked="@(_selectedFilter == "all")" @onclick="@(()=>_selectedFilter = "partial")" /> All Books <br>
-            <Input type="radio" value="ebooks" name="filter" checked="@(_selectedFilter == "ebooks")" @onclick="@(()=>_selectedFilter = "ebooks")" /> All Ebooks <br>
-            <Input type="radio" value="free-ebooks" name="filter" checked="@(_selectedFilter == "free-ebooks")" @onclick="@(()=>_selectedFilter = "free-ebooks")" /> Only Free Ebooks <br>
-            <Input type="radio" value="paid-ebooks" name="filter" checked="@(_selectedFilter == "paid-ebooks")" @onclick="@(()=>_selectedFilter = "paid-ebooks")" /> Only Paid Ebooks <br>
-        </p>*@
-
+    <div id="divfilterradio">
         <InputRadioGroup @bind-Value=_selectedFilter> Filters:
+
             @foreach(var flt in filters)
             {
                 <div class="form-check-inline">
                     <InputRadio class="form-check-input" Value="flt.rdValue"></InputRadio>
                     <label class="form-check-label">@flt.rdLabel</label>
                 </div>
-                
             }
         </InputRadioGroup>
-
     </div>
-    @_selectedCategory;
-    @_selectedFilter;
+
 </div>
 
-<div id="divserachresults">
-
-    @if (_searchResults is not null)
-    {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Search Results</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var result in _searchResults)
-                {
-                    <tr>
-                        <td>@result </td>
-                @*         @foreach(var author in result.Authors.Take(2))
-                        {
-                            <td>author.FullName</td>
-                        } *@
-                    </tr>
-                }
-            </tbody>
-        </table>
-
-    }
-    else
-    {
-        <p><em>No book record found. Search again!</em></p>
-    }
-
+<div id="divsearchresults">
+    <QuickGrid></QuickGrid>
 </div>
 
 @code {
 
 
-    private List<Book> _searchResults = new List<Book>();
+    List<Book> _searchResults = new List<Book>();
+    IQueryable<Book> _results;
 
     private string _searchTopic;
     private string _selectedCategory = "";
@@ -113,8 +62,8 @@
     {
         if (!String.IsNullOrEmpty(_searchTopic))
         {
-
             _searchResults = MainDataService.SearchBook(_searchTopic, _selectedCategory, _selectedFilter);
+            _results = _searchResults.AsQueryable();
         }
 
     }
@@ -143,4 +92,3 @@
 
 
 }
-
