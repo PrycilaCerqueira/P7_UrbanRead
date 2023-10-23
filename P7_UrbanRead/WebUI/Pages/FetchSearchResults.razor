@@ -3,6 +3,7 @@
 @using WebUI.Data
 @using P7_UrbanRead
 @using Microsoft.AspNetCore.Components.QuickGrid
+
 @inject MainDataService SearchBook
 
 <PageTitle>Urban Library Search</PageTitle>
@@ -45,14 +46,21 @@
 </div>
 
 <div id="divsearchresults">
-    <QuickGrid></QuickGrid>
+    <QuickGrid Items="@_results">
+        <PropertyColumn Property="@(r=>r.Title)"></PropertyColumn>
+        <PropertyColumn Property="@(r=>r.Description)"></PropertyColumn>
+        <TemplateColumn title="ISBN">
+            @context.ISBNS.First()
+        </TemplateColumn>
+    </QuickGrid>
+    
 </div>
 
 @code {
 
 
     List<Book> _searchResults = new List<Book>();
-    IQueryable<Book> _results;
+    IQueryable<Book> _results { get; set; } = null!;
 
     private string _searchTopic;
     private string _selectedCategory = "";
