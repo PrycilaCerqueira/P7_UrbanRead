@@ -48,25 +48,37 @@
 
 </div>
 
+
 <div id="divsearchresults">
 
     @if (_isVisible)
     {
-        <QuickGrid Items="@_results">
+        <QuickGrid Items="@_results" Pagination="@pagination">
             <TemplateColumn title="Cover">
                 <img class="cover" src="@context.CoverImgLink" />
             </TemplateColumn>
             <TemplateColumn title="Title">@context.Title</TemplateColumn>
             <TemplateColumn title="Authors">
-                @foreach (var aut in context.Authors){
-                    @aut <br />
+                @for(int i = context.Authors.Count -1; i >= 0; i--)
+                {
+                    var author = context.Authors[i];
+                    if (i > 0)
+                    {
+                        <ul>@author, </ul>
+                    }
+                    else
+                    {
+                        <ul>@author</ul>
+                    }
                 }
+                
             </TemplateColumn>
-            <TemplateColumn title="ISBN">@context.ISBNS.First()</TemplateColumn>
+            <TemplateColumn title="ISBNs">@context.ISBNS.First()</TemplateColumn>
         </QuickGrid>
     }
-
 </div>
+<Paginator State="@pagination" />
+
 
 @code 
 {
@@ -77,8 +89,9 @@
     private string _searchTopic;
     private string _selectedCategory = "";
     private string _selectedFilter = "partial";
-    private bool _isVisible = false;
 
+    private bool _isVisible = false;
+    PaginationState pagination = new PaginationState { ItemsPerPage = 5 };
 
     private void FetchResults()
     {

@@ -18,10 +18,12 @@ namespace P7_UrbanRead
             set { _Isbn13 = value; }
         }
 
+        /*
         public override string ToString()
         {
            return $"{Isbn13}, {Isbn10}";
         }
+        */
 
 
     }
