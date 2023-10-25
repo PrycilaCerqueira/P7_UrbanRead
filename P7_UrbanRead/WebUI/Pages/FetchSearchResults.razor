@@ -57,7 +57,11 @@
                 <img class="cover" src="@context.CoverImgLink" />
             </TemplateColumn>
             <TemplateColumn title="Title">@context.Title</TemplateColumn>
-            <TemplateColumn title="Authors">@context.Authors</TemplateColumn>
+            <TemplateColumn title="Authors">
+                @foreach (var aut in context.Authors){
+                    @aut <br />
+                }
+            </TemplateColumn>
             <TemplateColumn title="ISBN">@context.ISBNS.First()</TemplateColumn>
         </QuickGrid>
     }
