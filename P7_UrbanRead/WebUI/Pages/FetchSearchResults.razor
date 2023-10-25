@@ -3,7 +3,6 @@
 @using WebUI.Data
 @using P7_UrbanRead
 @using Microsoft.AspNetCore.Components.QuickGrid
-
 @inject MainDataService SearchBook
 
 <PageTitle>Urban Library Search</PageTitle>
@@ -15,6 +14,7 @@
     <div id="divsearchtxtbox">
         <InputText type="search" id="query" name="q" placeholder="Book..." @bind-Value="_searchTopic"></InputText>
         <button class="btn btn-primary" @onclick="FetchResults">Search</button>
+        <br />
     </div>
 
     <div id="divcatergoryradio">
@@ -28,6 +28,7 @@
                 </div>
             }
         </InputRadioGroup>
+        <br />
     </div>
    
     <div id="divfilterradio">
@@ -41,37 +42,48 @@
                 </div>
             }
         </InputRadioGroup>
+        <br />
+        <br />
     </div>
 
 </div>
 
 <div id="divsearchresults">
-    <QuickGrid Items="@_results">
-        <PropertyColumn Property="@(r=>r.Title)"></PropertyColumn>
-        <PropertyColumn Property="@(r=>r.Description)"></PropertyColumn>
-        <TemplateColumn title="ISBN">
-            @context.ISBNS.First()
-        </TemplateColumn>
-    </QuickGrid>
-    
+
+    @if (_isVisible)
+    {
+        <QuickGrid Items="@_results">
+            <TemplateColumn title="Cover">
+                <img class="cover" src="@context.CoverImgLink" />
+            </TemplateColumn>
+            <TemplateColumn title="Title">@context.Title</TemplateColumn>
+            <TemplateColumn title="Authors">@context.Authors</TemplateColumn>
+            <TemplateColumn title="ISBN">@context.ISBNS.First()</TemplateColumn>
+        </QuickGrid>
+    }
+
 </div>
 
-@code {
-
+@code 
+{
 
     List<Book> _searchResults = new List<Book>();
-    IQueryable<Book> _results { get; set; } = null!;
+    IQueryable<Book> _results;
 
     private string _searchTopic;
     private string _selectedCategory = "";
     private string _selectedFilter = "partial";
+    private bool _isVisible = false;
+
 
     private void FetchResults()
     {
         if (!String.IsNullOrEmpty(_searchTopic))
         {
+            _isVisible = true;
             _searchResults = MainDataService.SearchBook(_searchTopic, _selectedCategory, _selectedFilter);
             _results = _searchResults.AsQueryable();
+
         }
 
     }
@@ -97,6 +109,6 @@
         public string rdLabel { get; set; }
         public string rdValue { get; set; }
     }
-
+    
 
 }

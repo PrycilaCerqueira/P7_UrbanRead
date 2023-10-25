@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Globalization;
 using System.Net;
+using System.Runtime.InteropServices;
 
 namespace P7_UrbanRead
 {
@@ -41,47 +42,50 @@ namespace P7_UrbanRead
         public static List<Book> LoadGoogleBooksData(GoogleBooksJson.Root GBCollection)
         {
             var library = new List<Book>();
-            for (int i = 0; i < GBCollection.Items.Count; i++)
+            if (GBCollection.Items != null)
             {
-                var gb = GBCollection.Items[i];
-                var bookRef = new Book();
-
-                //Verifies whether or not the ISBNs format and values are valid to add the bookRef to the internal library.
-                if (isIsbnValid(gb.VolumeInfo.IndustryIdentifiers, bookRef) == false)
+                for (int i = 0; i < GBCollection.Items.Count; i++)
                 {
-                    library.Remove(bookRef);
-                    continue;
+                    var gb = GBCollection.Items[i];
+                    var bookRef = new Book();
+
+                    //Verifies whether or not the ISBNs format and values are valid to add the bookRef to the internal library.
+                    if (isIsbnValid(gb.VolumeInfo.IndustryIdentifiers, bookRef) == false)
+                    {
+                        library.Remove(bookRef);
+                        continue;
+                    }
+
+                    //Gets the cover of the bookRef image link
+                    GetCoverImgLink(gb.VolumeInfo.ImageLinks, bookRef);
+
+                    bookRef.Title = gb.VolumeInfo.Title;
+                    bookRef.Subtitle = gb.VolumeInfo.Subtitle;
+                    bookRef.Description = gb.VolumeInfo.Description;
+                    bookRef.TotalPages = gb.VolumeInfo.PageCount;
+
+                    //Gets the authors' names from GoogleBooksJson and passes it to Library
+                    GetGBAuthorNames(gb.VolumeInfo.Authors, bookRef);
+
+                    //Gets the Publisher data from GoogleBookJson
+                    bookRef.PublisherName = gb.VolumeInfo.Publisher;
+                    GetGBPublishDates(gb.VolumeInfo.PublishedDate, bookRef);
+
+                    //Sets the language type based on the GoogleBook language data
+                    GetLanguageType(gb.VolumeInfo.Language, bookRef);
+
+                    //Sets Genre based on GoogleBook category data
+                    GetGenreType(gb.VolumeInfo.Categories, bookRef);
+
+                    //Sets the high-level of Book Maturity Rating based on GoogleBook data
+                    GetMaturityRating(gb.VolumeInfo.MaturityRating, bookRef);
+
+                    //Get a reading sample of the bookRef 
+                    GetBookReadingSamples(gb.AccessInfo.AccessViewStatus, gb.AccessInfo.WebReaderLink, gb.VolumeInfo.PreviewLink, bookRef);
+
+                    library.Add(bookRef);
+
                 }
-
-                //Gets the cover of the bookRef image link
-                GetCoverImgLink(gb.VolumeInfo.ImageLinks, bookRef);
-
-                bookRef.Title = gb.VolumeInfo.Title;
-                bookRef.Subtitle = gb.VolumeInfo.Subtitle;
-                bookRef.Description = gb.VolumeInfo.Description;
-                bookRef.TotalPages = gb.VolumeInfo.PageCount;
-
-                //Gets the authors' names from GoogleBooksJson and passes it to Library
-                GetGBAuthorNames(gb.VolumeInfo.Authors, bookRef);
-
-                //Gets the Publisher data from GoogleBookJson
-                bookRef.PublisherName = gb.VolumeInfo.Publisher;
-                GetGBPublishDates(gb.VolumeInfo.PublishedDate, bookRef);
-
-                //Sets the language type based on the GoogleBook language data
-                GetLanguageType(gb.VolumeInfo.Language, bookRef);
-
-                //Sets Genre based on GoogleBook category data
-                GetGenreType(gb.VolumeInfo.Categories, bookRef);
-
-                //Sets the high-level of Book Maturity Rating based on GoogleBook data
-                GetMaturityRating(gb.VolumeInfo.MaturityRating, bookRef);
-
-                //Get a reading sample of the bookRef 
-                GetBookReadingSamples(gb.AccessInfo.AccessViewStatus, gb.AccessInfo.WebReaderLink, gb.VolumeInfo.PreviewLink, bookRef);
-
-                library.Add(bookRef);
-
             }
 
             return library;

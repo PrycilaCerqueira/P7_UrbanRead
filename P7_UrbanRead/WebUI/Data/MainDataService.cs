@@ -53,7 +53,6 @@ namespace WebUI.Data
                 searchResults = _library.Where(b => b.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
             }
 
-
             return searchResults;
         }
     }
