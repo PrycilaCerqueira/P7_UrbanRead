@@ -54,11 +54,16 @@
     @if (_isVisible)
     {
         <QuickGrid Items="@_results" Pagination="@pagination">
-            <TemplateColumn title="Cover">
+            
+            <TemplateColumn title="Cover" Align="Align.Right">
                 <img class="cover" src="@context.CoverImgLink" />
             </TemplateColumn>
-            <TemplateColumn title="Title">@context.Title</TemplateColumn>
-            <TemplateColumn title="Authors">
+
+            <TemplateColumn title="Title" Align="Align.Right">
+                @context.Title
+            </TemplateColumn>
+
+            <TemplateColumn title="Authors" Align="Align.Center">
                 @for(int i = context.Authors.Count -1; i >= 0; i--)
                 {
                     var author = context.Authors[i];
@@ -71,9 +76,15 @@
                         <ul>@author</ul>
                     }
                 }
-                
             </TemplateColumn>
-            <TemplateColumn title="ISBNs">@context.ISBNS.First()</TemplateColumn>
+
+            <TemplateColumn title="Publisher" Align="Align.Right">
+                @context.PublisherName
+            </TemplateColumn>
+
+            <TemplateColumn title="ISBNs" Align="Align.Right">
+                @context.ISBNS.First()
+           </TemplateColumn>
         </QuickGrid>
     }
 </div>
