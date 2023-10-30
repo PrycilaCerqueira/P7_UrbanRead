@@ -119,9 +119,10 @@ namespace P7_UrbanRead
         /// <param name="locBook">Book instance with its elements to be populated</param>
         public static void GetGBIsbnNumbers(List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, Book locBook)
         {
-            ISBN isbnId = new ISBN();
+            ISBN isbnID = new ISBN();
             long isbnNum;
 
+            /* This is the original code 
             if (isbnIdentifiers != null)
             {
                 foreach (var item in isbnIdentifiers)
@@ -137,16 +138,16 @@ namespace P7_UrbanRead
                             }
                             if (item.Type == "ISBN_10")
                             {
-                                isbnId.Isbn10 = isbnNum;
+                                isbnID.Isbn10 = isbnNum;
                             }
                             if (item.Type == "ISBN_13")
                             {
-                                isbnId.Isbn13 = isbnNum;
+                                isbnID.Isbn13 = isbnNum;
                             }
                         }
                         else
                         {
-                            isbnId = null;
+                            isbnID = null;
                         }
                     }
                     else
@@ -158,10 +159,11 @@ namespace P7_UrbanRead
             }
             else
             {
-                isbnId = null;
+                isbnID = null;
             }
 
-            locBook.ISBNS.Add(isbnId);
+            locBook.ISBNS.Add(isbnID);
+            */
         }
 
         /// <summary>
