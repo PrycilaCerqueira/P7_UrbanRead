@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Xml.Linq;
 
 namespace P7_UrbanRead
 {
@@ -119,9 +120,45 @@ namespace P7_UrbanRead
         /// <param name="locBook">Book instance with its elements to be populated</param>
         public static void GetGBIsbnNumbers(List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, Book locBook)
         {
-            ISBN isbnID = new ISBN();
-            long isbnNum;
 
+            long isbnNum;
+            
+            for (int i = 0; i < isbnIdentifiers.Count; i++)
+            {
+                bool isbnIsNumeric = long.TryParse(isbnIdentifiers[i].Identifier, out isbnNum);
+
+                if(isbnIsNumeric == true)
+                {
+                    int length = isbnNum.ToString().Length;
+
+                    if (isbnIdentifiers[i].Type == "OTHER" || length != 13 || length != 10)
+                    {
+                        continue;
+                    }
+                    if (isbnIdentifiers[i].Type == "ISBN_13" && length == 13)
+                    {
+                        ISBN i13 = new ISBN();
+                        i13.Isbn = isbnNum;
+                        locBook.ISBNS.Add(i13);
+                        continue;
+                    }
+                    if (isbnIdentifiers[i].Type == "ISBN_10" && length == 10)
+                    {
+                        ISBN i10 = new ISBN();
+                        i10.Isbn = isbnNum;
+                        locBook.ISBNS.Add(i10);
+                        continue;
+                    }
+
+                }
+                else 
+                {
+
+                }
+
+            }
+
+        
             /* This is the original code 
             if (isbnIdentifiers != null)
             {

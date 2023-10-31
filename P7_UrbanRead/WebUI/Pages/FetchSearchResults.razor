@@ -64,10 +64,10 @@
             </TemplateColumn>
 
             <TemplateColumn title="Authors" Align="Align.Center">
-                @for(int i = context.Authors.Count -1; i >= 0; i--)
+                @for(int a = context.Authors.Count -1; a >= 0; a--)
                 {
-                    var author = context.Authors[i];
-                    if (i > 0)
+                    var author = context.Authors[a];
+                    if (a > 0)
                     {
                         <ul>@author, </ul>
                     }
@@ -83,7 +83,18 @@
             </TemplateColumn>
 
             <TemplateColumn title="ISBNs" Align="Align.Right">
-                @context.ISBNS.First()
+                @for (int i = context.ISBNS.Count - 1; i >= 0; i--)
+                {
+                    var isbn = context.ISBNS[i].ToString();
+                    if (i > 0)
+                    {
+                        <ul>@isbn, </ul>
+                    }
+                    else
+                    {
+                        <ul>@isbn</ul>
+                    }
+                }
            </TemplateColumn>
         </QuickGrid>
     }

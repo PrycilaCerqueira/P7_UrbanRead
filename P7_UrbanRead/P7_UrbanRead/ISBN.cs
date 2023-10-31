@@ -4,25 +4,27 @@ namespace P7_UrbanRead
 {
     public class ISBN
     {
-        private long _Isbn10;
-        private long _Isbn13;
+        private long _Isbn;
+        //private long _Isbn13;
 
-        public long Isbn10
+        public long Isbn
         {
-            get { return _Isbn10; }
-            set { _Isbn10 = value; }
+            get { return _Isbn; }
+            set { _Isbn = value; }
         }
-        public long Isbn13
+        /*public long Isbn13
         {
             get { return _Isbn13; }
             set { _Isbn13 = value; }
         }
+        */
 
      
         public override string ToString()
         {
-           return $"{Isbn13}, {Isbn10}";
+            return $"{Isbn}";
         }
+        
 
 
     }
