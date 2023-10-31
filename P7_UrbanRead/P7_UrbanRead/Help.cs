@@ -123,39 +123,50 @@ namespace P7_UrbanRead
 
             long isbnNum;
             
-            for (int i = 0; i < isbnIdentifiers.Count; i++)
+            ISBN iMinus1 = new ISBN();
+            iMinus1.Isbn = -1;        
+
+            if (String.IsNullOrEmpty(isbnIdentifiers.Count.ToString()))
             {
-                bool isbnIsNumeric = long.TryParse(isbnIdentifiers[i].Identifier, out isbnNum);
+                locBook.ISBNS.Add(iMinus1);
+            }
+            else {
 
-                if(isbnIsNumeric == true)
+                for (int i = 0; i < isbnIdentifiers.Count; i++)
                 {
-                    int length = isbnNum.ToString().Length;
+                    bool isbnIsNumeric = long.TryParse(isbnIdentifiers[i].Identifier, out isbnNum);
 
-                    if (isbnIdentifiers[i].Type == "OTHER" || length != 13 || length != 10)
+                    if (isbnIsNumeric == true)
                     {
-                        continue;
-                    }
-                    if (isbnIdentifiers[i].Type == "ISBN_13" && length == 13)
-                    {
-                        ISBN i13 = new ISBN();
-                        i13.Isbn = isbnNum;
-                        locBook.ISBNS.Add(i13);
-                        continue;
-                    }
-                    if (isbnIdentifiers[i].Type == "ISBN_10" && length == 10)
-                    {
-                        ISBN i10 = new ISBN();
-                        i10.Isbn = isbnNum;
-                        locBook.ISBNS.Add(i10);
-                        continue;
-                    }
+                        int length = isbnNum.ToString().Length;
 
+                        if (isbnIdentifiers[i].Type == "OTHER" || length != 13 || length != 10)
+                        {
+                            continue;
+                        }
+                        if (isbnIdentifiers[i].Type == "ISBN_13" && length == 13)
+                        {
+                            ISBN i13 = new ISBN();
+                            i13.Isbn = isbnNum;
+                            locBook.ISBNS.Add(i13);
+                            continue;
+                        }
+                        if (isbnIdentifiers[i].Type == "ISBN_10" && length == 10)
+                        {
+                            ISBN i10 = new ISBN();
+                            i10.Isbn = isbnNum;
+                            locBook.ISBNS.Add(i10);
+                            continue;
+                        }
+
+                    }
+                    else
+                    {
+                        //ISBN iMinus1 = new ISBN();
+                        //iMinus1.Isbn = -1;
+                        locBook.ISBNS.Add(iMinus1);
+                    }
                 }
-                else 
-                {
-
-                }
-
             }
 
         
