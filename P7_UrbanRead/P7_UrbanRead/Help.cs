@@ -122,12 +122,23 @@ namespace P7_UrbanRead
         {
 
             long isbnNum;
-            
-            ISBN iMinus1 = new ISBN();
-            iMinus1.Isbn = -1;        
+            int countIdCheck;          
 
-            if (String.IsNullOrEmpty(isbnIdentifiers.Count.ToString()))
+            try
             {
+                countIdCheck = isbnIdentifiers.Count();
+            }
+            catch (Exception)
+            {
+                countIdCheck = -1;
+            }
+
+       
+
+            if (countIdCheck < 0)
+            {
+                ISBN iMinus1 = new ISBN();
+                iMinus1.Isbn = countIdCheck;
                 locBook.ISBNS.Add(iMinus1);
             }
             else {
@@ -162,8 +173,8 @@ namespace P7_UrbanRead
                     }
                     else
                     {
-                        //ISBN iMinus1 = new ISBN();
-                        //iMinus1.Isbn = -1;
+                        ISBN iMinus1 = new ISBN();
+                        iMinus1.Isbn = -1;
                         locBook.ISBNS.Add(iMinus1);
                     }
                 }
