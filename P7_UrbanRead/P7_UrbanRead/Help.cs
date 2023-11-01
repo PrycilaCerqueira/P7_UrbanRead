@@ -102,7 +102,18 @@ namespace P7_UrbanRead
         public static bool isIsbnValid(List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, Book locBook)
         {
             GetGBIsbnNumbers(isbnIdentifiers, locBook);
-            
+
+            ISBN iMinus1 = new ISBN();
+            iMinus1.Isbn = -1;
+
+            if (locBook.ISBNS.Contains(iMinus1))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
 
             /*
             if (!locBook.ISBNS.Contains(null))
