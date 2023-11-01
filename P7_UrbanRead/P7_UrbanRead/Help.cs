@@ -177,49 +177,6 @@ namespace P7_UrbanRead
                 }
             }
 
-        
-            /* This is the original code 
-            if (isbnIdentifiers != null)
-            {
-                foreach (var item in isbnIdentifiers)
-                {
-                    if (item.Type != null)
-                    {
-                        bool isntAlphaNumeric = long.TryParse(item.Identifier, out isbnNum);
-                        if (isntAlphaNumeric == true)
-                        {
-                            if (item.Type == "OTHER")
-                            {
-                                continue;
-                            }
-                            if (item.Type == "ISBN_10")
-                            {
-                                isbnID.Isbn10 = isbnNum;
-                            }
-                            if (item.Type == "ISBN_13")
-                            {
-                                isbnID.Isbn13 = isbnNum;
-                            }
-                        }
-                        else
-                        {
-                            isbnID = null;
-                        }
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-
-            }
-            else
-            {
-                isbnID = null;
-            }
-
-            locBook.ISBNS.Add(isbnID);
-            */
         }
 
         /// <summary>
