@@ -102,6 +102,9 @@ namespace P7_UrbanRead
         public static bool isIsbnValid(List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, Book locBook)
         {
             GetGBIsbnNumbers(isbnIdentifiers, locBook);
+            
+
+            /*
             if (!locBook.ISBNS.Contains(null))
             {
                 return true;
@@ -110,6 +113,7 @@ namespace P7_UrbanRead
             {
                 return false;
             }
+            */
 
         }
 
