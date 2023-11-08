@@ -53,7 +53,6 @@ namespace P7_UrbanRead
                     //Verifies whether or not the ISBNs format and values are valid to add the bookRef to the internal library.
                     if (isIsbnValid(gb.VolumeInfo.IndustryIdentifiers, bookRef) == false)
                     {
-                        library.Remove(bookRef);
                         continue;
                     }
 
@@ -101,12 +100,9 @@ namespace P7_UrbanRead
         /// <returns>Returns true/false for the ISBN format</returns>
         public static bool isIsbnValid(List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, Book locBook)
         {
-            GetGBIsbnNumbers(isbnIdentifiers, locBook);
+            GetGBIsbnNumbers(isbnIdentifiers, ref locBook);
 
-            ISBN iMinus1 = new ISBN();
-            iMinus1.Isbn = -1;
-
-            if (locBook.ISBNS.Contains(iMinus1))
+            if(locBook.ISBNS.Count == 0)
             {
                 return false;
             }
@@ -114,17 +110,6 @@ namespace P7_UrbanRead
             {
                 return true;
             }
-
-            /*
-            if (!locBook.ISBNS.Contains(null))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-            */
 
         }
 
@@ -133,27 +118,15 @@ namespace P7_UrbanRead
         /// </summary>
         /// <param name="isbnIdentifiers">GoogleBookJson ISBNs' data</param>
         /// <param name="locBook">Book instance with its elements to be populated</param>
-        public static void GetGBIsbnNumbers(List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, Book locBook)
+        public static void GetGBIsbnNumbers(List<GoogleBooksJson.IndustryIdentifier> isbnIdentifiers, ref Book locBook)
         {
 
-            long isbnNum;
-            int countIdCheck;          
+            long isbnNum;         
 
-            try
+            if(isbnIdentifiers == null)
             {
-                countIdCheck = isbnIdentifiers.Count();
-            }
-            catch (Exception)
-            {
-                countIdCheck = -1;
-            }
-
-            if (countIdCheck < 0)
-            {
-                ISBN iMinus1 = new ISBN();
-                iMinus1.Isbn = countIdCheck;
-                locBook.ISBNS.Add(iMinus1);
-            }
+                return;
+            }         
             else {
 
                 for (int i = 0; i < isbnIdentifiers.Count; i++)
@@ -185,9 +158,7 @@ namespace P7_UrbanRead
                     }
                     else
                     {
-                        ISBN iMinus2 = new ISBN();
-                        iMinus2.Isbn = -2;
-                        locBook.ISBNS.Add(iMinus2);
+                        continue;
                     }
                 }
             }
