@@ -25,7 +25,6 @@ namespace WebUI
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
-            builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddSingleton<MainDataService>();
 
             var app = builder.Build();
