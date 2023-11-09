@@ -37,7 +37,12 @@ namespace WebUI.Data
 
             //Search for the book title in the Local Library
             var lowerCaseSearchTerm = sTopic.ToLower();
-            var searchResults = _library.Where(b => b.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
+            var searchResults = _library
+                .Where(t => t.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList()
+                .Where((a => a.Authors).ForEach(a => a.ToLower() == lowercaseSearchTerm)).ToList();
+
+               
+
 
             //If Local Library does not contain the book title, establishes API connection and add the new range of books into the Local Library
             if (searchResults.Count < 1)
