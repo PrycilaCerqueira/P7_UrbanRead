@@ -45,8 +45,9 @@ namespace WebUI.Data
             }
             if (sCategory == "inauthor")
             {
-                searchResults = _library.Where(a => a.Authors.ToString().Contains(lowerCaseSearchTerm, StringComparison.InvariantCultureIgnoreCase)).ToList();
-    
+                //searchResults = _library.Where(a => a.Authors.ToString().Contains(lowerCaseSearchTerm, StringComparison.InvariantCultureIgnoreCase)).ToList();
+                
+                searchResults = _library.Where(a => a.Authors.Any(n => n.FullName.ToLower() == lowerCaseSearchTerm)).ToList();
             }
 
        
@@ -71,11 +72,13 @@ namespace WebUI.Data
                 }
                 if (sCategory == "inauthor")
                 {
-                    searchResults = _library.Where(a => a.Authors.ToString().Contains(lowerCaseSearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+                    //searchResults = _library.Where(a => a.Authors.ToString().Contains(lowerCaseSearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
 
-                    //searchResults = _library.ForEach(a => a.Authors.Where(n => n.FullName.Contains(lowerCaseSearchTerm,StringComparison.OrdinalIgnoreCase))).ToList();
-                    
+                    //searchResults = _library.ForEach(a => a.Authors.Where(n => n.FullName.Equals(lowerCaseSearchTerm,StringComparison.OrdinalIgnoreCase))).ToList();
+
+                    searchResults = _library.Where(a => a.Authors.Any(n => n.FullName.ToLower() == lowerCaseSearchTerm)).ToList();
                 }
+                
             }
 
             return searchResults;
