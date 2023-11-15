@@ -37,7 +37,7 @@ namespace WebUI.Data
 
             //Search for the book title in the Local Library
             var lowerCaseSearchTerm = sTopic.ToLower();
-            var searchResults = new List<Book> ();
+            var searchResults = new List<Book>();
 
             if (sCategory == "intitle" || sCategory =="")
             {
@@ -45,17 +45,11 @@ namespace WebUI.Data
             }
             if (sCategory == "inauthor")
             {
-                //searchResults = _library.Where(a => a.Authors.ForEach(fn => fn.FullName.ToLower()).FindAll(lowerCaseSearchTerm)).ToList();
-
-                //var authorsToString = _library.Where(a => a.Authors.ForEach(fn => fn.FullName.ToLower()).ToList();
-                
-                foreach (var author in _library)
-                {
-                    author.Authors.Where(a => a.FullName.ToLower().Contains(lowerCaseSearchTerm)).ToList();
-                }
+                searchResults = _library.Where(a => a.Authors.ToString().Contains(lowerCaseSearchTerm, StringComparison.InvariantCultureIgnoreCase)).ToList();
+    
             }
 
-            //.Where((a => a.Authors).ForEach(a => a.ToLower() == lowercaseSearchTerm)).ToList();
+       
 
 
 
@@ -71,7 +65,17 @@ namespace WebUI.Data
                 _library.AddRange(addToLib);
                 XML.ExportFile(_library); //Save the incremented library file into the users' profile folder for a fast load
 
-                searchResults = _library.Where(b => b.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
+                if (sCategory == "intitle" || sCategory == "")
+                {
+                    searchResults = _library.Where(t => t.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
+                }
+                if (sCategory == "inauthor")
+                {
+                    searchResults = _library.Where(a => a.Authors.ToString().Contains(lowerCaseSearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+
+                    //searchResults = _library.ForEach(a => a.Authors.Where(n => n.FullName.Contains(lowerCaseSearchTerm,StringComparison.OrdinalIgnoreCase))).ToList();
+                    
+                }
             }
 
             return searchResults;
