@@ -13,7 +13,7 @@
 <div id="divsearchmenu">
 
     <div id="divsearchtxtbox">
-        <InputText type="search" id="query" name="q" placeholder="Book..." @bind-Value="_searchTopic"></InputText>
+        <InputText type="search" id="query" name="q" placeholder="Book..." @bind-Value="_searchTopic.Trim()"></InputText>
         <button class="btn btn-primary" @onclick="FetchResults">Search</button>
         <br />
     </div>
@@ -132,10 +132,10 @@
     {
         new RadioOptions(){rdLabel = "Subject", rdValue = ""},
         new RadioOptions(){rdLabel = "Title", rdValue = "intitle"},
-        new RadioOptions(){rdLabel = "Author", rdValue = "inauthor"},
         new RadioOptions(){rdLabel = "ISBN", rdValue = "isbn"},
+        new RadioOptions(){rdLabel = "Author", rdValue = "inauthor"},
     };
-
+    
     List<RadioOptions> filters = new List<RadioOptions>()
     {
         new RadioOptions(){rdLabel = "All Books", rdValue = "partial"},

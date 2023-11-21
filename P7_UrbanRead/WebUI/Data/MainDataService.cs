@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Microsoft.IdentityModel.Tokens;
 using P7_UrbanRead;
+using System.Numerics;
 
 namespace WebUI.Data
 {
@@ -45,9 +46,12 @@ namespace WebUI.Data
             }
             if (sCategory == "inauthor")
             {
-                //searchResults = _library.Where(a => a.Authors.ToString().Contains(lowerCaseSearchTerm, StringComparison.InvariantCultureIgnoreCase)).ToList();
-                
                 searchResults = _library.Where(a => a.Authors.Any(n => n.FullName.ToLower() == lowerCaseSearchTerm)).ToList();
+            }
+            if (sCategory == "isbn")
+            {
+                long iNum = Int64.Parse(lowerCaseSearchTerm);
+                searchResults = _library.Where(i => i.ISBNS.Any(num => num.Isbn == iNum)).ToList();
             }
 
        
@@ -72,13 +76,14 @@ namespace WebUI.Data
                 }
                 if (sCategory == "inauthor")
                 {
-                    //searchResults = _library.Where(a => a.Authors.ToString().Contains(lowerCaseSearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
-
-                    //searchResults = _library.ForEach(a => a.Authors.Where(n => n.FullName.Equals(lowerCaseSearchTerm,StringComparison.OrdinalIgnoreCase))).ToList();
-
                     searchResults = _library.Where(a => a.Authors.Any(n => n.FullName.ToLower() == lowerCaseSearchTerm)).ToList();
                 }
-                
+                if (sCategory == "isbn")
+                {
+                    long iNum = Int64.Parse(lowerCaseSearchTerm);
+                    searchResults = _library.Where(i => i.ISBNS.Any(num => num.Isbn == iNum)).ToList();
+                }
+
             }
 
             return searchResults;
