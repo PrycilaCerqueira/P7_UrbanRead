@@ -97,8 +97,12 @@ namespace P7_UrbanRead
         public static List<Book> RemoveDuplicateBooks(List<Book> library)
         {
             List<Book> noDuplicates = new List<Book>();
-            noDuplicates = library.Distinct().ToList();
+            //noDuplicates = library.Distinct().ToList();
+            //noDuplicates = library.Distinct(lib => lib.ISBNS).ToList();
+
+            noDuplicates = library.Where(lib => lib.ISBNS.Distinct(num => num.Isbn)).ToList();
             
+
             return noDuplicates;
         }
 
