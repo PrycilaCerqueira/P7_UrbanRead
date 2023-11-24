@@ -33,7 +33,6 @@ namespace WebUI.Data
                 GoogleBooksJson.Root GBCollection = Help.GoogleBookAPIConnector(sTopic, sCategory, sFilter);
                 _library = Help.LoadGoogleBooksData(GBCollection);
 
-                XML.ExportFile(_library); //Save the incremented library file into the users' profile folder for a fast load
             }
 
             //Search for the book title in the Local Library
@@ -55,10 +54,6 @@ namespace WebUI.Data
             }
 
        
-
-
-
-
             //If Local Library does not contain the book title, establishes API connection and add the new range of books into the Local Library
             if (searchResults.Count < 1)
             {
@@ -68,7 +63,6 @@ namespace WebUI.Data
                 addToLib = Help.LoadGoogleBooksData(GBCollection);
 
                 _library.AddRange(addToLib);
-                XML.ExportFile(_library); //Save the incremented library file into the users' profile folder for a fast load
 
                 if (sCategory == "intitle" || sCategory == "")
                 {
@@ -85,6 +79,10 @@ namespace WebUI.Data
                 }
 
             }
+            
+
+
+            XML.ExportFile(_library); //Save the incremented library file into the users' profile folder for a fast load
 
             return searchResults;
         }

@@ -13,7 +13,7 @@
 <div id="divsearchmenu">
 
     <div id="divsearchtxtbox">
-        <InputText type="search" id="query" name="q" placeholder="Book..." @bind-Value="_searchTopic.Trim()"></InputText>
+        <InputText type="search" id="query" name="q" placeholder="Book..." @bind-Value="_searchTopic"></InputText>
         <button class="btn btn-primary" @onclick="FetchResults">Search</button>
         <br />
     </div>
@@ -130,18 +130,19 @@
 
     List<RadioOptions> categories = new List<RadioOptions>()
     {
-        new RadioOptions(){rdLabel = "Subject", rdValue = ""},
-        new RadioOptions(){rdLabel = "Title", rdValue = "intitle"},
-        new RadioOptions(){rdLabel = "ISBN", rdValue = "isbn"},
-        new RadioOptions(){rdLabel = "Author", rdValue = "inauthor"},
+        new RadioOptions(){ rdLabel = "Subject", rdValue = ""},
+        new RadioOptions(){ rdLabel = "Title", rdValue = "intitle"},
+        new RadioOptions(){ rdLabel = "ISBN", rdValue = "isbn"},
+        new RadioOptions(){ rdLabel = "Author", rdValue = "inauthor"},
     };
-    
+
+
     List<RadioOptions> filters = new List<RadioOptions>()
     {
-        new RadioOptions(){rdLabel = "All Books", rdValue = "partial"},
-        new RadioOptions(){rdLabel = "All eBooks", rdValue = "ebooks"},
-        new RadioOptions(){rdLabel = "Only Free eBooks", rdValue = "free-ebooks"},
-        new RadioOptions(){rdLabel = "Only Paid eBooks", rdValue = "paid-ebooks"},
+        new RadioOptions(){ rdLabel = "All Books", rdValue = "partial"},
+        new RadioOptions(){ rdLabel = "All eBooks", rdValue = "ebooks"},
+        new RadioOptions(){ rdLabel = "Only Free eBooks", rdValue = "free-ebooks"},
+        new RadioOptions(){ rdLabel = "Only Paid eBooks", rdValue = "paid-ebooks"},
     };
 
     public class RadioOptions
@@ -149,6 +150,7 @@
         public string rdLabel { get; set; }
         public string rdValue { get; set; }
     }
+
     
 
 }
