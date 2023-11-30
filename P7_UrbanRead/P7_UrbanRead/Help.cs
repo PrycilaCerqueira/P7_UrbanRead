@@ -96,14 +96,46 @@ namespace P7_UrbanRead
 
         public static List<Book> RemoveDuplicateBooks(List<Book> library)
         {
+            var a = new List<int>() { 1, 2, 3 };
+            var b = new List<int>() { 1, 2, 3 };
+            var c = a;
+
+            c.Add(5);
+
+            if(a == b)
+            {
+                //does this happen?
+            }
             List<Book> noDuplicates = new List<Book>();
             //noDuplicates = library.Distinct().ToList();
-            //noDuplicates = library.Distinct(lib => lib.ISBNS).ToList();
+            noDuplicates = library.DistinctBy(lib => lib.ISBNS.First()).ToList();
 
-            noDuplicates = library.Where(lib => lib.ISBNS.Distinct(num => num.Isbn)).ToList();
-            
+
+            // noDuplicates = library.Where(lib => lib.ISBNS.Distinct(num => num.Isbn)).ToList();
+            noDuplicates = library.Where(book => book.Title == "john").ToList();
+            var x = library.DistinctBy(book => book.Title).ToList();
+
+          
 
             return noDuplicates;
+        }
+
+        public bool equals(Book a, Book b)
+        {
+            foreach(var isbnA in a.ISBNS)
+            {
+                foreach(var isbnB in b.ISBNS)
+                {
+                    if (isbnA.Isbn == isbnB.Isbn)
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        public int gethassh(Book a)
+        {
+            return a.ISBNS.Sum()
         }
 
         /// <summary>
