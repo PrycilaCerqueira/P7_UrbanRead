@@ -9,7 +9,7 @@ namespace P7_UrbanRead
         private string _Subtitle;
         private string _Description;
         private int  _TotalPages;
-        private long _Isnb;
+        private List<long> _ISBNS = new List<long>();
         private List<Author> _Authors = new List<Author>();
         private string _PublisherName; 
         private DateTime _PublishedDate; 
@@ -50,10 +50,10 @@ namespace P7_UrbanRead
             get { return _PublishedDate; }
             set { _PublishedDate = value; }
         } 
-        public long ISBNS
+        public List<long> ISBNS
         {
-            get { return _Isbn; }
-            set { _Isbn = value; }
+            get { return _ISBNS; }
+            set { _ISBNS = value; }
         }
         public List<Author> Authors
         {
