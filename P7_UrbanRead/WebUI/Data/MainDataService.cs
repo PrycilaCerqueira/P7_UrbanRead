@@ -41,16 +41,16 @@ namespace WebUI.Data
 
             if (sCategory == "intitle" || sCategory =="")
             {
-                searchResults = _library.Where(t => t.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
+                searchResults = _library.Where(book => book.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
             }
             if (sCategory == "inauthor")
             {
-                searchResults = _library.Where(a => a.Authors.Any(n => n.FullName.ToLower() == lowerCaseSearchTerm)).ToList();
+                searchResults = _library.Where(book => book.Authors.Any(fn => fn.FullName.ToLower() == lowerCaseSearchTerm)).ToList();
             }
             if (sCategory == "isbn")
             {
-                long iNum = Int64.Parse(lowerCaseSearchTerm);
-                searchResults = _library.Where(i => i.ISBNS.Any(num => num.Isbn == iNum)).ToList();
+                long isbnNum = Int64.Parse(lowerCaseSearchTerm);
+                searchResults = _library.Where(i => i.ISBNS.Any(num => num == isbnNum)).ToList();
             }
 
        
@@ -66,16 +66,16 @@ namespace WebUI.Data
 
                 if (sCategory == "intitle" || sCategory == "")
                 {
-                    searchResults = _library.Where(t => t.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
+                    searchResults = _library.Where(book => book.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
                 }
                 if (sCategory == "inauthor")
                 {
-                    searchResults = _library.Where(a => a.Authors.Any(n => n.FullName.ToLower() == lowerCaseSearchTerm)).ToList();
+                    searchResults = _library.Where(book => book.Authors.Any(fn => fn.FullName.ToLower() == lowerCaseSearchTerm)).ToList();
                 }
                 if (sCategory == "isbn")
                 {
-                    long iNum = Int64.Parse(lowerCaseSearchTerm);
-                    searchResults = _library.Where(i => i.ISBNS.Any(num => num.Isbn == iNum)).ToList();
+                    long isbnNum = Int64.Parse(lowerCaseSearchTerm);
+                    searchResults = _library.Where(i => i.ISBNS.Any(num => num == isbnNum)).ToList();
                 }
 
             }

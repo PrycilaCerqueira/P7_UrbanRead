@@ -88,12 +88,12 @@ namespace P7_UrbanRead
                 }
             }
 
-            library = RemoveDuplicateBooks(library);
+            //library = RemoveDuplicateBooks(library);
             return library;
 
         }
 
-
+        /*
         public static List<Book> RemoveDuplicateBooks(List<Book> library)
         {
             var a = new List<int>() { 1, 2, 3 };
@@ -126,17 +126,19 @@ namespace P7_UrbanRead
             {
                 foreach(var isbnB in b.ISBNS)
                 {
-                    if (isbnA.Isbn == isbnB.Isbn)
+                    if (isbnA == isbnB)
                         return true;
                 }
             }
             return false;
         }
 
+
         public int gethassh(Book a)
         {
-            return a.ISBNS.Sum()
+            returna.ISBNS.Sum();
         }
+        */
 
         /// <summary>
         /// Verifies whether the ISBN has a valid format or not 
