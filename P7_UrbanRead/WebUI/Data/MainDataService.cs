@@ -80,8 +80,6 @@ namespace WebUI.Data
 
             }
             
-
-
             XML.ExportFile(_library); //Save the incremented library file into the users' profile folder for a fast load
 
             return searchResults;
