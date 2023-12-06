@@ -88,57 +88,18 @@ namespace P7_UrbanRead
                 }
             }
 
-            //library = RemoveDuplicateBooks(library);
+            library = RemoveDuplicateBooks(library);
             return library;
 
         }
 
-        /*
+        
         public static List<Book> RemoveDuplicateBooks(List<Book> library)
         {
-            var a = new List<int>() { 1, 2, 3 };
-            var b = new List<int>() { 1, 2, 3 };
-            var c = a;
-
-            c.Add(5);
-
-            if(a == b)
-            {
-                //does this happen?
-            }
-            List<Book> noDuplicates = new List<Book>();
-            //noDuplicates = library.Distinct().ToList();
-            noDuplicates = library.DistinctBy(lib => lib.ISBNS.First()).ToList();
-
-
-            // noDuplicates = library.Where(lib => lib.ISBNS.Distinct(num => num.Isbn)).ToList();
-            noDuplicates = library.Where(book => book.Title == "john").ToList();
-            var x = library.DistinctBy(book => book.Title).ToList();
-
-          
-
+            List<Book> noDuplicates = library.Distinct(new BookComparer()).ToList();
             return noDuplicates;
         }
 
-        public bool equals(Book a, Book b)
-        {
-            foreach(var isbnA in a.ISBNS)
-            {
-                foreach(var isbnB in b.ISBNS)
-                {
-                    if (isbnA == isbnB)
-                        return true;
-                }
-            }
-            return false;
-        }
-
-
-        public int gethassh(Book a)
-        {
-            returna.ISBNS.Sum();
-        }
-        */
 
         /// <summary>
         /// Verifies whether the ISBN has a valid format or not 

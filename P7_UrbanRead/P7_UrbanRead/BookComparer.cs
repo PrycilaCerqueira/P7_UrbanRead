@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 
 namespace P7_UrbanRead
 {
-    internal class BookComparer : IEqualityComparer<Book>
+    public class BookComparer : IEqualityComparer<Book>
     {
-        public bool Equals(Book x, Book y)
+        public bool Equals(Book bookRight, Book bookLeft)
         {
-            foreach (var isbnX in x.ISBNS)
+            if (Object.ReferenceEquals(bookRight.ISBNS, null) || Object.ReferenceEquals(bookLeft.ISBNS, null))
+                return false;
+
+            foreach (var isbnRigth in bookRight.ISBNS)
             {
-                foreach (var isbnY in y.ISBNS)
+                foreach (var isbnLeft in bookLeft.ISBNS)
                 {
-                    if (isbnX == isbnY)
+                    if (isbnRigth == isbnLeft)
                         return true;
                 }
             }
-            if (Object.ReferenceEquals(x.ISBNS, null) || Object.ReferenceEquals(y.ISBNS, null))
-                return false;
-
-
-
+            return false; 
+            
             /*
             if (Object.ReferenceEquals(x.ISBNS,y.ISBNS)) 
                 return true;
@@ -32,9 +32,12 @@ namespace P7_UrbanRead
 
         }
 
-        public int GetHashCode([DisallowNull] Book x)
+        public int GetHashCode([DisallowNull] Book book)
         {
-            return x.ISBNS.Sum();
+            if (Object.ReferenceEquals(book.ISBNS, null)) return 0;
+
+            int hashID = book.ISBNS.GetHashCode();
+            return hashID;
         }
     }
 }
