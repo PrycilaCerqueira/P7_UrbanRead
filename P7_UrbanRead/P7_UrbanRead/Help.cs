@@ -88,15 +88,14 @@ namespace P7_UrbanRead
                 }
             }
 
-            library = RemoveDuplicateBooks(library);
             return library;
 
         }
 
         
-        public static List<Book> RemoveDuplicateBooks(List<Book> library)
+        public static List<Book> RemoveDuplicateBooks(List<Book> libraryRef)
         {
-            List<Book> noDuplicates = library.Distinct(new BookComparer()).ToList();
+            List<Book> noDuplicates = libraryRef.Distinct(new BookComparer()).ToList();
             return noDuplicates;
         }
 

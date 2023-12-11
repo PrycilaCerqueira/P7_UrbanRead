@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,25 +11,23 @@ namespace P7_UrbanRead
 {
     public class BookComparer : IEqualityComparer<Book>
     {
-        public bool Equals(Book bookRight, Book bookLeft)
+
+        
+
+        public bool Equals(Book bookLeft, Book bookRight)
         {
-            if (Object.ReferenceEquals(bookRight.ISBNS, null) || Object.ReferenceEquals(bookLeft.ISBNS, null))
+            if (Object.ReferenceEquals(bookLeft.ISBNS, null) || Object.ReferenceEquals(bookRight.ISBNS, null))
                 return false;
 
             foreach (var isbnRigth in bookRight.ISBNS)
             {
                 foreach (var isbnLeft in bookLeft.ISBNS)
                 {
-                    if (isbnRigth == isbnLeft)
+                    if (Object.Equals(isbnRigth, isbnLeft))
                         return true;
-                }
+                }   
             }
-            return false; 
-            
-            /*
-            if (Object.ReferenceEquals(x.ISBNS,y.ISBNS)) 
-                return true;
-            */
+            return false;
 
         }
 
@@ -36,8 +35,9 @@ namespace P7_UrbanRead
         {
             if (Object.ReferenceEquals(book.ISBNS, null)) return 0;
 
-            int hashID = book.ISBNS.GetHashCode();
-            return hashID;
+            long sum = book.ISBNS.Sum();
+            int hash = sum.GetHashCode();
+            return hash;
         }
     }
 }

@@ -16,7 +16,6 @@ namespace WebUI.Data
         /// </summary>
         protected static void Init()
         {
-            _library = XML.LoadLocalLibrary();
         }
 
 
@@ -26,6 +25,7 @@ namespace WebUI.Data
         /// <returns>List of book records</returns>
         public static List<Book> SearchBook(string sTopic, string sCategory, string sFilter)
         {
+            _library = XML.LoadLocalLibrary();
 
             //If Local Library file doesn't have data, establishes API connection with Google Books to retrieve books 
             if (_library == null)
@@ -33,6 +33,7 @@ namespace WebUI.Data
                 GoogleBooksJson.Root GBCollection = Help.GoogleBookAPIConnector(sTopic, sCategory, sFilter);
                 _library = Help.LoadGoogleBooksData(GBCollection);
 
+                XML.ExportFile(_library); //Save the incremented library file into the users' profile folder for a fast load
             }
 
             //Search for the book title in the Local Library
@@ -77,10 +78,13 @@ namespace WebUI.Data
                     long isbnNum = Int64.Parse(lowerCaseSearchTerm);
                     searchResults = _library.Where(i => i.ISBNS.Any(num => num == isbnNum)).ToList();
                 }
+            
+                XML.ExportFile(_library); //Save the incremented library file into the users' profile folder for a fast load
 
             }
             
-            XML.ExportFile(_library); //Save the incremented library file into the users' profile folder for a fast load
+            searchResults = Help.RemoveDuplicateBooks(_library);
+
 
             return searchResults;
         }
