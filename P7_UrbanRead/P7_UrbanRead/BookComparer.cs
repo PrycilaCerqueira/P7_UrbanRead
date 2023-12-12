@@ -28,6 +28,7 @@ namespace P7_UrbanRead
                 }   
             }
             return false;
+           
 
         }
 
@@ -38,6 +39,8 @@ namespace P7_UrbanRead
             long sum = book.ISBNS.Sum();
             int hash = sum.GetHashCode();
             return hash;
+            
         }
-    }
+
+    }   
 }
