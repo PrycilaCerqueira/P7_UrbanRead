@@ -83,9 +83,6 @@ namespace WebUI.Data
 
             }
             
-            searchResults = Help.RemoveDuplicateBooks(_library);
-
-
             return searchResults;
         }
     }

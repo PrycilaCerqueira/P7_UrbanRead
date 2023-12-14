@@ -11,9 +11,6 @@ namespace P7_UrbanRead
 {
     public class BookComparer : IEqualityComparer<Book>
     {
-
-        
-
         public bool Equals(Book bookLeft, Book bookRight)
         {
             if (Object.ReferenceEquals(bookLeft.ISBNS, null) || Object.ReferenceEquals(bookRight.ISBNS, null))

@@ -86,8 +86,10 @@ namespace P7_UrbanRead
                     library.Add(bookRef);
 
                 }
-            }
 
+            }
+            
+            library = RemoveDuplicateBooks(library);
             return library;
 
         }
