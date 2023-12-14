@@ -64,9 +64,17 @@
                 @context.Title
             </TemplateColumn>
 
-            <TemplateColumn title="Description" Align="Align.Right">
-                <html><textarea maxlength="10">@context.Description</textarea></html>
-                
+            <TemplateColumn class="descriptionWebKit" title="Description" Align="Align.Right">
+                @context.Description
+                <style>
+                    .descriptionWebKit:hover {
+                        width: 400px;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 3;
+                        overflow: hidden;
+                    }
+                </style>
             </TemplateColumn>
 
             <TemplateColumn title="Authors" Align="Align.Center">
