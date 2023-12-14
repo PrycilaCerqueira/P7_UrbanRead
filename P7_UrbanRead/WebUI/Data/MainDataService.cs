@@ -16,6 +16,7 @@ namespace WebUI.Data
         /// </summary>
         protected static void Init()
         {
+            _library = XML.LoadLocalLibrary();
         }
 
 
@@ -25,7 +26,6 @@ namespace WebUI.Data
         /// <returns>List of book records</returns>
         public static List<Book> SearchBook(string sTopic, string sCategory, string sFilter)
         {
-            _library = XML.LoadLocalLibrary();
 
             //If Local Library file doesn't have data, establishes API connection with Google Books to retrieve books 
             if (_library == null)

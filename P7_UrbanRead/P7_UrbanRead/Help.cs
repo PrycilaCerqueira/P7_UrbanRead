@@ -99,35 +99,7 @@ namespace P7_UrbanRead
             return noDuplicates;
 
         }
-
-        public static List<Book> Test_RemoveDuplicateBook(List<Book> libraryRef)
-        {
-            List<Book> noDuplicates = new List<Book>();
-
-            foreach (Book book1 in libraryRef) 
-            {
-                foreach (Book book2 in libraryRef)
-                {
-                    foreach (var num1 in book1.ISBNS)
-                    {
-                        foreach(var num2 in book2.ISBNS)
-                        {
-                            if (num1 != num2)
-                            {
-                                noDuplicates.Add(book1);
-                            }
-
-
-                        }
-                        
-                    }
-                    
-                }
-            }
-            return noDuplicates;
-
-        }
-    
+  
 
 
         /// <summary>
