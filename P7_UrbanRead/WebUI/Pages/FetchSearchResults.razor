@@ -64,6 +64,11 @@
                 @context.Title
             </TemplateColumn>
 
+            <TemplateColumn title="Description" Align="Align.Right">
+                <html><textarea maxlength="10">@context.Description</textarea></html>
+                
+            </TemplateColumn>
+
             <TemplateColumn title="Authors" Align="Align.Center">
                 @for(int a = context.Authors.Count -1; a >= 0; a--)
                 {
