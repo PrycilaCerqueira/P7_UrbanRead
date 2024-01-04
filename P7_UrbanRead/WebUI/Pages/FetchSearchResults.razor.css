@@ -1,13 +1,34 @@
-﻿h1{
-    color: brown;
+﻿* {
     font-family: 'Comic Sans MS';
-    text-align: center;
+    color: navy;
 }
 
-#divsearchtxtbox{
+
+h1{
     text-align: center;
+    text-shadow:1px 2px lightgray;
+    padding-bottom: 10px;
+
 }
 
+#search_txt{
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+#categories, #filters {
+    text-align: center;
+    padding: 3px;
+}
+
+.form-check-label{
+    font-size: small;
+}
+
+button {
+    background-color: navy;
+    color: white;
+}
 
 .description:hover {
     width: 400px;
