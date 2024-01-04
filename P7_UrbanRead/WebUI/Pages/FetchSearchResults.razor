@@ -10,17 +10,16 @@
 
 <h1>Urban Library</h1>
 
-<div id="divsearchmenu">
+<div id="search_menu">
 
-    <div id="divsearchtxtbox">
+    <div id="search_txt">
         <InputText type="search" id="query" name="q" placeholder="Book..." @bind-Value="_searchTopic"></InputText>
         <button class="btn btn-primary" @onclick="FetchResults">Search</button>
         <br />
     </div>
 
-    <div id="divcatergoryradio">
+    <div id="categories">
         <InputRadioGroup @bind-Value=_selectedCategory> Categories:
-
             @foreach(var cat in categories)
             {
                 <div class="form-check-inline">
@@ -32,7 +31,7 @@
         <br />
     </div>
    
-    <div id="divfilterradio">
+    <div id="filters">
         <InputRadioGroup @bind-Value=_selectedFilter> Filters:
 
             @foreach(var flt in filters)
@@ -43,14 +42,13 @@
                 </div>
             }
         </InputRadioGroup>
-        <br />
-        <br />
+
     </div>
 
 </div>
 
 
-<div id="divsearchresults">
+<div id="search_results">
 
     @if (_isVisible)
     {
@@ -64,17 +62,8 @@
                 @context.Title
             </TemplateColumn>
 
-            <TemplateColumn class="descriptionWebKit" title="Description" Align="Align.Right">
+            <TemplateColumn class="description" title="Description" Align="Align.Right">
                 @context.Description
-                <style>
-                    .descriptionWebKit:hover {
-                        width: 400px;
-                        display: -webkit-box;
-                        -webkit-box-orient: vertical;
-                        -webkit-line-clamp: 3;
-                        overflow: hidden;
-                    }
-                </style>
             </TemplateColumn>
 
             <TemplateColumn title="Authors" Align="Align.Center">
