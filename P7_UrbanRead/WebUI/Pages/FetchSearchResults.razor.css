@@ -3,7 +3,6 @@
     color: navy;
 }
 
-
 h1{
     text-align: center;
     text-shadow:1px 2px lightgray;
@@ -18,22 +17,38 @@ h1{
 
 #categories, #filters {
     text-align: center;
-    padding: 3px;
+    padding: 4px 11px;
+    
 }
 
 .form-check-label{
     font-size: small;
+
 }
+
 
 button {
     background-color: navy;
     color: white;
 }
 
-.description:hover {
-    width: 400px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
+
+::deep .quickgrid[theme=corporate] {
+    text-align: left;
+    border:2px dashed red;
+    padding:10px 10px 10px 10px; 
+
 }
+
+    ::deep .quickgrid[theme=corporate] .description {
+        width: 550px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+    }
+     ::deep .quickgrid[theme=corporate] .description:hover {
+            display: -webkit-box;
+            -webkit-line-clamp: 20;
+            overflow: hidden;
+     }

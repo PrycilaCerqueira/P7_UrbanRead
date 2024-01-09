@@ -46,25 +46,25 @@
 </div>
 
 
-<div id="search_results">
+<div class="search_results">
 
     @if (_isVisible)
     {
-        <QuickGrid Items="@_results" Pagination="@pagination">
+        <QuickGrid Items="@_results" Pagination="@pagination" Theme="corporate">
             
-            <TemplateColumn title="" Align="Align.Right">
+            <TemplateColumn title="">
                 <img class="cover" src="@context.CoverImgLink" alt="Cover"/>
             </TemplateColumn>
 
-            <TemplateColumn title="Title" Align="Align.Right">
+            <TemplateColumn title="Title">
                 @context.Title
             </TemplateColumn>
 
-            <TemplateColumn class="description" title="Description" Align="Align.Right">
+            <TemplateColumn class="description" title="Description">
                 @context.Description
             </TemplateColumn>
 
-            <TemplateColumn title="Authors" Align="Align.Center">
+            <TemplateColumn title="Authors">
                 @for(int a = context.Authors.Count -1; a >= 0; a--)
                 {
                     var author = context.Authors[a];
@@ -79,11 +79,11 @@
                 }
             </TemplateColumn>
 
-            <TemplateColumn title="Publisher" Align="Align.Right">
+            <TemplateColumn title="Publisher">
                 @context.PublisherName
             </TemplateColumn>
 
-            <TemplateColumn title="ISBNs" Align="Align.Right">
+            <TemplateColumn title="ISBNs">
                 @for (int i = context.ISBNS.Count - 1; i >= 0; i--)
                 {
                     var isbn = context.ISBNS[i].ToString();
