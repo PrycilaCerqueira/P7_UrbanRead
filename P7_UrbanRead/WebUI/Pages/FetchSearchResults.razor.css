@@ -34,21 +34,24 @@ button {
 
 
 ::deep .quickgrid[theme=corporate] {
-    text-align: left;
     border:2px dashed red;
-    padding:10px 10px 10px 10px; 
 
 }
 
-    ::deep .quickgrid[theme=corporate] .description {
+
+    ::deep .quickgrid[theme=corporate] .col-title {
+        gap: 1.5rem; /* Separate the sort indicator from title text */
+        text-align: center;
+        border: 1px dashed purple;
+    }
+
+    :: deep .quickgrid[theme=corporate] .description {
         width: 550px;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 3;
         overflow: hidden;
     }
-     ::deep .quickgrid[theme=corporate] .description:hover {
-            display: -webkit-box;
+    ::deep .quickgrid[theme=corporate] .description:hover {
             -webkit-line-clamp: 20;
-            overflow: hidden;
-     }
+    }
