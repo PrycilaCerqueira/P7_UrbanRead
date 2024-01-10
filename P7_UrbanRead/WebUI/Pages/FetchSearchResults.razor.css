@@ -1,18 +1,30 @@
 ﻿* {
-    font-family: 'Comic Sans MS';
+    font-family: sans-serif;
     color: navy;
 }
 
-h1{
+h1 {
+    font-family: Georgia, serif;
+    font-size: 60px;
+    font-weigh: bolder;
     text-align: center;
-    text-shadow:1px 2px lightgray;
-    padding-bottom: 10px;
-
+    text-shadow: 1px 2px lightgray;
+    padding-bottom: 20px;
 }
 
 #search_txt{
     text-align: center;
-    padding-bottom: 5px;
+    padding-bottom: 7px;
+
+}
+
+#query {
+    width: 550px;
+}
+
+button {
+    background-color: navy;
+    color: white;
 }
 
 #categories, #filters {
@@ -26,11 +38,13 @@ h1{
 
 }
 
+#filters{
+    padding-bottom: 50px;
 
-button {
-    background-color: navy;
-    color: white;
 }
+
+
+
 
 
 ::deep .quickgrid[theme=corporate] {
@@ -39,13 +53,16 @@ button {
 }
 
 
-    ::deep .quickgrid[theme=corporate] .col-title {
-        gap: 1.5rem; /* Separate the sort indicator from title text */
+    ::deep .quickgrid[theme=corporate] thead {
+        background-color: navy;
+        color: white;
+        font-size: 18px;
         text-align: center;
-        border: 1px dashed purple;
+        font-weight: normal;
     }
 
-    :: deep .quickgrid[theme=corporate] .description {
+
+    ::deep .quickgrid[theme=corporate] .description {
         width: 550px;
         display: -webkit-box;
         -webkit-box-orient: vertical;
