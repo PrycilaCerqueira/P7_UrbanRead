@@ -52,19 +52,19 @@
     {
         <QuickGrid Items="@_results" Pagination="@pagination" Theme="corporate">
             
-            <TemplateColumn title="">
+            <TemplateColumn title="" class="cover">
                 <img class="cover" src="@context.CoverImgLink" alt="Cover"/>
             </TemplateColumn>
 
-            <TemplateColumn title="Title">
+            <TemplateColumn title="Title" class="book-title">
                 @context.Title
             </TemplateColumn>
 
-            <TemplateColumn class="description" title="Description">
+            <TemplateColumn title="Description" class="description">
                 @context.Description
             </TemplateColumn>
 
-            <TemplateColumn title="Authors">
+            <TemplateColumn title="Authors" class="author">
                 @for(int a = context.Authors.Count -1; a >= 0; a--)
                 {
                     var author = context.Authors[a];
@@ -79,11 +79,11 @@
                 }
             </TemplateColumn>
 
-            <TemplateColumn title="Publisher">
+            <TemplateColumn title="Publisher" class="publisher">
                 @context.PublisherName
             </TemplateColumn>
 
-            <TemplateColumn title="ISBNs">
+            <TemplateColumn title="ISBNs" class="isbn">
                 @for (int i = context.ISBNS.Count - 1; i >= 0; i--)
                 {
                     var isbn = context.ISBNS[i].ToString();

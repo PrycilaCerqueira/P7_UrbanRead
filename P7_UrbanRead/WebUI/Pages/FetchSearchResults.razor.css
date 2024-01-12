@@ -49,37 +49,45 @@ button {
 
 /* Results Styling */
 ::deep .quickgrid[theme=corporate] {
-
+    
 
 }
 
-    ::deep tr:nth-child(odd) {
-        text-align: center;
-        padding-top: 20px;
-        background: #f1f9fd;
-    }
 
-    ::deep tr:nth-child(even) {
-        background: #cfebf9;
-    }
+::deep .quickgrid[theme=corporate] tbody tr td {
+    table-layout: fixed;
+    width: 13%;
+    vertical-align: top;
+    padding-right: 5px;
+}
+
+::deep .quickgrid[theme=corporate] thead th {
+    background-color: navy;
+    color: white;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+::deep tr:nth-child(odd) {
+    background: #f1f9fd;
+}
+
+::deep tr:nth-child(even) {
+    background: #cfebf9;
+}
 
 
-    ::deep .quickgrid[theme=corporate] th{
-        background-color: navy;
-        color: white;
-        font-size: 18px;
-        font-weight: normal;
-       
-    }
+::deep .quickgrid[theme=corporate] .description {
+    width: 100%;
+    padding-right: 15px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 7;
+    overflow: hidden;
+}
 
-
-    ::deep .quickgrid[theme=corporate] .description {
-        width: 550px;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
-        overflow: hidden;
-    }
+/*
     ::deep .quickgrid[theme=corporate] .description:hover {
-            -webkit-line-clamp: 20;
+     -webkit-line-clamp: 6;
     }
+*/
