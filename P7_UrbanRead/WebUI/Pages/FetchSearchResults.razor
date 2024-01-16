@@ -14,7 +14,7 @@
 
     <div id="search_txt">
         <InputText type="search" id="query" name="q" placeholder="Book..." @bind-Value="_searchTopic"></InputText>
-        <button class="btn btn-primary" @onclick="FetchResults">Search</button>
+        <button class="btn btn-search" @onclick="FetchResults">Search</button>
     </div>
 
     <div id="categories">
@@ -99,7 +99,7 @@
            </TemplateColumn>
 
            <TemplateColumn title="Action" class="action">
-                   <button class="bnt bnt-secondary" @onclick="GetDetails">Details</button>
+                   <button class="btn btn-details" @onclick="GetDetails">Details</button>
            </TemplateColumn>
         </QuickGrid>
     }

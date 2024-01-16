@@ -20,9 +20,19 @@ h1 {
 
 }
 
-button {
+.btn {
     background-color: navy;
     color: white;
+}
+
+.btn-details{
+    font-size:small;
+    border-radius: 4px;
+    opacity:0.6;
+}
+
+.btn-details:hover{
+    opacity:1;
 }
 
 #categories, #filters {
