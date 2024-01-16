@@ -97,6 +97,10 @@
                     }
                 }
            </TemplateColumn>
+
+           <TemplateColumn title="Action" class="action">
+                   <button class="bnt bnt-secondary" @onclick="GetDetails">Details</button>
+           </TemplateColumn>
         </QuickGrid>
     }
 </div>
@@ -127,6 +131,17 @@
         }
 
     }
+
+    private void GetDetails()
+    { 
+        Console.WriteLine("Details");
+    }
+
+    private void ReadSample()
+    {
+        Console.WriteLine("Read");
+    }
+
 
     List<RadioOptions> categories = new List<RadioOptions>()
     {
