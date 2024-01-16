@@ -100,8 +100,8 @@
            </TemplateColumn>
 
            <TemplateColumn title="Action" class="action">
-                   <button class="btn btn-details" @onclick="GetDetails">Details</button>
-           </TemplateColumn>
+                <a class="btn btn-details" href="/BookDetails" target="_blank">Read More</a>
+            </TemplateColumn>
         </QuickGrid>
     }
 </div>
@@ -131,11 +131,6 @@
 
         }
 
-    }
-
-    private void GetDetails()
-    {
-        Navigation.NavigateTo("/BookDetails");
     }
 
 
