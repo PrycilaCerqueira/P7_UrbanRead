@@ -51,10 +51,10 @@ button {
 
 ::deep .quickgrid[theme=corporate] tbody tr td {
     table-layout: fixed;
-    width: 13%;
-    vertical-align: top;
-    padding-right: 5px;
-}
+    width: 10.5%;
+    vertical-align: central;
+    padding: 5px 7px 5px 7px;
+ }
 
 ::deep .quickgrid[theme=corporate] thead th {
     background-color: navy;
