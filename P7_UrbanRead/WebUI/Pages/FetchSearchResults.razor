@@ -5,6 +5,7 @@
 @using P7_UrbanRead
 @using Microsoft.AspNetCore.Components.QuickGrid
 @inject MainDataService SearchBook
+@inject NavigationManager Navigation
 
 <PageTitle>Urban Library Search</PageTitle>
 
@@ -133,14 +134,10 @@
     }
 
     private void GetDetails()
-    { 
-        Console.WriteLine("Details");
+    {
+        Navigation.NavigateTo("/BookDetails");
     }
 
-    private void ReadSample()
-    {
-        Console.WriteLine("Read");
-    }
 
 
     List<RadioOptions> categories = new List<RadioOptions>()
