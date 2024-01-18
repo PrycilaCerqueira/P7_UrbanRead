@@ -1,8 +1,9 @@
 ﻿@page "/BookDetails"
-@page "/BookDetails/id:{id:long}"
+@page "/BookDetails/id:{isbn:long}"
 
-<h3>BookDetails</h3>
+<h3>Book ID: @isbn</h3>
 
 @code {
-
+    [Parameter]
+    public long isbn { get; set; }
 }
