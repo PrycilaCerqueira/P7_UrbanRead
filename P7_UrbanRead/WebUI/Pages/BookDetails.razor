@@ -1,10 +1,29 @@
 ﻿@page "/BookDetails"
 @page "/BookDetails/id:{isbn:long}"
 
+@using WebUI.Data
+@using P7_UrbanRead
+@inject MainDataService GetBookDetails
+
 <h3>Book ID: @isbn</h3>
 
+<div>
+    <p>
+        @_book.
+    </p>
+</div>
+
+
 @code {
-    [Parameter]
     public long isbn { get; set; }
+
+    IQueryable<Book> _book;
+
+    protected override void OnParametersSet()
+    {
+        _book = MainDataService.GetBookDetails(isbn).AsQueryable();
+    }
+    
+
 }
     

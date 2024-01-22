@@ -89,9 +89,9 @@ namespace WebUI.Data
 
         public static List<Book> GetBookDetails(long selectedIsbn)
         {
-            var bookDetails = new List<Book>();
+            List<Book> bookDetails = new List<Book>();
             
-            bookDetails = _library.Where(i = i.ISBNS.Any(num => num == selectedIsbn)).ToList();
+            bookDetails = _library.Where(isbn => isbn.ISBNS.Any(num => num == selectedIsbn)).ToList();
 
             return bookDetails;
         }
