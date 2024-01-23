@@ -1,27 +1,39 @@
 ﻿@page "/BookDetails"
-@page "/BookDetails/id:{isbn:long}"
+@page "/BookDetails/id:{_isbn:long}"
 
 @using WebUI.Data
 @using P7_UrbanRead
 @inject MainDataService GetBookDetails
 
-<h3>Book ID: @isbn</h3>
-
 <div>
-    <p>
-        @_book.
-    </p>
+    @foreach(var _bookElement in _book)
+    {
+        <h3>@_bookElement.Title</h3>
+
+        <img class="cover" src="@_bookElement.CoverImgLink" alt="Cover" />
+ 
+        
+        foreach( var sample in _bookElement.BookSampleLinks)
+        {
+            <p>
+                <a href="@sample" target="_blank"> Read Sample </a>
+            </p>
+        }
+
+    }
+
 </div>
 
 
 @code {
-    public long isbn { get; set; }
+    [Parameter] public long _isbn { get; set; }
 
-    IQueryable<Book> _book;
+    List<Book> _book = new List<Book>();
 
-    protected override void OnParametersSet()
+
+    protected override void OnInitialized()
     {
-        _book = MainDataService.GetBookDetails(isbn).AsQueryable();
+        _book = MainDataService.GetBookDetails(_isbn);
     }
     
 
