@@ -59,6 +59,7 @@ namespace P7_UrbanRead
                     //Gets the cover of the bookRef image link
                     GetCoverImgLink(gb.VolumeInfo.ImageLinks, bookRef);
 
+                    bookRef.ID = gb.Id;
                     bookRef.Title = gb.VolumeInfo.Title;
                     bookRef.Subtitle = gb.VolumeInfo.Subtitle;
                     bookRef.Description = gb.VolumeInfo.Description;

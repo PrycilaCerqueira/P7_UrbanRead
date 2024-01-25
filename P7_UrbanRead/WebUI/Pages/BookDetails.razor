@@ -1,41 +1,47 @@
 ﻿@page "/BookDetails"
-@page "/BookDetails/id:{_isbn:long}"
+@page "/BookDetails/isbn:{_isbn:long}"
 
 @using WebUI.Data
 @using P7_UrbanRead
 @inject MainDataService GetBookDetails
 
-<div>
-    @foreach(var _bookElement in _book)
-    {
-        <h3>@_bookElement.Title</h3>
+<header>
+    ID: @_isbn
+</header>
+<main>
 
-        <img class="cover" src="@_bookElement.CoverImgLink" alt="Cover" />
- 
-        
-        foreach( var sample in _bookElement.BookSampleLinks)
-        {
-            <p>
-                <a href="@sample" target="_blank"> Read Sample </a>
-            </p>
-        }
+   
+    <h3>@_book.Title</h3>
 
-    }
+    <img class="cover" src="@_book.CoverImgLink" alt="Cover" />
 
-</div>
+    <p>@_book.Description</p>
+
+    <p>@_book.Genre</p>
+
+    <iframe src="@embeddedURL" width ="100%" height="480"></iframe>
+
+
+</main>
 
 
 @code {
     [Parameter] public long _isbn { get; set; }
-
-    List<Book> _book = new List<Book>();
-
+    private Book _book = new Book();
+    private string embeddedURL;
 
     protected override void OnInitialized()
     {
         _book = MainDataService.GetBookDetails(_isbn);
+
     }
-    
+
+    public void GenerateIframeURL()
+    {
+        embeddedURL = @$"https://books.google.com/books?id={_book.ID}&lpg=PP1&pg=PP1&output=embed";
+
+    }
+
 
 }
     

@@ -1,9 +1,11 @@
-﻿using System.Text;
+﻿using System.Reflection.Metadata.Ecma335;
+using System.Text;
 
 namespace P7_UrbanRead
 {
     public class Book
     {
+        private string _id;
         private string _CoverImgLink;
         private string _Title;
         private string _Subtitle;
@@ -17,9 +19,14 @@ namespace P7_UrbanRead
         private string _Genre; 
         private BookFormat _BookFormat; 
         private List<MatRatType> _MaturityRating = new List<MatRatType>();
-        private List<string> _BookSampleLinks = new List<string>();  
-        
+        private List<string> _BookSampleLinks = new List<string>();
 
+
+        public string ID
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
         public string CoverImgLink
         {
             get { return _CoverImgLink; }
