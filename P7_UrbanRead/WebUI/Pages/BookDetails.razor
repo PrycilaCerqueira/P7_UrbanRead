@@ -28,17 +28,11 @@
 @code {
     [Parameter] public long _isbn { get; set; }
     private Book _book = new Book();
-    private string embeddedURL;
+    private string embeddedURL => @$"https://books.google.com/books?id={_book.ID}&lpg=PP1&pg=PP1&output=embed";
 
     protected override void OnInitialized()
     {
         _book = MainDataService.GetBookDetails(_isbn);
-
-    }
-
-    public void GenerateIframeURL()
-    {
-        embeddedURL = @$"https://books.google.com/books?id={_book.ID}&lpg=PP1&pg=PP1&output=embed";
 
     }
 
