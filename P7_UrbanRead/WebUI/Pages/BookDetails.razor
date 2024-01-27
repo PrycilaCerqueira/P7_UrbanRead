@@ -5,22 +5,43 @@
 @using P7_UrbanRead
 @inject MainDataService GetBookDetails
 
-<header>
-    ID: @_isbn
-</header>
+
+<PageTitle>Book: @_book.Title</PageTitle>
+
 <main>
 
-   
-    <h3>@_book.Title</h3>
+    <h2>@_book.Title</h2>
+ 
+    <img class="cover" src="@_book.CoverImgLink" alt="Cover Image" />
 
-    <img class="cover" src="@_book.CoverImgLink" alt="Cover" />
+    <dl class="product_description">
+        <dt>Subtitle</dt>
+            <dd>@_book.Subtitle</dd>
+        <dt>Description</dt>
+            <dd>@_book.Description</dd>
+        <dt>Pages</dt>
+            <dd>@_book.TotalPages</dd>
+        <dt>Genre</dt>
+            <dd>@_book.Genre</dd>
+        <dt>Language</dt>
+            <dd>@_book.Language</dd>
+        <dt>Authors</dt>
+            <dd>@foreach (var author in _book.Authors)
+                {
+                    <p>@author</p>
+                }
+            </dd>
+        <dt>Publisher</dt>
+        <dd>@_book.PublisherName (@_book.PublishedDate)</dd>
+        <dt>ISBNs</dt>
+            <dd>@foreach(var num in _book.ISBNS)
+                {
+                    <p>@num</p>
+                }
+            </dd>
+    </dl>
 
-    <p>@_book.Description</p>
-
-    <p>@_book.Genre</p>
-
-    <iframe src="@embeddedURL" width ="100%" height="480"></iframe>
-
+    <iframe class="read_sample" src="@embeddedURL" width="60%" height="900"></iframe>
 
 </main>
 
