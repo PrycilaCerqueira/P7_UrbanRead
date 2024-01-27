@@ -10,6 +10,11 @@
 
   <ItemGroup>
     <Compile Remove="Data\BookSearchService.cs" />
+    <Compile Remove="Pages\Error.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="BookDetails.razor.razor" />
   </ItemGroup>
 
   <ItemGroup>

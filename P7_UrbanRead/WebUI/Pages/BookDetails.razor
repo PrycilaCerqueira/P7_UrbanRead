@@ -8,42 +8,42 @@
 
 <PageTitle>Book: @_book.Title</PageTitle>
 
-<main>
+<div class="product_description">
 
     <h2>@_book.Title</h2>
  
     <img class="cover" src="@_book.CoverImgLink" alt="Cover Image" />
 
-    <dl class="product_description">
+    <dl>
         <dt>Subtitle</dt>
-            <dd>@_book.Subtitle</dd>
+        <dd>@_book.Subtitle</dd>
         <dt>Description</dt>
-            <dd>@_book.Description</dd>
+        <dd>@_book.Description</dd>
         <dt>Pages</dt>
-            <dd>@_book.TotalPages</dd>
+        <dd>@_book.TotalPages</dd>
         <dt>Genre</dt>
-            <dd>@_book.Genre</dd>
+        <dd>@_book.Genre</dd>
         <dt>Language</dt>
-            <dd>@_book.Language</dd>
+        <dd>@_book.Language</dd>
         <dt>Authors</dt>
-            <dd>@foreach (var author in _book.Authors)
-                {
-                    <p>@author</p>
-                }
-            </dd>
+        <dd>@foreach (var author in _book.Authors)
+            {
+                <p>@author</p>
+            }
+        </dd>
         <dt>Publisher</dt>
         <dd>@_book.PublisherName (@_book.PublishedDate)</dd>
         <dt>ISBNs</dt>
-            <dd>@foreach(var num in _book.ISBNS)
-                {
-                    <p>@num</p>
-                }
-            </dd>
+        <dd>@foreach(var num in _book.ISBNS)
+            {
+                <p>@num</p>
+            }
+        </dd>
     </dl>
 
     <iframe class="read_sample" src="@embeddedURL" width="60%" height="900"></iframe>
 
-</main>
+</div>
 
 
 @code {
