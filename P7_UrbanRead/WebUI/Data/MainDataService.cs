@@ -67,7 +67,7 @@ namespace WebUI.Data
 
                 if (sCategory == "intitle" || sCategory == "")
                 {
-                    searchResults = _library.Where(book => book.Title.ToLower().Contains(lowerCaseSearchTerm)).ToList();
+                    searchResults = _library.Where(book => book.Title?.ToLower().Contains(lowerCaseSearchTerm) ?? false).ToList();
                 }
                 if (sCategory == "inauthor")
                 {
