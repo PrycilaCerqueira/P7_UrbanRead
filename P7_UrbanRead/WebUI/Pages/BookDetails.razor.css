@@ -1,18 +1,24 @@
 ﻿* {
     font-family: sans-serif;
     color: navy;
+    margin-left: 1rem;
+    margin-right: 1.5rem;
 }
 
 h2 {
     font-family: Georgia, serif;
     text-align: center;
-    text-shadow: 1px 2px lightgray;
-    padding-bottom: 40px;
+    background: #00006a;
+    color: white;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 dl{
     float: left;
-    width:40%;
+    width:42%;
     display: grid;
     grid-template-columns: max-content auto;
 }
@@ -27,6 +33,5 @@ dd {
 
 .read_sample {
     float: right;
-    margin-right: 1rem;
 }
 
