@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Compile Remove="Data\BookSearchService.cs" />
-    <Compile Remove="Pages\Error.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
