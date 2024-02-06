@@ -5,7 +5,7 @@ namespace P7_UrbanRead
 {
     public class Book
     {
-        private string _id;
+        private string _Id;
         private string _CoverImgLink;
         private string _Title;
         private string _Subtitle;
@@ -24,8 +24,8 @@ namespace P7_UrbanRead
 
         public string ID
         {
-            get { return _id; }
-            set { _id = value; }
+            get { return _Id; }
+            set { _Id = value; }
         }
         public string CoverImgLink
         {

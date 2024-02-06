@@ -2,7 +2,14 @@
 {
     public class Author
     {
+        int _Id;
         private string _FullName;
+
+        public int Id
+        {
+            get { return _Id; }
+            set { _Id = value; }
+        }
 
         public string FullName
         {

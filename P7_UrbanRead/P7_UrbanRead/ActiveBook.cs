@@ -5,6 +5,7 @@
         private Book _ActBook;
         private ReadStatus _ReadingStatus;
         private int _PageAt;
+        public int ID { get; set; }
         public Book ActBook
         {
             get { return _ActBook; }

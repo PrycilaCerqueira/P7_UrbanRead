@@ -1,7 +1,8 @@
 ﻿namespace P7_UrbanRead
 {
-    internal class Address
+    public class Address
     {
+        public int _Id;
         private int _StreetNumber;
         private string _StreetName;
         private string _AptSuite;
@@ -9,6 +10,12 @@
         private string _StateProvince;
         private string _PostalCode;
         private string _Country;
+
+        public int Id
+        {
+            get { return _Id; }
+            set { _Id = value; }
+        }
 
         public int StreetNumber 
         { 

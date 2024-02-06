@@ -1,7 +1,8 @@
 ﻿namespace P7_UrbanRead
 {
-    internal class Person
+    public class Person 
     {
+        public int _Id;
         private string _FirstName;
         private string _LastName;
         private DateTime _DateOfBirth;
@@ -13,6 +14,12 @@
         private List<Book> _WishList;
         private List<ActiveBook> _Bookshelf;
 
+
+        public int Id
+        {
+            get { return _Id; }
+            set { _Id = value; }
+        }
         public string FirstName
         {
             get { return _FirstName; }
