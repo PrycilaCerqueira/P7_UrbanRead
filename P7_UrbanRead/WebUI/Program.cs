@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using WebUI.Areas.Identity;
 using WebUI.Areas.Identity.Data;
 using WebUI.Data;
 
