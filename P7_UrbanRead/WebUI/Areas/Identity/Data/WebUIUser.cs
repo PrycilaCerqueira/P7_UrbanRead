@@ -10,6 +10,6 @@ namespace WebUI.Areas.Identity.Data;
 // Add profile data for application users by adding properties to the WebUIUser class
 public class WebUIUser : IdentityUser
 {
-     public Person person { get; set; }
+    public Person _Person { get; set; }
 }
 
