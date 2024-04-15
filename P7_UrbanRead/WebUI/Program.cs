@@ -25,6 +25,7 @@ namespace WebUI
                 .AddEntityFrameworkStores<WebUIContext>();
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
+            builder.Services.AddQuickGridEntityFrameworkAdapter();
             builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<WebUIUser>>();
             builder.Services.AddSingleton<MainDataService>();
 
