@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WebUI.Areas.Identity.Data;
+using P7_UrbanRead;
+
 
 namespace WebUI.Data;
 
@@ -20,4 +22,6 @@ public class WebUIContext : IdentityDbContext<WebUIUser>
         // Add your customizations after calling base.OnModelCreating(builder);
     }
 
+    public DbSet<WebUI.Areas.Identity.Data.WebUIUser> _WebUIUser { get; set; } = default!;
+    public DbSet<P7_UrbanRead.Person> _User { get; set; } = default!;
 }
