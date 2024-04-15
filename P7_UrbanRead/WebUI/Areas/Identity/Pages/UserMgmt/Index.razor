@@ -9,8 +9,10 @@
 <h3>List of Users</h3>
 
 <QuickGrid Class="table" Items="DB._WebUIUser">
+    <PropertyColumn Property="_WebUIUser => _WebUIUser.Id" />
     <PropertyColumn Property="_WebUIUser => _WebUIUser.Email" />
     <PropertyColumn Property="_WebUIUser => _WebUIUser.UserName" />
+    <PropertyColumn Property="_WebUIUser => _WebUIUser._Person" />
 </QuickGrid>
 
 @code {
