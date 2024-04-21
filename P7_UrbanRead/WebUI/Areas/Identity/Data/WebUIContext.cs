@@ -23,5 +23,5 @@ public class WebUIContext : IdentityDbContext<WebUIUser>
     }
 
     public DbSet<WebUI.Areas.Identity.Data.WebUIUser> _WebUIUser { get; set; } = default!;
-    public DbSet<P7_UrbanRead.Person> _User { get; set; } = default!;
+    public DbSet<Person> _User { get; set; } = default!;
 }

@@ -1,6 +1,6 @@
 ﻿namespace P7_UrbanRead
 {
-    public class Person 
+    public class Person
     {
         public int _Id;
         private string _FirstName;

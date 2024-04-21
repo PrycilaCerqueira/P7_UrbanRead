@@ -1,0 +1,59 @@
+﻿@page "/usermgmt/create"
+
+@using P7_UrbanRead;
+@using WebUI.Data
+@inject WebUI.Data.WebUIContext DB
+@inject IJSRuntime JS
+@inject NavigationManager NavigationManager
+
+<h3>Create User</h3>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="User" OnInvalidSubmit="AddUser" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" />
+            <div class="mb-3">
+                <label for="FirstName" class="form-label">First Name:</label>
+                <InputText id="firstname" @bind-Value="User.FirstName" class="form-control" />
+                <ValidationMessage For="() => User.FirstName" class="text-danger" />
+            </div>
+            <div class="mb-3">
+                <label for="LastName" class="form-label">Last Name:</label>
+                <InputText id="lastname" @bind-Value="User.LastName" class="form-control" />
+                <ValidationMessage For="() => User.LastName" class="text-danger" />
+            </div>
+            <div class="mb-3">
+                <label for="PrimaryEmail" class="form-label">Primary E-mail:</label>
+                <InputText id="primaryemail" @bind-Value="User.PrimaryEmail" class="form-control" />
+                <ValidationMessage For="() => User.PrimaryEmail" class="text-danger" />
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+
+</div>
+
+<div>
+    <a href="/usermgmt">Back to List</a>
+</div>
+
+
+@code {
+
+    [SupplyParameterFromForm]
+    public Person User { get; set; } = new(); 
+
+    public async Task AddUser()
+    {
+        Random rnd = new Random();
+        User.Id = rnd.Next();
+
+        DB._User.Add(User);
+        await DB.SaveChangesAsync();
+        NavigationManager.NavigateTo("/usermgmt");
+          
+    }
+
+}

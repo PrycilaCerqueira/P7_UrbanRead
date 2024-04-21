@@ -1,0 +1,22 @@
+﻿@page "/usermgmt"
+
+@using WebUI.Data
+@using P7_UrbanRead
+@using Microsoft.AspNetCore.Components.QuickGrid
+@inject WebUI.Data.WebUIContext DB
+@inject IJSRuntime JS
+
+<h3>List of Users</h3>
+
+<QuickGrid Class="table" Items="DB._User">
+    <PropertyColumn Property="user => user.Id" />
+    <PropertyColumn Property="user => user.FirstName" />
+    <PropertyColumn Property="user => user.LastName" />
+    <PropertyColumn Property="user => user.PrimaryEmail" />
+</QuickGrid>
+
+
+@code {
+
+    
+}
