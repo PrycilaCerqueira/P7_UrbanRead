@@ -26,8 +26,18 @@
             </div>
             <div class="mb-3">
                 <label for="PrimaryEmail" class="form-label">Primary E-mail:</label>
-                <InputText id="primaryemail" @bind-Value="User.PrimaryEmail" class="form-control" />
+                <InputText id="primaryemail" @bind-Value="User.PrimaryEmail" class="form-control" placeholder="name@example.com" />
                 <ValidationMessage For="() => User.PrimaryEmail" class="text-danger" />
+            </div>
+            <div class="mb-3">
+                <label for="SecondaryEmail" class="form-label">Secondary E-mail:</label>
+                <InputText id="secondaryemail" @bind-Value="User.SecondaryEmail" class="form-control" placeholder="name@example.com"  />
+                <ValidationMessage For="() => User.SecondaryEmail" class="text-danger" />
+            </div>
+            <div class="mb-3">
+                <label for="DateOfBirth" class="form-label">Date of Birth:</label>
+                <InputDate id="dob" @bind-Value="User.DateOfBirth" class="form-control" min="@minDate" max="@maxDate"/>
+                <ValidationMessage For="() => User.DateOfBirth" class="text-danger" />
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
@@ -43,14 +53,20 @@
 @code {
 
     [SupplyParameterFromForm]
-    public Person User { get; set; } = new(); 
+    public Person User { get; set; } = new();
+
+    ä
+    public DateTime minDate = new DateTime (1900, 1, 1);
+    public DateTime maxDate = DateTime.Today;
 
     public async Task AddUser()
     {
-        Random rnd = new Random();
-        User.Id = rnd.Next();
+        //Random rnd = new Random();
+        //User.Id = rnd.Next();
 
-        DB._User.Add(User);
+        User.Id = DB.Person.Count();
+
+        DB.Person.Add(User);
         await DB.SaveChangesAsync();
         NavigationManager.NavigateTo("/usermgmt");
           
