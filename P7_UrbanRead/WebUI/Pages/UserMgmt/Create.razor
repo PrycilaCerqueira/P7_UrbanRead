@@ -36,7 +36,7 @@
             </div>
             <div class="mb-3">
                 <label for="DateOfBirth" class="form-label">Date of Birth:</label>
-                <InputDate id="dob" @bind-Value="User.DateOfBirth" class="form-control" min="@minDate" max="@maxDate"/>
+                <InputDate id="dob" @bind-Value="User.DateOfBirth" Min="@min" Max="@max" class="form-control" />
                 <ValidationMessage For="() => User.DateOfBirth" class="text-danger" />
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
@@ -55,9 +55,19 @@
     [SupplyParameterFromForm]
     public Person User { get; set; } = new();
 
-    ä
-    public DateTime minDate = new DateTime (1900, 1, 1);
+    public DateTime minDate = DateTime.Today.AddYears(-10);
     public DateTime maxDate = DateTime.Today;
+
+    public DateTime? min, max;
+
+    protected override void OnInitialized()
+    {
+        User.DateOfBirth = DateTime.Today;
+        min = minDate;
+        max = maxDate;
+    }
+
+
 
     public async Task AddUser()
     {
