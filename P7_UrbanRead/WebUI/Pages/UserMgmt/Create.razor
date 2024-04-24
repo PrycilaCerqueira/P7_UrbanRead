@@ -11,7 +11,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <EditForm method="post" Model="User" OnInvalidSubmit="AddUser" FormName="create" Enhance>
+        <EditForm Model="User" OnSubmit="AddUser" FormName="create" Enhance>
             <DataAnnotationsValidator />
             <ValidationSummary class="text-danger" />
             <div class="mb-3">
@@ -36,7 +36,7 @@
             </div>
             <div class="mb-3">
                 <label for="DateOfBirth" class="form-label">Date of Birth:</label>
-                <InputDate id="dob" @bind-Value="User.DateOfBirth" Min="@min" Max="@max" class="form-control" />
+                <InputDate id="dob" @bind-Value="User.DateOfBirth" EnableMinMax="true" Min="@min" Max="@max" class="form-control" />
                 <ValidationMessage For="() => User.DateOfBirth" class="text-danger" />
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
@@ -55,16 +55,15 @@
     [SupplyParameterFromForm]
     public Person User { get; set; } = new();
 
-    public DateTime minDate = DateTime.Today.AddYears(-10);
-    public DateTime maxDate = DateTime.Today;
+    public DateTime min, max;
 
-    public DateTime? min, max;
 
     protected override void OnInitialized()
     {
-        User.DateOfBirth = DateTime.Today;
-        min = minDate;
-        max = maxDate;
+        min = DateTime.Now.AddYears(-1);
+        max = DateTime.Now.AddDays(-1);
+        User.DateOfBirth = DateTime.Now.Date;
+
     }
 
 
@@ -74,7 +73,7 @@
         //Random rnd = new Random();
         //User.Id = rnd.Next();
 
-        User.Id = DB.Person.Count();
+        User.Id = DB.Person.Any() ? DB.Person.Max(n => n.Id) + 1 : 0;
 
         DB.Person.Add(User);
         await DB.SaveChangesAsync();
