@@ -22,6 +22,6 @@ public class WebUIContext : IdentityDbContext<WebUIUser>
         // Add your customizations after calling base.OnModelCreating(builder);
     }
 
-    public DbSet<WebUI.Areas.Identity.Data.WebUIUser> WebUIUser { get; set; } = default!;
+    public DbSet<WebUI.Areas.Identity.Data.WebUIUser> UsersIdentity { get; set; } = default!;
     public DbSet<Person> Person { get; set; } = default!;
 }

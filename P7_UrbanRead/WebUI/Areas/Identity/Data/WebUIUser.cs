@@ -12,7 +12,9 @@ namespace WebUI.Areas.Identity.Data;
 [Table("AspNetUsers")]
 public class WebUIUser : IdentityUser
 {
-    public Person _Person {  get; set; }
+    [PersonalData]
+    public Person _Person { get; set; }
+
 
 }
 

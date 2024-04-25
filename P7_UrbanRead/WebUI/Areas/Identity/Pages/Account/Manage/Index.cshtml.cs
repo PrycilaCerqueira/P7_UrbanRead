@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using P7_UrbanRead;
 using WebUI.Areas.Identity.Data;
 
 namespace WebUI.Areas.Identity.Pages.Account.Manage
@@ -56,6 +57,17 @@ namespace WebUI.Areas.Identity.Pages.Account.Manage
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
@@ -70,6 +82,8 @@ namespace WebUI.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
+                FirstName = user._Person.FirstName,
+                LastName = user._Person.LastName,
                 PhoneNumber = phoneNumber
             };
         }
