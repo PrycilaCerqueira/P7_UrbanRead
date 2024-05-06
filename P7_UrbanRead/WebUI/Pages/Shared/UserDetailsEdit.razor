@@ -1,0 +1,39 @@
+﻿@using P7_UrbanRead
+
+
+<EditForm Model="User" FormName="create" Enhance>
+    <DataAnnotationsValidator />
+    <ValidationSummary class="text-danger" />
+    <div class="mb-3">
+        <label for="FirstName" class="form-label">First Name:</label>
+        <InputText id="firstname" @bind-Value="User.FirstName" class="form-control" />
+        <ValidationMessage For="() => User.FirstName" class="text-danger" />
+    </div>
+    <div class="mb-3">
+        <label for="LastName" class="form-label">Last Name:</label>
+        <InputText id="lastname" @bind-Value="User.LastName" class="form-control" />
+        <ValidationMessage For="() => User.LastName" class="text-danger" />
+    </div>
+    <div class="mb-3">
+        <label for="PrimaryEmail" class="form-label">Primary E-mail:</label>
+        <InputText id="primaryemail" @bind-Value="User.PrimaryEmail" class="form-control" placeholder="name@example.com" />
+        <ValidationMessage For="() => User.PrimaryEmail" class="text-danger" />
+    </div>
+    <div class="mb-3">
+        <label for="SecondaryEmail" class="form-label">Secondary E-mail:</label>
+        <InputText id="secondaryemail" @bind-Value="User.SecondaryEmail" class="form-control" placeholder="name@example.com" />
+        <ValidationMessage For="() => User.SecondaryEmail" class="text-danger" />
+    </div>
+    <div class="mb-3">
+        <label for="DateOfBirth" class="form-label">Date of Birth:</label>
+        <InputDate id="dob" @bind-Value="User.DateOfBirth"  class="form-control" />
+        <ValidationMessage For="() => User.DateOfBirth" class="text-danger" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public Person User { get; set; }
+
+}

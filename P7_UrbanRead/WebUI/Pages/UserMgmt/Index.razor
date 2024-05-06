@@ -1,22 +1,69 @@
 ﻿@page "/usermgmt"
-
+@* admins page *@
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc
+@using WebUI.Areas.Identity.Data
 @using WebUI.Data
 @using P7_UrbanRead
 @using Microsoft.AspNetCore.Components.QuickGrid
 @inject WebUI.Data.WebUIContext DB
+@inject UserManager<WebUIUser> UserManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IJSRuntime JS
 
 <h3>List of Users</h3>
 
-<QuickGrid Class="table" Items="DB.Person">
+<QuickGrid Class="table" Items="@_UsersIQueryable">
     <PropertyColumn Property="user => user.Id" />
-    <PropertyColumn Property="user => user.FirstName" />
-    <PropertyColumn Property="user => user.LastName" />
-    <PropertyColumn Property="user => user.PrimaryEmail" />
-</QuickGrid>
+    <PropertyColumn Property="user => user.UserName" />
+    <PropertyColumn Property="user => user.Email" />
+@*  <PropertyColumn Property="user => user.PhoneNumber" />
+    <PropertyColumn Property="user => user._Person.FirstName" />
+    <PropertyColumn Property="user => user._Person.LastName" />
+    <PropertyColumn Property="user => user._Person.Address.StreetName" /> *@
+</QuickGrid> 
 
+@* <UserDetailsEdit @User=SelectedUser></UserDetailsEdit> *@
 
 @code {
+    List<WebUIUser> _UsersList = new List<WebUIUser>();
+    IQueryable<WebUIUser> _UsersIQueryable;
 
-    
+    protected override async Task OnInitializedAsync()
+    {
+        await GetUsers();
+        
+    }
+
+    public async Task GetUsers()
+    {
+        _UsersList = new List<WebUIUser>();
+        var user = UserManager.Users.Select(u => new WebUIUser
+        {
+            Id = u.Id,
+            UserName = u.UserName,
+            Email = u.Email,
+
+        });
+
+        foreach (var item in user)
+        {
+            _UsersList.Add(item);
+        }
+
+        _UsersIQueryable = _UsersList.AsQueryable();
+        
+    }
+
+
+    // **Code to return the current user logged in**
+    //Person SelectedUser;
+    // System.Security.Claims.ClaimsPrincipal CurrentUser;
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     var current = AuthenticationStateProvider.GetAuthenticationStateAsync().Result.User;
+    //     var user = UserManager.GetUserAsync(current).Result;
+
+    // }
+
 }

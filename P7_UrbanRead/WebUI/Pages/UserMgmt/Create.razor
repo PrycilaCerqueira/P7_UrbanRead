@@ -1,6 +1,6 @@
-﻿@page "/usermgmt/create"
-
-@using P7_UrbanRead;
+﻿@* self service *@
+@page "/usermgmt/create"
+@* @using P7_UrbanRead;
 @using WebUI.Data
 @inject WebUI.Data.WebUIContext DB
 @inject IJSRuntime JS
@@ -11,36 +11,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <EditForm Model="User" OnSubmit="AddUser" FormName="create" Enhance>
-            <DataAnnotationsValidator />
-            <ValidationSummary class="text-danger" />
-            <div class="mb-3">
-                <label for="FirstName" class="form-label">First Name:</label>
-                <InputText id="firstname" @bind-Value="User.FirstName" class="form-control" />
-                <ValidationMessage For="() => User.FirstName" class="text-danger" />
-            </div>
-            <div class="mb-3">
-                <label for="LastName" class="form-label">Last Name:</label>
-                <InputText id="lastname" @bind-Value="User.LastName" class="form-control" />
-                <ValidationMessage For="() => User.LastName" class="text-danger" />
-            </div>
-            <div class="mb-3">
-                <label for="PrimaryEmail" class="form-label">Primary E-mail:</label>
-                <InputText id="primaryemail" @bind-Value="User.PrimaryEmail" class="form-control" placeholder="name@example.com" />
-                <ValidationMessage For="() => User.PrimaryEmail" class="text-danger" />
-            </div>
-            <div class="mb-3">
-                <label for="SecondaryEmail" class="form-label">Secondary E-mail:</label>
-                <InputText id="secondaryemail" @bind-Value="User.SecondaryEmail" class="form-control" placeholder="name@example.com"  />
-                <ValidationMessage For="() => User.SecondaryEmail" class="text-danger" />
-            </div>
-            <div class="mb-3">
-                <label for="DateOfBirth" class="form-label">Date of Birth:</label>
-                <InputDate id="dob" @bind-Value="User.DateOfBirth" EnableMinMax="true" Min="@min" Max="@max" class="form-control" />
-                <ValidationMessage For="() => User.DateOfBirth" class="text-danger" />
-            </div>
-            <button type="submit" class="btn btn-primary">Create</button>
-        </EditForm>
+     <UserDetailsEdit @User=User></UserDetailsEdit>
     </div>
 
 </div>
@@ -55,30 +26,21 @@
     [SupplyParameterFromForm]
     public Person User { get; set; } = new();
 
-    public DateTime min, max;
-
-
     protected override void OnInitialized()
     {
-        min = DateTime.Now.AddYears(-1);
-        max = DateTime.Now.AddDays(-1);
+        //Authenticationprinciapprovbider // get logged in princicpal
+        //get User obj from Usermenanager
+        //User == result from above
+
         User.DateOfBirth = DateTime.Now.Date;
 
     }
 
-
-
     public async Task AddUser()
     {
-        //Random rnd = new Random();
-        //User.Id = rnd.Next();
-
-        User.Id = DB.Person.Any() ? DB.Person.Max(n => n.Id) + 1 : 0;
-
-        DB.Person.Add(User);
-        await DB.SaveChangesAsync();
-        NavigationManager.NavigateTo("/usermgmt");
-          
-    }
+        // DB.UsersIdentity.AddAsync(User);
+        // await DB.SaveChangesAsync();
+        // NavigationManager.NavigateTo("/usermgmt");
+    } *@
 
 }
