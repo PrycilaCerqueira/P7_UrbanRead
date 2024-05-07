@@ -125,6 +125,16 @@ namespace WebUI.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            if (Input.FirstName != user._Person.FirstName)
+            {
+                user._Person.FirstName = Input.FirstName;
+            }
+            if (Input.LastName != user._Person.LastName)
+            {
+                user._Person.LastName = Input.LastName;
+            }
+            await _userManager.UpdateAsync(user);
+
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

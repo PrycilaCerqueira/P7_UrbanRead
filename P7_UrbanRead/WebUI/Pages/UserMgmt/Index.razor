@@ -13,12 +13,12 @@
 <h3>List of Users</h3>
 
 @* <QuickGrid Class="table" Items="@_UsersIQueryable"> *@
- <QuickGrid Class="table" Items="DB.Users">
+<QuickGrid Class="table" Items="DB.Users">
     <PropertyColumn Property="user => user.Id" />
     <PropertyColumn Property="user => user.UserName" />
     <PropertyColumn Property="user => user.Email" />
     <PropertyColumn Property="user => user.PhoneNumber" />
-    <PropertyColumn Property="user => user._Person.FirstName.FirstOrDefault()" />
+    <PropertyColumn Property="user => user._Person.FirstName.SingleOrDefault()" />
    @*  <PropertyColumn Property="user => user._Person.LastName" />
     <PropertyColumn Property="user => user._Person.Address.StreetName" /> *@
 </QuickGrid> 
@@ -26,8 +26,6 @@
 @* <UserDetailsEdit @User=SelectedUser></UserDetailsEdit> *@
 
 @code {
-
-
 
     // List<WebUIUser> _UsersList = new List<WebUIUser>();ä
     // IQueryable<WebUIUser> _UsersIQueryable;
