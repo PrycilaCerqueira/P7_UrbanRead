@@ -71,14 +71,14 @@ namespace WebUI.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required]
-            [DataType(DataType.Text)]
-            [Display(Name = "First Name")]
-            public string First { get; set; }
+            //[Required]
+            //[DataType(DataType.Text)]
+            //[Display(Name = "First Name")]
+            //public string First { get; set; }
 
-            [Required]
-            [Display(Name = "Last Name")]
-            public string LastName { get; set; }
+            //[Required]
+            //[Display(Name = "Last Name")]
+            //public string LastName { get; set; }
 
 
             /// <summary>
