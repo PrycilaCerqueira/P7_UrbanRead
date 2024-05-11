@@ -13,7 +13,8 @@ namespace WebUI.Areas.Identity.Data;
 public class WebUIUser : IdentityUser
 {
     [PersonalData]
-    public Person _Person { get; set; }
+    public Person _Person { get; set; } = new();
+
 
 
 }

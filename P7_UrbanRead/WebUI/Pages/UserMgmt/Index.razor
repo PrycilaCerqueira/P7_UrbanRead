@@ -1,6 +1,7 @@
 ﻿@page "/usermgmt"
 @* admins page *@
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
 @using WebUI.Areas.Identity.Data
 @using WebUI.Data
 @using P7_UrbanRead
@@ -12,53 +13,56 @@
 
 <h3>List of Users</h3>
 
-@* <QuickGrid Class="table" Items="@_UsersIQueryable"> *@
-<QuickGrid Class="table" Items="DB.Users">
+<QuickGrid Class="table" Items="@_UsersIQueryable">
+@* <QuickGrid Class="table" Items="DB.Users"> *@
     <PropertyColumn Property="user => user.Id" />
     <PropertyColumn Property="user => user.UserName" />
     <PropertyColumn Property="user => user.Email" />
     <PropertyColumn Property="user => user.PhoneNumber" />
-    <PropertyColumn Property="user => user._Person.FirstName.SingleOrDefault()" />
-   @*  <PropertyColumn Property="user => user._Person.LastName" />
-    <PropertyColumn Property="user => user._Person.Address.StreetName" /> *@
+    <PropertyColumn Property="user => user._Person.FirstName" />
+    <PropertyColumn Property="user => user._Person.LastName" />
+
 </QuickGrid> 
 
 @* <UserDetailsEdit @User=SelectedUser></UserDetailsEdit> *@
 
 @code {
 
-    // List<WebUIUser> _UsersList = new List<WebUIUser>();ä
-    // IQueryable<WebUIUser> _UsersIQueryable;
+    List<WebUIUser> _UsersList = new List<WebUIUser>();
+    IQueryable<WebUIUser> _UsersIQueryable;
 
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     await GetUsers();
+    protected override async Task OnInitializedAsync()
+    {
+        await GetUsers();
+
+    }
+
+    public async Task GetUsers()
+    {
+        _UsersList = new List<WebUIUser>();
+
+        var user = UserManager.Users.Include(p => p._Person).Select(u => new WebUIUser
+        {
+                Id = u.Id,
+                UserName = u.UserName,
+                Email = u.Email,
+                FirstName = u._Person.FirstName,
+                LastName = u._Person.LastName,
+        });
+
+
+        foreach (var item in user)
+        {
+            _UsersList.Add(item);
+        }
+
+        _UsersIQueryable = _UsersList.AsQueryable();
         
-    // }
-
-    // public async Task GetUsers()
-    // {
-    //     _UsersList = new List<WebUIUser>();
-    //     var user = UserManager.Users.Select(u => new WebUIUser
-    //     {
-    //         Id = u.Id,
-    //         UserName = u.UserName,
-    //         Email = u.Email,
-
-    //     });
-
-    //     foreach (var item in user)
-    //     {
-    //         _UsersList.Add(item);
-    //     }
-
-    //     _UsersIQueryable = _UsersList.AsQueryable();
-        
-    // }
+    }
 
 
     // **Code to return the current user logged in**
-    //Person SelectedUser;
+    // Person SelectedUser;
     // System.Security.Claims.ClaimsPrincipal CurrentUser;
     // protected override async Task OnInitializedAsync()
     // {
