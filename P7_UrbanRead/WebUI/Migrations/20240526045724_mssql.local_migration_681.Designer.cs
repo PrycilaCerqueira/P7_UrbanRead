@@ -12,8 +12,8 @@ using WebUI.Data;
 namespace WebUI.Migrations
 {
     [DbContext(typeof(WebUIContext))]
-    [Migration("20240510231003_mssql.local_migration_763")]
-    partial class mssqllocal_migration_763
+    [Migration("20240526045724_mssql.local_migration_681")]
+    partial class mssqllocal_migration_681
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
