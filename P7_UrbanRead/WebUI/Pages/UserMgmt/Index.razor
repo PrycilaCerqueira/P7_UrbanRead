@@ -4,22 +4,22 @@
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.EntityFrameworkCore
 @using WebUI.Areas.Identity.Data
-
 @inject WebUI.Data.WebUIContext DBContext
-@inject IJSRuntime JS
 
 <h3>List of Users</h3>
 
 <QuickGrid Class="table" Items="DBContext.Users.Include(u => u._Person)">
-    <PropertyColumn Property="user => user.Id" />
-    <PropertyColumn Property="user => user.UserName" />
-    <PropertyColumn Property="user => user.Email" />
-    <PropertyColumn Property="user => user.PhoneNumber" />
-    <PropertyColumn Property="user => user._Person.FirstName" />
-    <PropertyColumn Property="user => user._Person.LastName" />
+    <PropertyColumn Property="usermgmt => usermgmt.Id" />
+    <PropertyColumn Property="usermgmt => usermgmt._Person.FirstName" />
+    <PropertyColumn Property="usermgmt => usermgmt._Person.LastName" />
+    <PropertyColumn Property="usermgmt => usermgmt.UserName" />
+
+    <TemplateColumn Context="usermgmt">
+        <a href="@($"/usermgmt/details?id={usermgmt.Id}")">Details</a>
+    </TemplateColumn>
 </QuickGrid> 
 
- @* <UserDetailsEdit @User=SelectedUser></UserDetailsEdit>*@
+
 
 @code {
 

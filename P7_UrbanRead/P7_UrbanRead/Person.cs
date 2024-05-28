@@ -1,4 +1,7 @@
-﻿namespace P7_UrbanRead
+﻿using Microsoft.AspNetCore.Identity;
+using System.Diagnostics;
+
+namespace P7_UrbanRead
 {
     public class Person
     {

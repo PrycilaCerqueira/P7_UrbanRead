@@ -1,0 +1,40 @@
+﻿@page "/usermgmt/details"
+
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@using WebUI.Areas.Identity.Data
+@inject WebUI.Data.WebUIContext DBContext
+@inject NavigationManager NavigationManager
+
+<h3>Details</h3>
+
+<div>
+    @if (usermgmt is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else{
+       @*  <h4>@usermgmt.FirstName @usermgmt.LastName</h4> *@
+        <hr />
+
+
+    }
+</div>
+
+@code {
+    WebUIUser? usermgmt;
+
+    [SupplyParameterFromQuery]
+    public string Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        usermgmt = await DBContext.Users.FirstOrDefaultAsync(user => user.Id == Id);
+
+        if (usermgmt is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+}

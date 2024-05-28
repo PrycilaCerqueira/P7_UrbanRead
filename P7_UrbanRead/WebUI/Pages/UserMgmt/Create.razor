@@ -1,9 +1,7 @@
-﻿@* self service *@
-@page "/usermgmt/create"
-@* @using P7_UrbanRead;
-@using WebUI.Data
+﻿@* @page "/usermgmt/create"
+
+@using WebUI.Pages.Shared
 @inject WebUI.Data.WebUIContext DB
-@inject IJSRuntime JS
 @inject NavigationManager NavigationManager
 
 <h3>Create User</h3>
@@ -41,6 +39,6 @@
         // DB.UsersIdentity.AddAsync(User);
         // await DB.SaveChangesAsync();
         // NavigationManager.NavigateTo("/usermgmt");
-    } *@
+    }
 
-}
+ *@}
