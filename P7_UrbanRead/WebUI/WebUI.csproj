@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Content Remove="BookDetails.razor.razor" />
-    <Content Remove="Pages\UserMgmt\Details.razor" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,18 +43,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\P7_UrbanRead\P7_UrbanRead.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\UserMgmt\Details.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\UserMgmt\Details.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Pages\UserMgmt\Details.razor" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,42 @@
+﻿@page "/usermgmt/detailsV2"
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@using WebUI.Areas.Identity.Data
+@using P7_UrbanRead
+@inject WebUI.Data.WebUIContext DBContext
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h3>ID: @Id</h3>
+<hr />
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Name</dt>
+        <dd class="col-sm-10">@usermgmt._Person.FirstName @usermgmt._Person.LastName</dd>
+    </dl>
+
+    <div>
+        <a href="@($"/usermgmt")">Back to Users List</a>
+    </div>
+</div>
+
+
+@code {
+    WebUIUser usermgmt;
+
+    [SupplyParameterFromForm]
+    public string Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        usermgmt = await DBContext.Users.Include(p => p._Person).FirstOrDefaultAsync(user => user.Id == Id);
+
+        if (usermgmt is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+}
