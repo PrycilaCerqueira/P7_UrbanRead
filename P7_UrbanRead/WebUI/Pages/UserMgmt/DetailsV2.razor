@@ -6,6 +6,8 @@
 @inject WebUI.Data.WebUIContext DBContext
 @inject NavigationManager NavigationManager
 
+
+
 <PageTitle>Details</PageTitle>
 
 <h3>ID: @Id</h3>
@@ -26,12 +28,27 @@
 @code {
     WebUIUser usermgmt;
 
-    [SupplyParameterFromForm]
-    public string Id { get; set; }
+    //private readonly UserManager<IdentityUser> _userManager;
+
+    [SupplyParameterFromQuery]
+    public string Id  { get; set; }
+
 
     protected override async Task OnInitializedAsync()
     {
-        usermgmt = await DBContext.Users.Include(p => p._Person).FirstOrDefaultAsync(user => user.Id == Id);
+
+        var tmp =  DBContext.Users.Include(p => p._Person);
+
+        var tmp2 = tmp.FirstOrDefaultAsync(u => u.Id == Id);
+
+        var tmp3 = tmp2.Result;
+
+        usermgmt = tmp3;
+
+        //usermgmt = DBContext.Users.Include(p => p._Person).FirstOrDefault(user => user.Id == Id);
+
+     
+        //var user = _userManager.GetUserAsync(Id).Result;
 
         if (usermgmt is null)
         {
