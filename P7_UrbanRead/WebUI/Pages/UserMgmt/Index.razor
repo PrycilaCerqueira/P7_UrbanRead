@@ -11,7 +11,7 @@
 <h3>List of Users</h3>
 
 <QuickGrid Class="table" Items="DBContext.Users.Include(u => u._Person)">
-    <PropertyColumn Property="usermgmt => usermgmt._Person.Id" />
+    <PropertyColumn Property="usermgmt => usermgmt._Person.Id" IsDefaultSortColumn="true" InitialSortDirection="SortDirection.Ascending" />
     <PropertyColumn Property="usermgmt => usermgmt._Person.FirstName" />
     <PropertyColumn Property="usermgmt => usermgmt._Person.LastName" />
     <PropertyColumn Property="usermgmt => usermgmt.UserName" />
