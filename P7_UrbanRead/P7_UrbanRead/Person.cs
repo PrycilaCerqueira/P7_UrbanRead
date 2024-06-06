@@ -13,9 +13,9 @@ namespace P7_UrbanRead
         private int _AlternativePhoneNumber;
         private string _PrimaryEmail;
         private string _SecondaryEmail;
-        private Address _Address;
-        private List<Book> _WishList;
-        private List<ActiveBook> _Bookshelf;
+        private Address _Address = new Address();
+        private List<Book> _WishList = new List<Book>();
+        private List<ActiveBook> _Bookshelf = new List<ActiveBook>();
 
 
         public int Id

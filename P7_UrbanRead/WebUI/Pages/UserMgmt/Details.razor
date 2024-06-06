@@ -10,29 +10,29 @@
 
 <PageTitle>Details</PageTitle>
 
-<h3>@usermgmt._Person.FirstName @usermgmt._Person.LastName</h3>
+<h3>@_usermgmt._Person.FirstName @_usermgmt._Person.LastName</h3>
 <hr />
 
 <div>
     <dl class="row">
         <dt class="col-sm-2">Identity Id:</dt>
-        <dd class="col-sm-10">@usermgmt.Id</dd>
+        <dd class="col-sm-10">@_usermgmt.Id</dd>
         <dt class="col-sm-2">Username:</dt>
-        <dd class="col-sm-10">@usermgmt.UserName</dd>
+        <dd class="col-sm-10">@_usermgmt.UserName</dd>
         <dt class="col-sm-2">Date of Birth:</dt>
-        <dd class="col-sm-10">@usermgmt._Person.DateOfBirth</dd>
+        <dd class="col-sm-10">@_usermgmt._Person.DateOfBirth</dd>
         <hr />
         <dt class="col-sm-2">E-mail (main):</dt>
-        <dd class="col-sm-10">@usermgmt._Person.PrimaryEmail</dd>
+        <dd class="col-sm-10">@_usermgmt._Person.PrimaryEmail</dd>
         <dt class="col-sm-2">E-mail (second):</dt>
-        <dd class="col-sm-10">@usermgmt._Person.SecondaryEmail</dd>
+        <dd class="col-sm-10">@_usermgmt._Person.SecondaryEmail</dd>
         <dt class="col-sm-2">Phone number (mobile):</dt>
-        <dd class="col-sm-10">@usermgmt._Person.MobilePhoneNumber</dd>
+        <dd class="col-sm-10">@_usermgmt._Person.MobilePhoneNumber</dd>
         <dt class="col-sm-2">Phone number (home):</dt>
-        <dd class="col-sm-10">@usermgmt._Person.MobilePhoneNumber</dd>
+        <dd class="col-sm-10">@_usermgmt._Person.MobilePhoneNumber</dd>
         <hr />
         <dt class="col-sm-2">City:</dt>
-        <dd class="col-sm-10">@usermgmt._Person.Address.City</dd>
+        <dd class="col-sm-10">@_usermgmt._Person.Address.City</dd>
 
     </dl>
 
@@ -43,7 +43,7 @@
 
 
 @code {
-    WebUIUser usermgmt;
+    WebUIUser _usermgmt;
 
     [SupplyParameterFromQuery]
     public string Id  { get; set; }
@@ -53,12 +53,12 @@
     {
         //usermgmt 
 
-        usermgmt = DBContext.Users.Include(p => p._Person)
+        _usermgmt = DBContext.Users.Include(p => p._Person)
                                    .ThenInclude(a => a.Address)
                                    .FirstOrDefaultAsync(u => u.Id == Id)
                                    .Result;
         
-        if (usermgmt is null)
+        if (_usermgmt is null)
         {
             NavigationManager.NavigateTo("notfound");
         }

@@ -11,13 +11,13 @@
 <h3>List of Users</h3>
 
 <QuickGrid Class="table" Items="DBContext.Users.Include(u => u._Person)">
-    <PropertyColumn Property="usermgmt => usermgmt._Person.Id" IsDefaultSortColumn="true" InitialSortDirection="SortDirection.Ascending" />
-    <PropertyColumn Property="usermgmt => usermgmt._Person.FirstName" />
-    <PropertyColumn Property="usermgmt => usermgmt._Person.LastName" />
-    <PropertyColumn Property="usermgmt => usermgmt.UserName" />
+    <PropertyColumn Property="_usermgmt => _usermgmt._Person.Id" IsDefaultSortColumn="true" InitialSortDirection="SortDirection.Ascending" />
+    <PropertyColumn Property="_usermgmt => _usermgmt._Person.FirstName" />
+    <PropertyColumn Property="_usermgmt => _usermgmt._Person.LastName" />
+    <PropertyColumn Property="_usermgmt => _usermgmt.UserName" />
 
-    <TemplateColumn Context="usermgmt">
-        <a href="@($"/usermgmt/details?id={usermgmt.Id}")">Details</a>
+    <TemplateColumn Context="_usermgmt">
+        <a href="@($"/usermgmt/details?id={_usermgmt.Id}")">Details</a>
     </TemplateColumn>
 </QuickGrid> 
 
