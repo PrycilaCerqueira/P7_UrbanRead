@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -68,6 +69,11 @@ namespace WebUI.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Birth Date")]
+            public DateTime DOB { get; set; }
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
@@ -84,6 +90,7 @@ namespace WebUI.Areas.Identity.Pages.Account.Manage
             {
                 FirstName = user._Person.FirstName,
                 LastName = user._Person.LastName,
+                DOB = user._Person.DateOfBirth,
                 PhoneNumber = phoneNumber
             };
         }
@@ -132,6 +139,10 @@ namespace WebUI.Areas.Identity.Pages.Account.Manage
             if (Input.LastName != user._Person.LastName)
             {
                 user._Person.LastName = Input.LastName;
+            }
+            if(Input.DOB != user._Person.DateOfBirth)
+            {
+                user._Person.DateOfBirth = Input.DOB;
             }
             await _userManager.UpdateAsync(user);
 

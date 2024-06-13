@@ -20,7 +20,7 @@
         <dt class="col-sm-2">Username:</dt>
         <dd class="col-sm-10">@_usermgmt.UserName</dd>
         <dt class="col-sm-2">Date of Birth:</dt>
-        <dd class="col-sm-10">@_usermgmt._Person.DateOfBirth</dd>
+        <dd class="col-sm-10">@_usermgmt._Person.DateOfBirth.ToShortDateString()</dd>
         <hr />
         <dt class="col-sm-2">E-mail (main):</dt>
         <dd class="col-sm-10">@_usermgmt._Person.PrimaryEmail</dd>
@@ -31,9 +31,17 @@
         <dt class="col-sm-2">Phone number (home):</dt>
         <dd class="col-sm-10">@_usermgmt._Person.MobilePhoneNumber</dd>
         <hr />
-        <dt class="col-sm-2">City:</dt>
-        <dd class="col-sm-10">@_usermgmt._Person.Address.City</dd>
-
+        <dt class="col-sm-2">Address#/Suite#</dt>
+        <dd class="col-sm-10">@_usermgmt._Person.Address.StreetNumber / @_usermgmt._Person.Address.AptSuite </dd>
+        <dt class="col-sm-2">Address</dt>
+        <dd class="col-sm-10">@_usermgmt._Person.Address.StreetName</dd>
+        <dt class="col-sm-2">City/Province</dt>
+        <dd class="col-sm-10">@_usermgmt._Person.Address.City / @_usermgmt._Person.Address.StateProvince</dd>
+        <dt class="col-sm-2">Postal Code</dt>
+        <dd class="col-sm-10">@_usermgmt._Person.Address.PostalCode</dd>
+        <dt class="col-sm-2">Country</dt>
+        <dd class="col-sm-10">@_usermgmt._Person.Address.Country</dd>
+        <hr />
     </dl>
 
     <div>
@@ -51,7 +59,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        //usermgmt 
 
         _usermgmt = DBContext.Users.Include(p => p._Person)
                                    .ThenInclude(a => a.Address)
