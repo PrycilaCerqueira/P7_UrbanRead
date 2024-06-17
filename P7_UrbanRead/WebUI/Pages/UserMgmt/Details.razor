@@ -10,48 +10,55 @@
 
 <PageTitle>Details</PageTitle>
 
-<h3>@_usermgmt._Person.FirstName @_usermgmt._Person.LastName</h3>
+<h3>Profile of @_Usermgmt._Person.FirstName @_Usermgmt._Person.LastName</h3>
 <hr />
 
 <div>
-    <dl class="row">
+    <dl class="row" id="identity_info">
         <dt class="col-sm-2">Identity Id:</dt>
-        <dd class="col-sm-10">@_usermgmt.Id</dd>
+        <dd class="col-sm-10">@_Usermgmt.Id</dd>
+        <dt class="col-sm-2">First name:</dt>
+        <dd class="col-sm-10">@_Usermgmt._Person.FirstName</dd>
+        <dt class="col-sm-2">Last name:</dt>
+        <dd class="col-sm-10">@_Usermgmt._Person.LastName</dd>
         <dt class="col-sm-2">Username:</dt>
-        <dd class="col-sm-10">@_usermgmt.UserName</dd>
+        <dd class="col-sm-10">@_Usermgmt.UserName</dd>
         <dt class="col-sm-2">Date of Birth:</dt>
-        <dd class="col-sm-10">@_usermgmt._Person.DateOfBirth.ToShortDateString()</dd>
-        <hr />
-        <dt class="col-sm-2">E-mail (main):</dt>
-        <dd class="col-sm-10">@_usermgmt._Person.PrimaryEmail</dd>
-        <dt class="col-sm-2">E-mail (second):</dt>
-        <dd class="col-sm-10">@_usermgmt._Person.SecondaryEmail</dd>
-        <dt class="col-sm-2">Phone number (mobile):</dt>
-        <dd class="col-sm-10">@_usermgmt._Person.MobilePhoneNumber</dd>
-        <dt class="col-sm-2">Phone number (home):</dt>
-        <dd class="col-sm-10">@_usermgmt._Person.MobilePhoneNumber</dd>
-        <hr />
-        <dt class="col-sm-2">Address#/Suite#</dt>
-        <dd class="col-sm-10">@_usermgmt._Person.Address.StreetNumber / @_usermgmt._Person.Address.AptSuite </dd>
-        <dt class="col-sm-2">Address</dt>
-        <dd class="col-sm-10">@_usermgmt._Person.Address.StreetName</dd>
-        <dt class="col-sm-2">City/Province</dt>
-        <dd class="col-sm-10">@_usermgmt._Person.Address.City / @_usermgmt._Person.Address.StateProvince</dd>
-        <dt class="col-sm-2">Postal Code</dt>
-        <dd class="col-sm-10">@_usermgmt._Person.Address.PostalCode</dd>
-        <dt class="col-sm-2">Country</dt>
-        <dd class="col-sm-10">@_usermgmt._Person.Address.Country</dd>
-        <hr />
+        <dd class="col-sm-10">@_Usermgmt._Person.DateOfBirth.ToShortDateString()</dd>
     </dl>
-
+    <hr />
+    <dl class="row" id="personal_info">
+        <dt class="col-sm-2">E-mail (main):</dt>
+        <dd class="col-sm-10">@_Usermgmt._Person.PrimaryEmail</dd>
+        <dt class="col-sm-2">E-mail (second):</dt>
+        <dd class="col-sm-10">@_Usermgmt._Person.SecondaryEmail</dd>
+        <dt class="col-sm-2">Phone number (mobile):</dt>
+        <dd class="col-sm-10">@_Usermgmt._Person.MobilePhoneNumber</dd>
+        <dt class="col-sm-2">Phone number (home):</dt>
+        <dd class="col-sm-10">@_Usermgmt._Person.MobilePhoneNumber</dd>
+     </dl>
+    <hr />
+     <dl class="row" id="address_info">
+        <dt class="col-sm-2">Address#/Suite#</dt>
+        <dd class="col-sm-10">@_Usermgmt._Person.Address.StreetNumber / @_Usermgmt._Person.Address.AptSuite </dd>
+        <dt class="col-sm-2">Address</dt>
+        <dd class="col-sm-10">@_Usermgmt._Person.Address.StreetName</dd>
+        <dt class="col-sm-2">City/Province</dt>
+        <dd class="col-sm-10">@_Usermgmt._Person.Address.City / @_Usermgmt._Person.Address.StateProvince</dd>
+        <dt class="col-sm-2">Postal Code</dt>
+        <dd class="col-sm-10">@_Usermgmt._Person.Address.PostalCode</dd>
+        <dt class="col-sm-2">Country</dt>
+        <dd class="col-sm-10">@_Usermgmt._Person.Address.Country</dd> 
+    </dl>
+    <hr />
     <div>
-        <a href="@($"/usermgmt")">Back to Users List</a>
+        <a href="@("/usermgmt")">Back to Users List </a>
     </div>
 </div>
 
 
 @code {
-    WebUIUser _usermgmt;
+    WebUIUser _Usermgmt;
 
     [SupplyParameterFromQuery]
     public string Id  { get; set; }
@@ -60,12 +67,12 @@
     protected override async Task OnInitializedAsync()
     {
 
-        _usermgmt = DBContext.Users.Include(p => p._Person)
+        _Usermgmt = DBContext.Users.Include(p => p._Person)
                                    .ThenInclude(a => a.Address)
                                    .FirstOrDefaultAsync(u => u.Id == Id)
                                    .Result;
-        
-        if (_usermgmt is null)
+
+        if (_Usermgmt is null)
         {
             NavigationManager.NavigateTo("notfound");
         }

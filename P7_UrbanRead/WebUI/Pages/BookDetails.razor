@@ -1,5 +1,5 @@
 ﻿@page "/BookDetails"
-@page "/BookDetails/isbn:{_isbn:long}"
+@page "/BookDetails/isbn:{_Isbn:long}"
 
 @using WebUI.Data
 @using P7_UrbanRead
@@ -45,13 +45,15 @@
 
 
 @code {
-    [Parameter] public long _isbn { get; set; }
+    [Parameter] 
+    public long _Isbn { get; set; }
+    
     private Book _book = new Book();
     private string _embeddedURL => @$"https://books.google.com/books?id={_book.ID}&lpg=PP1&pg=PP1&output=embed";
 
     protected override void OnInitialized()
     {
-        _book = MainDataService.GetBookDetails(_isbn);
+        _book = MainDataService.GetBookDetails(_Isbn);
 
     }
 

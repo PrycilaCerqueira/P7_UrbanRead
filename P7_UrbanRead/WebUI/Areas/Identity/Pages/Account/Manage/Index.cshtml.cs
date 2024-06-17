@@ -90,7 +90,7 @@ namespace WebUI.Areas.Identity.Pages.Account.Manage
             {
                 FirstName = user._Person.FirstName,
                 LastName = user._Person.LastName,
-                DOB = user._Person.DateOfBirth,
+                DOB = user._Person.DateOfBirth.Date,
                 PhoneNumber = phoneNumber
             };
         }
