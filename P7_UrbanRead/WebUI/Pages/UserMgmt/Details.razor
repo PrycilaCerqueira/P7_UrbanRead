@@ -52,17 +52,18 @@
     </dl>
     <hr />
     <div>
-        <a href="@("/usermgmt")">Back to Users List </a>
+        <a href="@("/usermgmt")">Back to Users List </a> <br />
+        <a href="@($"/usermgmt/edit?={_Usermgmt.Id}")">Edit</a>
     </div>
 </div>
 
 
 @code {
-    WebUIUser _Usermgmt;
 
     [SupplyParameterFromQuery]
     public string Id  { get; set; }
 
+    WebUIUser _Usermgmt;
 
     protected override async Task OnInitializedAsync()
     {

@@ -1,0 +1,54 @@
+﻿@page "/usermgmt/edit"
+
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@using WebUI.Areas.Identity.Data
+@using P7_UrbanRead
+@using WebUI.Pages.Shared
+@inject WebUI.Data.WebUIContext DBContext
+@inject NavigationManager NavigationManager
+
+<h3>Create User</h3>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+     <UserDetailsEdit @_User=_User></UserDetailsEdit>
+    </div>
+
+</div>
+
+<div>
+    <a href="/usermgmt">Back to List</a>
+</div>
+
+
+@code {
+    [SupplyParameterFromQuery]
+    public string Id { get; set; }
+
+
+    [SupplyParameterFromForm]
+    public WebUIUser _User { get; set; } = new();
+
+
+    protected override void OnInitialized()
+    {
+        //Authenticationprinciapprovbider // get logged in princicpal
+        //get User obj from Usermenanager
+        //User == result from above
+        _User = DBContext.Users.Include(p => p._Person)
+                                  .ThenInclude(a => a.Address)
+                                  .FirstOrDefaultAsync(u => u.Id == Id)
+                                  .Result;
+
+    }
+
+    public async Task User()
+    {
+         //await DBContext.UsersIdentity.AddAsync(_User);
+         //await DBContext.SaveChangesAsync();
+        // NavigationManager.NavigateTo("/usermgmt");
+    }
+
+ }
