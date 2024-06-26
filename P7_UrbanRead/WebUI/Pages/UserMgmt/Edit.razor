@@ -7,7 +7,7 @@
 @inject WebUI.Data.WebUIContext DBContext
 @inject NavigationManager NavigationManager
 
-<h3>Create User</h3>
+<h3>Edit User</h3>
 <hr />
 
 <div class="row">
@@ -40,7 +40,7 @@
                 <InputDate id="dob" @bind-Value="_User._Person.DateOfBirth" class="form-control" />
                 <ValidationMessage For="() => _User._Person.DateOfBirth" class="text-danger" />
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </EditForm>
     </div>
 
@@ -56,27 +56,29 @@
     public string Id { get; set; }
 
     [SupplyParameterFromForm]
-    public WebUIUser _User { get; set; }
+    public WebUIUser _User { get; set; } = new();
 
 
     protected override void OnInitialized()
     {
-        //Authenticationprinciapprovbider // get logged in princicpal
-        //get User obj from Usermenanager
-        //User == result from above
-        _User = DBContext.Users.Include(p => p._Person)
-                                  .ThenInclude(a => a.Address)
-                                  .FirstOrDefaultAsync(u => u.Id == Id)
-                                  .Result;
+        GetCurrentUser();
 
         // if (_User is null)
         // {
         //     NavigationManager.NavigateTo("notfound");
-        // }
+        // }    
 
     }
 
-    public  async Task UpdateUser(string Id)
+    public async Task GetCurrentUser()
+    {
+        _User ??= await DBContext.Users.Include(p => p._Person)
+                                  .ThenInclude(a => a.Address)
+                                  .FirstOrDefaultAsync(u => u.Id == Id);
+    }
+
+
+    public async Task UpdateUser(string Id)
     {
         //await DBContext.UsersIdentity.AddAsync(_User);
         //await DBContext.SaveChangesAsync();
