@@ -40,7 +40,7 @@
                 <InputDate id="dob" @bind-Value="_User._Person.DateOfBirth" class="form-control" />
                 <ValidationMessage For="() => _User._Person.DateOfBirth" class="text-danger" />
             </div>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" @onclick="UpdateUser" class="btn btn-primary">Save</button>
         </EditForm>
     </div>
 
@@ -61,12 +61,7 @@
 
     protected override void OnInitialized()
     {
-        GetCurrentUser();
-
-        // if (_User is null)
-        // {
-        //     NavigationManager.NavigateTo("notfound");
-        // }    
+        GetCurrentUser();  
 
     }
 
@@ -78,24 +73,12 @@
     }
 
 
-    public async Task UpdateUser(string Id)
+    public async Task UpdateUser()
     {
-        //await DBContext.UsersIdentity.AddAsync(_User);
-        //await DBContext.SaveChangesAsync();
-        // NavigationManager.NavigateTo("/usermgmt");
+        this.DBContext.UsersIdentity.UpdateRange(_User);
+        await this.DBContext.SaveChangesAsync();
+        NavigationManager.NavigateTo("/usermgmt");
 
-        DBContext.Attach(DBContext.UsersIdentity).State = EntityState.Modified;
-
-        try
-        {
-            await DBContext.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            throw;
-        }
-
-        NavigationManager.NavigateTo("/usermgmt/details");
     }
 
 }
