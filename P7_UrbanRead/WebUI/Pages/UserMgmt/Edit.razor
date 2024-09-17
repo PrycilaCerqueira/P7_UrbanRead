@@ -75,8 +75,8 @@
 
     public async Task UpdateUser()
     {
-        this.DBContext.UsersIdentity.UpdateRange(_User);
-        await this.DBContext.SaveChangesAsync();
+        DBContext.UsersIdentity.UpdateRange(_User);
+        await DBContext.SaveChangesAsync();
         NavigationManager.NavigateTo("/usermgmt");
 
     }
