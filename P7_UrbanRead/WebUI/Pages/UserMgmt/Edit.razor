@@ -63,6 +63,7 @@
     {
         GetCurrentUser();  
 
+
     }
 
     public async Task GetCurrentUser()
@@ -70,13 +71,24 @@
         _User ??= await DBContext.Users.Include(p => p._Person)
                                   .ThenInclude(a => a.Address)
                                   .FirstOrDefaultAsync(u => u.Id == Id);
+
     }
 
 
     public async Task UpdateUser()
     {
-        DBContext.UsersIdentity.UpdateRange(_User);
-        await DBContext.SaveChangesAsync();
+        try
+        {
+           await DBContext.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            ex.Entries.Single().Reload();
+            await DBContext.SaveChangesAsync();
+        }
+
+        // DBContext.UsersIdentity.UpdateRange(_User);
+        // await DBContext.SaveChangesAsync();
         NavigationManager.NavigateTo("/usermgmt");
 
     }
