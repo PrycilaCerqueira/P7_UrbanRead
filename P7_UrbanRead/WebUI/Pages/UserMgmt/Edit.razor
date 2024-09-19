@@ -61,22 +61,14 @@
 
     protected override void OnInitialized()
     {
-        GetCurrentUser();  
-
-
-    }
-
-    public async Task GetCurrentUser()
-    {
-        _User ??= await DBContext.Users.Include(p => p._Person)
-                                  .ThenInclude(a => a.Address)
-                                  .FirstOrDefaultAsync(u => u.Id == Id);
+       
+        _User = DBContext.Users.Find(Id);
 
     }
-
 
     public async Task UpdateUser()
     {
+
         try
         {
            await DBContext.SaveChangesAsync();
@@ -87,8 +79,6 @@
             await DBContext.SaveChangesAsync();
         }
 
-        // DBContext.UsersIdentity.UpdateRange(_User);
-        // await DBContext.SaveChangesAsync();
         NavigationManager.NavigateTo("/usermgmt");
 
     }

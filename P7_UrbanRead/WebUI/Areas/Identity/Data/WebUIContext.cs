@@ -29,5 +29,4 @@ public class WebUIContext : IdentityDbContext<WebUIUser>
 
     public DbSet<WebUIUser> UsersIdentity { get; set; } = default!;
 
-
 }
