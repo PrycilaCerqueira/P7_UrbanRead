@@ -21,7 +21,7 @@
                 <ValidationMessage For="() => _User._Person.FirstName" class="text-danger" />
             </div>
             <div class="mb-3">
-                <label for="LastName" class="form-label">Last Name:</label>
+                <label for="LastName" class="form-label">Last Name:</label> 
                 <InputText id="lastname" @bind-Value="_User._Person.LastName" class="form-control" />
                 <ValidationMessage For="() => _User._Person.LastName" class="text-danger" />
             </div>
@@ -40,6 +40,17 @@
                 <InputDate id="dob" @bind-Value="_User._Person.DateOfBirth" class="form-control" />
                 <ValidationMessage For="() => _User._Person.DateOfBirth" class="text-danger" />
             </div>
+            <div class="mb-3">
+                <label for="Phone number (mobile)" class="form-label">Phone (mobile):</label>
+                <InputNumber id="phone" @bind-Value="_User._Person.MobilePhoneNumber" class="form-control" />
+                <ValidationMessage For="() => _User._Person.MobilePhoneNumber" class="text-danger" />
+            </div>
+            <div class="mb-3">
+                <label for="Phone number (mobile)" class="form-label">Phone (home):</label>
+                <InputNumber id="phone" @bind-Value="_User._Person.AlternativePhoneNumber" class="form-control" />
+                <ValidationMessage For="() => _User._Person.AlternativePhoneNumber" class="text-danger" />
+            </div>
+
             <button type="submit" @onclick="UpdateUser" class="btn btn-primary">Save</button>
         </EditForm>
     </div>
