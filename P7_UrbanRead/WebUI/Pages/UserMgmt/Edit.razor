@@ -87,6 +87,7 @@
             </div>
   
             <button type="submit" @onclick="UpdateUser" class="btn btn-primary">Save</button>
+            <button type="submit" @onclick="DeleteUser" class="btn btn-primary">Delete</button>
         </EditForm>
     </div>
 
@@ -107,7 +108,7 @@
 
     protected override void OnInitialized()
     {
-       
+
         _User = DBContext.Users.Find(Id);
 
     }
@@ -117,7 +118,7 @@
 
         try
         {
-           await DBContext.SaveChangesAsync();
+            await DBContext.SaveChangesAsync();
         }
         catch (DbUpdateConcurrencyException ex)
         {
@@ -127,6 +128,13 @@
 
         NavigationManager.NavigateTo("/usermgmt");
 
+    }
+
+    public async Task DeleteUser()
+    {
+        //TODO DeleteUser func, Style Edit Form
+
+        DBContext.Remove(_User);
     }
 
 }
