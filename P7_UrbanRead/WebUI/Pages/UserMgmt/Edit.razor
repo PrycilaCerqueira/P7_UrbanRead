@@ -11,7 +11,7 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
         <EditForm Model="@_User" FormName="edit" Enhance>
             <DataAnnotationsValidator />
             <ValidationSummary class="text-danger" />
@@ -41,16 +41,51 @@
                 <ValidationMessage For="() => _User._Person.DateOfBirth" class="text-danger" />
             </div>
             <div class="mb-3">
-                <label for="Phone number (mobile)" class="form-label">Phone (mobile):</label>
+                <label for="PhoneNumberMobile" class="form-label">Phone (mobile):</label>
                 <InputNumber id="phone" @bind-Value="_User._Person.MobilePhoneNumber" class="form-control" />
                 <ValidationMessage For="() => _User._Person.MobilePhoneNumber" class="text-danger" />
             </div>
             <div class="mb-3">
-                <label for="Phone number (mobile)" class="form-label">Phone (home):</label>
+                <label for="PhoneNumberHome" class="form-label">Phone (home):</label>
                 <InputNumber id="phone" @bind-Value="_User._Person.AlternativePhoneNumber" class="form-control" />
                 <ValidationMessage For="() => _User._Person.AlternativePhoneNumber" class="text-danger" />
             </div>
-
+            <div class="mb-3">
+                <label for="SuiteNumber" class="form-label">Suite#:</label>
+                <InputText id="suitenumber" @bind-Value="_User._Person.Address.AptSuite" class="form-control" />
+                <ValidationMessage For="() => _User._Person.Address.AptSuite" class="text-danger" />
+            </div>
+            <div class="=mb-3">
+                <label for="AddressNumber" class="form-floating">Address#:</label>
+                <InputNumber id="addressnumber" @bind-Value="_User._Person.Address.StreetNumber" class="form-control" />
+                <ValidationMessage For="() => _User._Person.Address.StreetNumber" class="text-dander" />
+            </div>
+            <div class="mb-3">
+                <label for="AddressTxt" class="form-label">Address:</label>
+                <InputText id="addresstxt" @bind-Value="_User._Person.Address.StreetName" class="form-control" />
+                <ValidationMessage For="() => _User._Person.Address.StreetName" class="text-danger" />
+            </div>
+            <div>
+                <label for="city" class="form-label">City:</label>
+                <InputText id="city" @bind-Value="_User._Person.Address.City" class="form-control" />
+                <ValidationMessage For="() => _User._Person.Address.City" class="text-danger" />
+            </div>
+            <div>
+                <label for="StateProvince" class="form-label">Province:</label>
+                <InputText id="estateprovince" @bind-Value="_User._Person.Address.StateProvince" class="form-control" />
+                <ValidationMessage For="() => _User._Person.Address.StateProvince" class="text-danger" />
+            </div>
+            <div>
+                <label for="Country" class="form-label">Country:</label>
+                <InputText id="country" @bind-Value="_User._Person.Address.Country" class="form-control" />
+                <ValidationMessage For="() => _User._Person.Address.Country" class="text-danger" />
+            </div>
+            <div>
+                <label for="PostalCode" class="form-label">Postal Code:</label>
+                <InputText id="postalcode" @bind-Value="_User._Person.Address.PostalCode" class="form-control" />
+                <ValidationMessage For="() => _User._Person.Address.PostalCode" class="text-danger" />
+            </div>
+  
             <button type="submit" @onclick="UpdateUser" class="btn btn-primary">Save</button>
         </EditForm>
     </div>
