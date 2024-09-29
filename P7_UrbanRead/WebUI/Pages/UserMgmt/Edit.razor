@@ -87,7 +87,7 @@
             </div>
   
             <button type="submit" @onclick="UpdateUser" class="btn btn-primary">Save</button>
-            <button type="submit" @onclick="DeleteUser" class="btn btn-primary">Delete</button>
+            <button type="button" @onclick="DeleteUser" class="btn btn-primary">Delete</button>
         </EditForm>
     </div>
 
@@ -106,10 +106,10 @@
     public WebUIUser _User { get; set; } = new();
 
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
 
-        _User = DBContext.Users.Find(Id);
+        _User = await DBContext.Users.FindAsync(Id);
 
     }
 
@@ -135,6 +135,8 @@
         //TODO DeleteUser func, Style Edit Form
 
         DBContext.Remove(_User);
+        DBContext.SaveChangesAsync();
+        NavigationManager.NavigateTo("/usermgmt");
     }
 
 }
