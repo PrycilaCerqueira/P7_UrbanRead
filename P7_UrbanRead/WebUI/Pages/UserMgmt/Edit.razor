@@ -126,18 +126,18 @@
             await DBContext.SaveChangesAsync();
         }
 
-        NavigationManager.NavigateTo("/usermgmt");
+        NavigationManager.NavigateTo($"/usermgmt/details?id={Id}");
 
     }
 
     public async Task DeleteUser()
     {
-        //TODO DeleteUser func, Style Edit Form
 
-        DBContext.Remove(_User);
-        DBContext.SaveChangesAsync();
+        DBContext.Remove(_User!);
+        await DBContext.SaveChangesAsync();
         NavigationManager.NavigateTo("/usermgmt");
     }
 
+    //TODO Style Edit Form, Validation check before delete user
 }
 
