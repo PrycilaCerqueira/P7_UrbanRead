@@ -6,6 +6,7 @@
 @using P7_UrbanRead
 @inject WebUI.Data.WebUIContext DBContext
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 <h3>Edit User</h3>
 <hr />
@@ -115,26 +116,35 @@
 
     public async Task UpdateUser()
     {
+        bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", "Do you want save your changes? ");
+        if (confirm == true)
+        {
+            try
+            {
+                await DBContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                ex.Entries.Single().Reload();
+                await DBContext.SaveChangesAsync();
+            }
 
-        try
-        {
-            await DBContext.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException ex)
-        {
-            ex.Entries.Single().Reload();
-            await DBContext.SaveChangesAsync();
         }
 
         NavigationManager.NavigateTo($"/usermgmt/details?id={Id}");
+        
 
     }
 
     public async Task DeleteUser()
     {
+        bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want delete this user?");
+        if (confirm == true)
+        {
+            DBContext.Remove(_User!);
+            await DBContext.SaveChangesAsync();
+        }
 
-        DBContext.Remove(_User!);
-        await DBContext.SaveChangesAsync();
         NavigationManager.NavigateTo("/usermgmt");
     }
 
