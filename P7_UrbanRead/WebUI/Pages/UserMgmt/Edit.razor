@@ -87,8 +87,8 @@
                 <ValidationMessage For="() => _User._Person.Address.PostalCode" class="text-danger" />
             </div>
   
-            <button type="submit" @onclick="UpdateUser" class="btn btn-primary">Save</button>
-            <button type="button" @onclick="DeleteUser" class="btn btn-primary">Delete</button>
+            <button type="submit" @onclick="UpdateUser" class="btn btn-save btn-primary">Save</button>
+            <button type="button" @onclick="DeleteUser" class="btn btn-delete btn-primary">Delete</button>
         </EditForm>
     </div>
 
@@ -128,12 +128,11 @@
                 ex.Entries.Single().Reload();
                 await DBContext.SaveChangesAsync();
             }
-
         }
-
-        NavigationManager.NavigateTo($"/usermgmt/details?id={Id}");
         
-
+        NavigationManager.NavigateTo($"/usermgmt/details?id={Id}");
+        // NavigationManager.Refresh();
+        // TODO validation works for UpdateUser, but requires a browser refresh to present the data stored in the db
     }
 
     public async Task DeleteUser()
@@ -148,6 +147,6 @@
         NavigationManager.NavigateTo("/usermgmt");
     }
 
-    //TODO Style Edit Form, Validation check before delete user
+    //TODO Style Edit Form
 }
 

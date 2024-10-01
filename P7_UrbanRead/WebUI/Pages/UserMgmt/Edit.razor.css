@@ -1,0 +1,18 @@
+﻿* {
+    font-family: sans-serif;
+    color: navy;
+}
+
+.btn {
+    color: white;
+}
+
+.btn-save{
+    background-color: forestgreen;
+    border: forestgreen;
+}
+
+.btn-delete{
+    background-color: red;
+    border: red;
+}
