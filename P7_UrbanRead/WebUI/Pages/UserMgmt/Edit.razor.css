@@ -13,6 +13,13 @@
 }
 
 .btn-delete{
-    background-color: red;
+    background-color: red; 
     border: red;
+}
+
+.form-section {
+    border: 2px solid red;
+    display: grid;
+    grid-template-columns: 1fr 1fr;  
+    grid-gap: 10px;
 }
