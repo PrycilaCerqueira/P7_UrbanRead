@@ -125,7 +125,7 @@
 
     public async Task UpdateUser()
     {
-       
+
         bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", "Do you want save your changes? ");
         if (confirm == true)
         {
@@ -138,6 +138,10 @@
                 ex.Entries.Single().Reload();
                 await DBContext.SaveChangesAsync();
             }
+        }
+        else
+        {
+            DBContext.Entry(_User._Person).Reload();
         }
 
         NavigationManager.NavigateTo($"/usermgmt/details?id={Id}");
