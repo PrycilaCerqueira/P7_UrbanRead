@@ -49,7 +49,7 @@
     public long _Isbn { get; set; }
     
     private Book _book = new Book();
-    private string _embeddedURL => @$"https://books.google.com/books?id={_book.ID}&lpg=PP1&pg=PP1&output=embed";
+    private string _embeddedURL => (@$"https://books.google.com/books?id={_book.ID}&lpg=PP1&pg=PP1&output=embed");
 
     protected override void OnInitialized()
     {
@@ -57,7 +57,4 @@
 
     }
 
-
-
 }
-    
