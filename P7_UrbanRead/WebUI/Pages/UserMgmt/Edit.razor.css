@@ -3,7 +3,7 @@
     color: navy;
 }
 
-.btn {
+.btn, a{
     color: white;
 }
 
@@ -17,8 +17,42 @@
     border: red;
 }
 
+a {
+    text-align: center;
+    text-decoration: none;
+    background: navy;
+    border-radius: 4px;
+    padding: 8px 8px 9px 8px;
+    opacity: 0.8;
+}
+
 .form-section {
     display: grid;
-    grid-template-columns: 1fr 1fr;  
-    grid-gap: 10px;
+    gap: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+
+}
+
+.personal-info, .address-info {
+    grid-template-columns: 1fr 1fr 1fr;   
+}
+
+.address-info {
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid navy;
+}
+
+.contact-info {
+    grid-template-columns: 1.5fr 1.5fr;
+}
+
+
+h5 {
+    padding-top: 7px;
+    padding-left: 7px;
+    border-left: 6px solid navy;
+    border-bottom: 0.5px solid navy;
+    border-bottom-left-radius: 4px;
 }
