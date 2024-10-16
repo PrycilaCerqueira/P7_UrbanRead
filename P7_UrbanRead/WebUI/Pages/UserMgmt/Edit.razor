@@ -30,7 +30,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="DateOfBirth" class="form-label">Date of Birth:</label>
-                    <InputDate id="dob" @bind-Value="_User._Person.DateOfBirth" class="form-control" />
+                    <InputDate id="dob" @bind-Value="_User._Person.DateOfBirth" min="@minDate" max="@maxDate" class="form-control" />
                     <ValidationMessage For="() => _User._Person.DateOfBirth" class="text-danger" />
                 </div>
             </section>
@@ -115,6 +115,9 @@
     [SupplyParameterFromForm]
     public WebUIUser _User { get; set; } = new();
 
+    string minDate = DateTime.Now.AddYears(-110).ToString("yyyy-MM-dd");
+    string maxDate = DateTime.Now.ToString("yyy-MM-dd");
+
     protected override async Task OnInitializedAsync()
     {
 
@@ -141,7 +144,6 @@
         else
         {
             DBContext.Entry(_User._Person).Reload();
-            //DBContext.Entry(_User._Person.Address).Reload();
         }
 
         NavigationManager.NavigateTo($"/usermgmt/details?id={Id}");
@@ -159,6 +161,5 @@
         NavigationManager.NavigateTo("/usermgmt");
     }
 
-    //TODO Style Edit Form
 }
 
