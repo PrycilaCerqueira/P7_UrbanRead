@@ -26,7 +26,8 @@
         <dt class="col-sm-2">Date of Birth:</dt>
         <dd class="col-sm-10">@_User._Person.DateOfBirth.ToShortDateString()</dd>
     </dl>
-    <hr />
+
+    <h5>Contact</h5>
     <dl class="row" id="personal_info">
         <dt class="col-sm-2">E-mail (main):</dt>
         <dd class="col-sm-10">@_User._Person.PrimaryEmail</dd>
@@ -37,7 +38,8 @@
         <dt class="col-sm-2">Phone (home):</dt>
         <dd class="col-sm-10">@_User._Person.AlternativePhoneNumber</dd>
      </dl>
-    <hr />
+
+     <h5>Address</h5>
      <dl class="row" id="address_info">
         <dt class="col-sm-2">Suite# / Address#</dt>
         <dd class="col-sm-10">@_User._Person.Address.AptSuite / @_User._Person.Address.StreetNumber </dd>
@@ -52,8 +54,8 @@
     </dl>
     <hr />
     <div>
-        <a href="@("/usermgmt")">Back to Users List </a> <br />
-        <a href="@($"/usermgmt/edit?id={_User.Id}")">Edit</a>
+        <a class="a-edit" href="@($"/usermgmt/edit?id={_User.Id}")">Edit</a>
+        <a class="a-backToList" href="@("/usermgmt")">Back to Users List </a>
     </div>
 </div>
 

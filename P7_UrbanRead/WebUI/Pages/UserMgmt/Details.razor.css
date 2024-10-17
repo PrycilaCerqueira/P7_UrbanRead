@@ -1,0 +1,35 @@
+﻿* {
+    font-family: sans-serif;
+    color: navy;
+}
+
+h5 {
+    padding-top: 7px;
+    padding-left: 7px;
+    border-left: 6px solid navy;
+    border-bottom: 0.5px solid navy;
+    border-bottom-left-radius: 4px;
+}
+
+dl{
+    padding-left: 10px;
+}
+
+a {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 8px 8px 9px 8px;
+}
+
+.a-edit {
+    background: #eb7134;
+}
+
+.a-backToList {
+    background: navy;
+    opacity: 0.8;
+    padding-left: 10px;
+}
+
