@@ -1,0 +1,33 @@
+﻿*{
+    font-family: sans-serif;
+    color: navy;
+}
+
+::deep thead th{
+    min-width: 100%;
+    font-family: sans-serif;
+    color: white;
+    background-color: navy;
+    position: sticky;
+    top: 0;
+}
+
+::deep tr {
+    height: 30px;
+    color: navy;
+}
+
+::deep tr:nth-child(odd) {
+    background: #f1f9fd;
+}
+
+::deep tr:nth-child(even) {
+    background: #cfebf9;
+}
+
+::deep tbody td {
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 0px;
+    text-overflow: ellipsis;
+}
