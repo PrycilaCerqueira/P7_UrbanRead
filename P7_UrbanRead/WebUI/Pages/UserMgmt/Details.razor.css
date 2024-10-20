@@ -9,6 +9,9 @@ h5 {
     border-left: 6px solid navy;
     border-bottom: 0.5px solid navy;
     border-bottom-left-radius: 4px;
+    width: 40%;
+    margin: 0;
+    display: inline-block;
 }
 
 dl{
