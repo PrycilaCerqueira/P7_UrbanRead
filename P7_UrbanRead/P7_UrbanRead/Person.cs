@@ -9,8 +9,8 @@ namespace P7_UrbanRead
         private string _FirstName;
         private string _LastName;
         private DateTime _DateOfBirth;
-        private int _MobilePhoneNumber;
-        private int _AlternativePhoneNumber;
+        private long _MobilePhoneNumber;
+        private long _AlternativePhoneNumber;
         private string _PrimaryEmail;
         private string _SecondaryEmail;
         private Address _Address = new Address();
@@ -38,12 +38,12 @@ namespace P7_UrbanRead
             get { return _DateOfBirth; }
             set { _DateOfBirth = value; }
         }
-        public int MobilePhoneNumber
+        public long MobilePhoneNumber
         {
             get { return _MobilePhoneNumber; }
             set { _MobilePhoneNumber = value; }
         }
-        public int AlternativePhoneNumber
+        public long AlternativePhoneNumber
         {
             get { return _AlternativePhoneNumber; }
             set { _AlternativePhoneNumber = value; }

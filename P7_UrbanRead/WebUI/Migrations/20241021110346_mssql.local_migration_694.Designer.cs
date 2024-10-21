@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebUI.Data;
 
@@ -11,9 +12,11 @@ using WebUI.Data;
 namespace WebUI.Migrations
 {
     [DbContext(typeof(WebUIContext))]
-    partial class WebUIContextModelSnapshot : ModelSnapshot
+    [Migration("20241021110346_mssql.local_migration_694")]
+    partial class mssqllocal_migration_694
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -308,8 +311,8 @@ namespace WebUI.Migrations
                     b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<long>("AlternativePhoneNumber")
-                        .HasColumnType("bigint");
+                    b.Property<int>("AlternativePhoneNumber")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
@@ -320,8 +323,8 @@ namespace WebUI.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("MobilePhoneNumber")
-                        .HasColumnType("bigint");
+                    b.Property<int>("MobilePhoneNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("PrimaryEmail")
                         .HasColumnType("nvarchar(max)");

@@ -53,8 +53,8 @@ namespace WebUI.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MobilePhoneNumber = table.Column<int>(type: "int", nullable: false),
-                    AlternativePhoneNumber = table.Column<int>(type: "int", nullable: false),
+                    MobilePhoneNumber = table.Column<int>(type: "int64", nullable: false),
+                    AlternativePhoneNumber = table.Column<int>(type: "int64", nullable: false),
                     PrimaryEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SecondaryEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AddressId = table.Column<int>(type: "int", nullable: true)
