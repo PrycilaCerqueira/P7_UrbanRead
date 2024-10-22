@@ -13,7 +13,7 @@
 
 <div class="row">
     <div class="col-md-7">
-        <EditForm Model="@_User" FormName="edit">
+        <EditForm Model="@_User" FormName="EditUserForm">
             <DataAnnotationsValidator />
             <ValidationSummary class="text-danger" />
 
@@ -49,12 +49,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="PhoneNumberMobile" class="form-label">Phone (mobile):</label>
-                    <InputNumber id="phone" @bind-Value="_User._Person.MobilePhoneNumber" class="form-control" />
+                    <InputText id="phone" @bind-Value="_User._Person.MobilePhoneNumber" class="form-control" />
                     <ValidationMessage For="() => _User._Person.MobilePhoneNumber" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="PhoneNumberHome" class="form-label">Phone (home):</label>
-                    <InputNumber id="phone" @bind-Value="_User._Person.AlternativePhoneNumber" class="form-control" />
+                    <InputText id="phone" @bind-Value="_User._Person.AlternativePhoneNumber" class="form-control" />
                     <ValidationMessage For="() => _User._Person.AlternativePhoneNumber" class="text-danger" />
                 </div>
             </section>
@@ -69,7 +69,7 @@
                 <div class="mb-3">
                     <label for="AddressNumber" class="form-label">Address#:</label>
                     <InputNumber id="addressnumber" @bind-Value="_User._Person.Address.StreetNumber" class="form-control" />
-                    <ValidationMessage For="() => _User._Person.Address.StreetNumber" class="text-dander" />
+                    <ValidationMessage For="() => _User._Person.Address.StreetNumber" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="AddressTxt" class="form-label">Address:</label>
@@ -98,9 +98,9 @@
                 </div>
             </section>
 
-            <button type="submit" @onclick="UpdateUser" class="btn btn-save btn-primary">Save</button>
+            <button type="submit" @onclick="UpdateUser"class="btn btn-save btn-primary">Save</button>
             <button type="button" @onclick="DeleteUser" class="btn btn-delete btn-primary">Delete</button>
-            <a href="/usermgmt">Back to List</a>
+            <a href="/usermgmt">Close</a>
         </EditForm>
     </div>
 </div>
@@ -116,7 +116,7 @@
     public WebUIUser _User { get; set; } = new();
 
     string minDate = DateTime.Now.AddYears(-110).ToString("yyyy-MM-dd");
-    string maxDate = DateTime.Now.ToString("yyy-MM-dd");
+    string maxDate = DateTime.Now.ToString("yyyy-MM-dd");
 
     protected override async Task OnInitializedAsync()
     {

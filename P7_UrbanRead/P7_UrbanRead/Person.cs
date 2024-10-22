@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 
 namespace P7_UrbanRead
@@ -9,8 +10,15 @@ namespace P7_UrbanRead
         private string _FirstName;
         private string _LastName;
         private DateTime _DateOfBirth;
-        private long _MobilePhoneNumber;
-        private long _AlternativePhoneNumber;
+
+        [Phone(ErrorMessage = "Invalid phone number format.")]
+        [StringLength(15, MinimumLength = 10, ErrorMessage = "Phone number must be between 10 and 15 characters long.")]
+        private string _MobilePhoneNumber;
+
+        [Phone(ErrorMessage = "Invalid phone number format.")]
+        [StringLength(15, MinimumLength = 10, ErrorMessage = "Phone number must be between 10 and 15 characters long.")]
+        private string _AlternativePhoneNumber;
+        
         private string _PrimaryEmail;
         private string _SecondaryEmail;
         private Address _Address = new Address();
@@ -38,12 +46,12 @@ namespace P7_UrbanRead
             get { return _DateOfBirth; }
             set { _DateOfBirth = value; }
         }
-        public long MobilePhoneNumber
+        public string MobilePhoneNumber
         {
             get { return _MobilePhoneNumber; }
             set { _MobilePhoneNumber = value; }
         }
-        public long AlternativePhoneNumber
+        public string AlternativePhoneNumber
         {
             get { return _AlternativePhoneNumber; }
             set { _AlternativePhoneNumber = value; }
