@@ -49,12 +49,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="PhoneNumberMobile" class="form-label">Phone (mobile):</label>
-                    <InputText id="phone" @bind-Value="_User._Person.MobilePhoneNumber" class="form-control" />
+                    <InputText id="phone" @bind-Value="_User._Person.MobilePhoneNumber" class="form-control" placeholder="+14165556666"/>
                     <ValidationMessage For="() => _User._Person.MobilePhoneNumber" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="PhoneNumberHome" class="form-label">Phone (home):</label>
-                    <InputText id="phone" @bind-Value="_User._Person.AlternativePhoneNumber" class="form-control" />
+                    <InputText id="phone" @bind-Value="_User._Person.AlternativePhoneNumber" class="form-control" placeholder="+14165556666" />
                     <ValidationMessage For="() => _User._Person.AlternativePhoneNumber" class="text-danger" />
                 </div>
             </section>
