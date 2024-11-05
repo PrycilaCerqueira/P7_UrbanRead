@@ -1,0 +1,13 @@
+﻿@page "/BookWishList"
+@page "/BookWishList/isbn:{_Isbn:long}"
+
+@using WebUI.Data
+@using P7_UrbanRead
+@inject MainDataService GetBookDetails
+
+<h3>BookWishList</h3>
+
+@code {
+    public long _Isbn { get; set; }
+
+}

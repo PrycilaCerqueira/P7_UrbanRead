@@ -100,7 +100,8 @@
            </TemplateColumn>
            
            <TemplateColumn title="Action" class="action">
-                <a class="btn btn-details" href=@($"/BookDetails/isbn:{context.ISBNS[0]}") target="_blank">Read More</a>               
+                <a class="btn btn-details" href=@($"/BookDetails/isbn:{context.ISBNS[0]}") target="_blank">Read More</a>
+                <a class="btn btn-details" href=@($"/BookWishList/isbn:{context.ISBNS[0]}") target="_blank">Wish List</a>
             </TemplateColumn>
         </QuickGrid>
     }   
@@ -145,7 +146,6 @@
         }
 
     }
-
 
 
     List<RadioOptions> categories = new List<RadioOptions>()
