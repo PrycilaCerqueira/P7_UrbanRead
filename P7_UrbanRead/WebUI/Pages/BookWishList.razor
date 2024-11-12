@@ -7,33 +7,17 @@
 @inject MainDataService GetBookDetails
 
 <h3>BookWishList</h3>
-
-@if (_IsUserAuthenticated)
-{
-    <h2>@_user.Identity.Name</h2>
-}
-else
-{
-    <h2>User isn't logged in'</h2>
-}
+<AuthorizeView>
+    <Authorized>
+        Hey there @context.User.Identity.Name
+    </Authorized>
+    <NotAuthorized>
+        Please log in 
+    </NotAuthorized>
+</AuthorizeView>
 
 @code {
     [Parameter]
     public long _Isbn { get; set; }
 
-    [CascadingParameter]
-    private Task<AuthenticationState> _CheckAthenticationStatus { get; set; }
-    ClaimsPrincipal _user;
-    bool _IsUserAuthenticated;
-
-    protected override async Task OnInitializedAsync()
-    {
-        _user = (await _CheckAthenticationStatus).User;
-
-        if (_user.Identity.IsAuthenticated)
-        {
-            _IsUserAuthenticated = true;
-        }
-
-    }
 }

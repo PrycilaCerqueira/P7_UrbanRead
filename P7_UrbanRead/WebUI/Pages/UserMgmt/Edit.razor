@@ -10,101 +10,106 @@
 
 <h3>Edit User</h3>
 <hr />
+<AuthorizeView>
+    <Authorized>
+        <div class="row">
+            <div class="col-md-7">
+                <EditForm Model="@_User" FormName="EditUserForm">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary class="text-danger" />
 
-<div class="row">
-    <div class="col-md-7">
-        <EditForm Model="@_User" FormName="EditUserForm">
-            <DataAnnotationsValidator />
-            <ValidationSummary class="text-danger" />
-
-            <section class="personal-info form-section">
-                <div class="mb-3">
-                    <label for="FirstName" class="form-label">First Name:</label>
-                    <InputText id="firstname" @bind-Value="_User._Person.FirstName" class="form-control" />
-                    <ValidationMessage For="() => _User._Person.FirstName" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="LastName" class="form-label">Last Name:</label> 
-                    <InputText id="lastname" @bind-Value="_User._Person.LastName" class="form-control" />
-                    <ValidationMessage For="() => _User._Person.LastName" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="DateOfBirth" class="form-label">Date of Birth:</label>
-                    <InputDate id="dob" @bind-Value="_User._Person.DateOfBirth" min="@minDate" max="@maxDate" class="form-control" />
-                    <ValidationMessage For="() => _User._Person.DateOfBirth" class="text-danger" />
-                </div>
-            </section>
+                    <section class="personal-info form-section">
+                        <div class="mb-3">
+                            <label for="FirstName" class="form-label">First Name:</label>
+                            <InputText id="firstname" @bind-Value="_User._Person.FirstName" class="form-control" />
+                            <ValidationMessage For="() => _User._Person.FirstName" class="text-danger" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="LastName" class="form-label">Last Name:</label> 
+                            <InputText id="lastname" @bind-Value="_User._Person.LastName" class="form-control" />
+                            <ValidationMessage For="() => _User._Person.LastName" class="text-danger" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="DateOfBirth" class="form-label">Date of Birth:</label>
+                            <InputDate id="dob" @bind-Value="_User._Person.DateOfBirth" min="@minDate" max="@maxDate" class="form-control" />
+                            <ValidationMessage For="() => _User._Person.DateOfBirth" class="text-danger" />
+                        </div>
+                    </section>
             
-            <h5>Contact</h5>
-            <section class="contact-info form-section">
-                <div class="mb-3">
-                    <label for="PrimaryEmail" class="form-label">Primary E-mail:</label>
-                    <InputText id="primaryemail" @bind-Value="_User._Person.PrimaryEmail" class="form-control" placeholder="name@example.com" />
-                    <ValidationMessage For="() => _User._Person.PrimaryEmail" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="SecondaryEmail" class="form-label">Secondary E-mail:</label>
-                    <InputText id="secondaryemail" @bind-Value="_User._Person.SecondaryEmail" class="form-control" placeholder="name@example.com" />
-                    <ValidationMessage For="() => _User._Person.SecondaryEmail" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="PhoneNumberMobile" class="form-label">Phone (mobile):</label>
-                    <InputText id="phone" @bind-Value="_User._Person.MobilePhoneNumber" class="form-control" placeholder="+14165556666"/>
-                    <ValidationMessage For="() => _User._Person.MobilePhoneNumber" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="PhoneNumberHome" class="form-label">Phone (home):</label>
-                    <InputText id="phone" @bind-Value="_User._Person.AlternativePhoneNumber" class="form-control" placeholder="+14165556666" />
-                    <ValidationMessage For="() => _User._Person.AlternativePhoneNumber" class="text-danger" />
-                </div>
-            </section>
+                    <h5>Contact</h5>
+                    <section class="contact-info form-section">
+                        <div class="mb-3">
+                            <label for="PrimaryEmail" class="form-label">Primary E-mail:</label>
+                            <InputText id="primaryemail" @bind-Value="_User._Person.PrimaryEmail" class="form-control" placeholder="name@example.com" />
+                            <ValidationMessage For="() => _User._Person.PrimaryEmail" class="text-danger" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="SecondaryEmail" class="form-label">Secondary E-mail:</label>
+                            <InputText id="secondaryemail" @bind-Value="_User._Person.SecondaryEmail" class="form-control" placeholder="name@example.com" />
+                            <ValidationMessage For="() => _User._Person.SecondaryEmail" class="text-danger" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="PhoneNumberMobile" class="form-label">Phone (mobile):</label>
+                            <InputText id="phone" @bind-Value="_User._Person.MobilePhoneNumber" class="form-control" placeholder="+14165556666"/>
+                            <ValidationMessage For="() => _User._Person.MobilePhoneNumber" class="text-danger" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="PhoneNumberHome" class="form-label">Phone (home):</label>
+                            <InputText id="phone" @bind-Value="_User._Person.AlternativePhoneNumber" class="form-control" placeholder="+14165556666" />
+                            <ValidationMessage For="() => _User._Person.AlternativePhoneNumber" class="text-danger" />
+                        </div>
+                    </section>
 
-            <h5>Address</h5> 
-            <section class="address-info form-section">
-                <div class="mb-3">
-                    <label for="SuiteNumber" class="form-label">Suite#:</label>
-                    <InputText id="suitenumber" @bind-Value="_User._Person.Address.AptSuite" class="form-control" />
-                    <ValidationMessage For="() => _User._Person.Address.AptSuite" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="AddressNumber" class="form-label">Address#:</label>
-                    <InputNumber id="addressnumber" @bind-Value="_User._Person.Address.StreetNumber" class="form-control" />
-                    <ValidationMessage For="() => _User._Person.Address.StreetNumber" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="AddressTxt" class="form-label">Address:</label>
-                    <InputText id="addresstxt" @bind-Value="_User._Person.Address.StreetName" class="form-control" />
-                    <ValidationMessage For="() => _User._Person.Address.StreetName" class="text-danger" />
-                </div>
-                <div class ="mb-3">
-                    <label for="city" class="form-label">City:</label>
-                    <InputText id="city" @bind-Value="_User._Person.Address.City" class="form-control" />
-                    <ValidationMessage For="() => _User._Person.Address.City" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="StateProvince" class="form-label">Province:</label>
-                    <InputText id="estateprovince" @bind-Value="_User._Person.Address.StateProvince" class="form-control" />
-                    <ValidationMessage For="() => _User._Person.Address.StateProvince" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="Country" class="form-label">Country:</label>
-                    <InputText id="country" @bind-Value="_User._Person.Address.Country" class="form-control" />
-                    <ValidationMessage For="() => _User._Person.Address.Country" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="PostalCode" class="form-label">Postal Code:</label>
-                    <InputText id="postalcode" @bind-Value="_User._Person.Address.PostalCode" class="form-control" />
-                    <ValidationMessage For="() => _User._Person.Address.PostalCode" class="text-danger" />
-                </div>
-            </section>
+                    <h5>Address</h5> 
+                    <section class="address-info form-section">
+                        <div class="mb-3">
+                            <label for="SuiteNumber" class="form-label">Suite#:</label>
+                            <InputText id="suitenumber" @bind-Value="_User._Person.Address.AptSuite" class="form-control" />
+                            <ValidationMessage For="() => _User._Person.Address.AptSuite" class="text-danger" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="AddressNumber" class="form-label">Address#:</label>
+                            <InputNumber id="addressnumber" @bind-Value="_User._Person.Address.StreetNumber" class="form-control" />
+                            <ValidationMessage For="() => _User._Person.Address.StreetNumber" class="text-danger" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="AddressTxt" class="form-label">Address:</label>
+                            <InputText id="addresstxt" @bind-Value="_User._Person.Address.StreetName" class="form-control" />
+                            <ValidationMessage For="() => _User._Person.Address.StreetName" class="text-danger" />
+                        </div>
+                        <div class ="mb-3">
+                            <label for="city" class="form-label">City:</label>
+                            <InputText id="city" @bind-Value="_User._Person.Address.City" class="form-control" />
+                            <ValidationMessage For="() => _User._Person.Address.City" class="text-danger" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="StateProvince" class="form-label">Province:</label>
+                            <InputText id="estateprovince" @bind-Value="_User._Person.Address.StateProvince" class="form-control" />
+                            <ValidationMessage For="() => _User._Person.Address.StateProvince" class="text-danger" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Country" class="form-label">Country:</label>
+                            <InputText id="country" @bind-Value="_User._Person.Address.Country" class="form-control" />
+                            <ValidationMessage For="() => _User._Person.Address.Country" class="text-danger" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="PostalCode" class="form-label">Postal Code:</label>
+                            <InputText id="postalcode" @bind-Value="_User._Person.Address.PostalCode" class="form-control" />
+                            <ValidationMessage For="() => _User._Person.Address.PostalCode" class="text-danger" />
+                        </div>
+                    </section>
 
-            <button type="submit" @onclick="UpdateUser"class="btn btn-save btn-primary">Save</button>
-            <button type="button" @onclick="DeleteUser" class="btn btn-delete btn-primary">Delete</button>
-            <a href="/usermgmt">Close</a>
-        </EditForm>
-    </div>
-</div>
-
+                    <button type="submit" @onclick="UpdateUser"class="btn btn-save btn-primary">Save</button>
+                    <button type="button" @onclick="DeleteUser" class="btn btn-delete btn-primary">Delete</button>
+                    <a href="/usermgmt">Close</a>
+                </EditForm>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        Please log in
+    </NotAuthorized>
+</AuthorizeView>
 
 
 @code {
