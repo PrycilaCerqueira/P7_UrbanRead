@@ -12,7 +12,7 @@ namespace WebUI
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +22,7 @@ namespace WebUI
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
             builder.Services.AddDefaultIdentity<WebUIUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<WebUIContext>();
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
@@ -56,7 +57,25 @@ namespace WebUI
             app.MapBlazorHub();
             app.MapFallbackToPage("/_Host");
 
-            app.Run();
+
+            //Creating the Roles during the first time the program runs 
+            using (var _Scope = app.Services.CreateScope())
+            {
+                var _RoleManager = _Scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                var _Roles = new[] { "Admin", "Member" };
+
+                foreach (var _Role in _Roles)
+                {
+                    if(!await _RoleManager.RoleExistsAsync(_Role))
+                    {
+                        await _RoleManager.CreateAsync(new IdentityRole(_Role));
+                    }
+                }
+
+            }
+
+                app.Run();
         }
     }
 }
