@@ -58,7 +58,7 @@ namespace WebUI
             app.MapFallbackToPage("/_Host");
 
 
-            //Creating the Roles during the first time the program runs 
+            //Creating the roles during the first time the program runs 
             using (var _Scope = app.Services.CreateScope())
             {
                 var _RoleManager = _Scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -71,6 +71,28 @@ namespace WebUI
                     {
                         await _RoleManager.CreateAsync(new IdentityRole(_Role));
                     }
+                }
+
+            }
+
+            //Creating a default admin user account during the first time the program runs
+            using (var _Scope = app.Services.CreateScope())
+            {
+                var _UserManager = _Scope.ServiceProvider.GetRequiredService<UserManager<WebUIUser>>();
+
+                string _Email = "admin@urban.com";
+                string _Password = "adminUrban,1!";
+
+                if(await _UserManager.FindByEmailAsync(_Email) == null)
+                {
+                    var _User = new WebUIUser();
+                    _User.UserName = _Email;
+                    _User.Email = _Email;
+                    _User.EmailConfirmed = true;
+
+                    await _UserManager.CreateAsync(_User, _Password);
+                    
+                    await _UserManager.AddToRoleAsync(_User, "Admin");
                 }
 
             }

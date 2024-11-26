@@ -10,7 +10,7 @@
 
 <h3>List of Users</h3>
 
-<AuthorizeView>
+<AuthorizeView Roles="Admin">
     <Authorized>
         <div class="grid">
             <QuickGrid Class="table" Items="DBContext.Users.Include(u => u._Person)">
