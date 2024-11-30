@@ -10,9 +10,11 @@
 
 <h3>Edit User</h3>
 <hr />
+<AuthorizeView>
+    <Authorized>
         <div class="row">
             <div class="col-md-7">
-                <EditForm Model="@_SelectedUser" FormName="EditUserForm">
+                <EditForm Model="@_SelectedUser" FormName="EditUserForm" Context="_ContextSelectedUser">
                     <DataAnnotationsValidator />
                     <ValidationSummary class="text-danger" />
 
@@ -103,6 +105,11 @@
                 </EditForm>
             </div>
         </div>
+    </Authorized>
+    <NotAuthorized>
+        Please log in
+    </NotAuthorized>
+</AuthorizeView>
 
 
 @code {
