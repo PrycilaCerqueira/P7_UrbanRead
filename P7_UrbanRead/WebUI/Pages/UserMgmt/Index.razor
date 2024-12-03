@@ -8,10 +8,10 @@
 @inject WebUI.Data.WebUIContext DBContext
 
 
-<h3>List of Users</h3>
-
-<AuthorizeView Roles="Admin">
+<AuthorizeView Roles="Admin, Member">
     <Authorized>
+        <PageTitle>List of Users</PageTitle>
+
         <div class="grid">
             <QuickGrid Class="table" Items="DBContext.Users.Include(u => u._Person)">
                 <PropertyColumn Property="_usermgmt => _usermgmt._Person.Id" Title="ID" IsDefaultSortColumn="true" InitialSortDirection="SortDirection.Ascending" />

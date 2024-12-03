@@ -7,10 +7,10 @@
 @inject NavigationManager NavigationManager
 
 
-
-<PageTitle>Details</PageTitle>
-<AuthorizeView>
+<AuthorizeView Roles="Admin, Member">
     <Authorized>
+        <PageTitle>Details</PageTitle>
+
         <h3>Profile of @_User._Person.FirstName @_User._Person.LastName</h3>
         <hr />
 
@@ -55,13 +55,16 @@
         </dl>
         <hr />
         <div>
-            <a class="a-edit" href="@($"/usermgmt/edit?id={_User.Id}")">Edit</a>
+            <AuthorizeView Role="Admin" Context="_ContextEditButton">
+                <a class="a-edit" href="@($"/usermgmt/edit?id={_User.Id}")">Edit</a>
+            </AuthorizeView>
             <a class="a-backToList" href="@("/usermgmt")">Back to Users List </a>
         </div>
         </div>
     </Authorized>
     <NotAuthorized>
-        Please log in
+        <p>Access denied!</p>
+        <p>Admin permission required.</p>
     </NotAuthorized>
 </AuthorizeView>
 

@@ -8,10 +8,11 @@
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
 
-<h3>Edit User</h3>
-<hr />
-<AuthorizeView>
+
+<AuthorizeView Roles="Admin">
     <Authorized>
+        <PageTitle>Edit User</PageTitle>
+
         <div class="row">
             <div class="col-md-7">
                 <EditForm Model="@_SelectedUser" FormName="EditUserForm" Context="_ContextSelectedUser">
@@ -107,7 +108,8 @@
         </div>
     </Authorized>
     <NotAuthorized>
-        Please log in
+        <p>Access denied!</p>
+        <p>Admin permission required.</p>
     </NotAuthorized>
 </AuthorizeView>
 
