@@ -1,0 +1,87 @@
+﻿@page "/permissions"
+@* @page "/usermgmt/permissions" *@
+
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@using WebUI.Areas.Identity.Data
+@using P7_UrbanRead
+@inject WebUI.Data.WebUIContext DBContext
+@inject UserManager<WebUIUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+
+
+
+<AuthorizeView>
+    <Authorized>
+
+        <PageTitle>Permission</PageTitle>
+
+        <div class="grid">
+            <QuickGrid Class="table" Items="_users">
+                <PropertyColumn Property="_usermgmt => _usermgmt.UserName" Title="UserName" />
+                <PropertyColumn Property="_usermgmt => _usermgmt._Person.FirstName" Title="First Name" />
+                <PropertyColumn Property="_usermgmt => _usermgmt._Person.LastName" Title="Last Name" />
+                @if (context.User.IsInRole("Admin"))
+                {
+                    <TemplateColumn Context="_usermgmt" Title="Permission">
+                        <button class=" btn btn-primary" @onclick=@(arg => EditUserPermission(_usermgmt.Id))>Permission</button>
+                      @_uidRole[_usermgmt.Id]
+                    </TemplateColumn>
+
+                }
+
+            </QuickGrid>
+        </div>
+
+    </Authorized>
+    <NotAuthorized>
+        <p>Access denied!</p>
+        <p>You are not logged in.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    string _CurrentUserRole { get; set; }
+    IQueryable<WebUIUser> _users { get; set; }
+    Dictionary<string, string> _uidRole { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+
+
+        _users = DBContext.Users.Include(u => u._Person);
+
+        foreach(var u in _users)
+        {
+            var isAdmin = UserManager.IsInRoleAsync(u, "Admin").GetAwaiter().GetResult();
+            _uidRole.Add(u.Id, isAdmin ? "Admin" : "Member");
+        }
+        //_SelectedUser = await UserManager.GetUsersInRoleAsync("Member");
+        base.OnInitialized();
+
+    }
+
+    async Task EditUserPermission(string _UserID)
+    {
+        if (_UserID != null)
+        {
+            var _User = await UserManager.FindByIdAsync(_UserID);
+
+            if (_User != null)
+            {
+
+                var _UserResult = await UserManager.IsInRoleAsync(_User, "Admin");
+                if (_UserResult)
+                {
+                    _CurrentUserRole = "Admin";
+                }
+                else
+                {
+                    _CurrentUserRole = "Member";
+                }
+
+            }
+        }
+    }
+
+}

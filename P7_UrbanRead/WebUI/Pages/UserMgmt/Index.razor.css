@@ -3,7 +3,7 @@
     color: navy;
 }
 
-::deep thead th{
+::deep thead th {
     min-width: 100%;
     font-family: sans-serif;
     color: white;
@@ -17,13 +17,13 @@
     color: navy;
 }
 
-::deep tr:nth-child(odd) {
-    background: #f1f9fd;
-}
+    ::deep tr:nth-child(odd) {
+        background: #f1f9fd;
+    }
 
-::deep tr:nth-child(even) {
-    background: #cfebf9;
-}
+    ::deep tr:nth-child(even) {
+        background: #cfebf9;
+    }
 
 ::deep tbody td {
     white-space: nowrap;

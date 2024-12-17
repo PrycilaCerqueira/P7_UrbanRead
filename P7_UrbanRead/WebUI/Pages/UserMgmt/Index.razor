@@ -10,6 +10,7 @@
 
 <AuthorizeView Roles="Admin, Member">
     <Authorized>
+
         <PageTitle>List of Users</PageTitle>
 
         <div class="grid">
@@ -18,10 +19,11 @@
                 <PropertyColumn Property="_usermgmt => _usermgmt._Person.FirstName" Title="First Name" />
                 <PropertyColumn Property="_usermgmt => _usermgmt._Person.LastName" Title="Last Name" />
                 <PropertyColumn Property="_usermgmt => _usermgmt.UserName" Title="Username" />
-
+                
                 <TemplateColumn Context="_usermgmt" Title="Action">
                     <a href="@($"/usermgmt/details?id={_usermgmt.Id}")">Details</a>
                 </TemplateColumn>
+
             </QuickGrid> 
         </div>
     </Authorized>

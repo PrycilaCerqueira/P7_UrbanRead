@@ -17,7 +17,7 @@
         <div>
             <dl class="row" id="identity_info">
                 <dt class="col-sm-2">Identity Id:</dt>
-                <dd class="col-sm-10">_User.Id</dd>
+                <dd class="col-sm-10">@_User.Id</dd>
                 <dt class="col-sm-2">First name:</dt>
                 <dd class="col-sm-10">@_User._Person.FirstName</dd>
                 <dt class="col-sm-2">Last name:</dt>
@@ -55,8 +55,13 @@
             </dl>
         </div>
         <div>
-            <a class="a-edit" href="@($"/usermgmt/edit?id={_User.Id}")">Edit</a>
-            <a class="a-backToList" href="@("/usermgmt")">Back to Users List </a>
+            <a class="bnt-backToList" href="@("/usermgmt")">Back to Users List </a>  
+            &nbsp;
+            
+            @if (context.User.IsInRole("Admin"))
+            {
+                <a class="bnt-edit" href="@($"/usermgmt/edit?id={_User.Id}")">Edit</a>
+            }
         </div>
     </Authorized>
     <NotAuthorized>

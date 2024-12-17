@@ -5,6 +5,7 @@
 
 .btn, a{
     color: white;
+    background-color: navy;
 }
 
 .btn-save{
@@ -15,15 +16,6 @@
 .btn-delete{
     background-color: red; 
     border: red;
-}
-
-a {
-    text-align: center;
-    text-decoration: none;
-    background: navy;
-    border-radius: 4px;
-    padding: 8px 8px 9px 8px;
-    opacity: 0.8;
 }
 
 .form-section {

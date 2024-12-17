@@ -24,20 +24,20 @@ dl{
 }
 
 a {
-    color: white;
+    color:white;
     text-align: center;
     text-decoration: none;
     border-radius: 4px;
-    padding: 8px 8px 9px 8px;
+    padding: 9px 9px 9px 9px;
 }
 
-.a-edit {
+.bnt-edit {
     background: #eb7134;
+
 }
 
-.a-backToList {
+.bnt-backToList {
     background: navy;
-    opacity: 0.8;
-    padding-left: 10px;
+
 }
 
