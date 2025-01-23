@@ -24,8 +24,11 @@
                 @if (context.User.IsInRole("Admin"))
                 {
                     <TemplateColumn Context="_usermgmt" Title="Permission">
+                 
                         <button class=" btn btn-primary" @onclick=@(arg => EditUserPermission(_usermgmt.Id))>Permission</button>
-                      @_uidRole[_usermgmt.Id]
+                        @if (_uidRole.ContainsKey(_usermgmt.Id))
+                            @_uidRole[_usermgmt.Id]
+
                     </TemplateColumn>
 
                 }
@@ -45,19 +48,32 @@
     IQueryable<WebUIUser> _users { get; set; }
     Dictionary<string, string> _uidRole { get; set; } = new();
 
-    protected override void OnInitialized()
+
+
+    protected override async Task OnInitializedAsync()
     {
 
+        _users = DBContext.Users.Include(u => u._Person);   
 
-        _users = DBContext.Users.Include(u => u._Person);
-
-        foreach(var u in _users)
+        foreach (var u in _users)
         {
-            var isAdmin = UserManager.IsInRoleAsync(u, "Admin").GetAwaiter().GetResult();
-            _uidRole.Add(u.Id, isAdmin ? "Admin" : "Member");
+            var _IsAdmin = await UserManager.IsInRoleAsync(u, "Admin");
+            if (_IsAdmin)
+            {
+                _CurrentUserRole = "Admin";
+            }
+            else
+            {
+                _CurrentUserRole = "Member";
+            }
+                
         }
-        //_SelectedUser = await UserManager.GetUsersInRoleAsync("Member");
-        base.OnInitialized();
+           
+        // _uidRole.Add(u.Id, isAdmin ? "Admin" : "Member");
+        
+        // _SelectedUser = await UserManager.GetUsersInRoleAsync("Member");
+
+        // return base.OnInitializedAsync();
 
     }
 
@@ -80,6 +96,10 @@
                     _CurrentUserRole = "Member";
                 }
 
+            }
+            else
+            {
+                _CurrentUserRole = "Not set";
             }
         }
     }

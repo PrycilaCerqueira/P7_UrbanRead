@@ -83,12 +83,15 @@ namespace WebUI
 
                 string _Email = "admin@urban.com";
                 string _Password = "adminUrban,1!";
+                string _PhoneNum = "14165556666";
 
                 if(await _UserManager.FindByEmailAsync(_Email) == null)
                 {
                     var _User = new WebUIUser();
                     _User.UserName = _Email;
                     _User.Email = _Email;
+                    _User._Person.PrimaryEmail = _Email;
+                    _User._Person.MobilePhoneNumber = _PhoneNum;
                     _User.EmailConfirmed = true;
 
                     await _UserManager.CreateAsync(_User, _Password);

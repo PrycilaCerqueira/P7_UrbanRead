@@ -17,6 +17,25 @@
 
   <ItemGroup>
     <Compile Remove="Data\BookSearchService.cs" />
+    <Compile Remove="Migrations\20240526045724_mssql.local_migration_681.cs" />
+    <Compile Remove="Migrations\20240526045724_mssql.local_migration_681.Designer.cs" />
+    <Compile Remove="Migrations\20240529032231_202405281121_mssql.local_migration_001.cs" />
+    <Compile Remove="Migrations\20240529032231_202405281121_mssql.local_migration_001.Designer.cs" />
+    <Compile Remove="Migrations\20240605005029_mssql.local_migration_002.cs" />
+    <Compile Remove="Migrations\20240605005029_mssql.local_migration_002.Designer.cs" />
+    <Compile Remove="Migrations\20240917130622_WebUIUser.cs" />
+    <Compile Remove="Migrations\20240917130622_WebUIUser.Designer.cs" />
+    <Compile Remove="Migrations\20241021110346_mssql.local_migration_694.cs" />
+    <Compile Remove="Migrations\20241021110346_mssql.local_migration_694.Designer.cs" />
+    <Compile Remove="Migrations\20241021111943_mssql.local_migration_603.cs" />
+    <Compile Remove="Migrations\20241021111943_mssql.local_migration_603.Designer.cs" />
+    <Compile Remove="Migrations\20241022112709_mssql.local_migration_979.cs" />
+    <Compile Remove="Migrations\20241022112709_mssql.local_migration_979.Designer.cs" />
+    <Compile Remove="Migrations\20250123035430_mssql_migration_618.cs" />
+    <Compile Remove="Migrations\20250123035430_mssql_migration_618.Designer.cs" />
+    <Compile Remove="Migrations\20250123040348_mssql.local_migration_251.cs" />
+    <Compile Remove="Migrations\20250123040348_mssql.local_migration_251.Designer.cs" />
+    <Compile Remove="Migrations\WebUIContextModelSnapshot.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +62,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\P7_UrbanRead\P7_UrbanRead.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

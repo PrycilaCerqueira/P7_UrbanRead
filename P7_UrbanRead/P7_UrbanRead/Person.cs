@@ -10,7 +10,7 @@ namespace P7_UrbanRead
         private string _FirstName;
         private string _LastName;
         private DateTime _DateOfBirth;
-        private string _MobilePhoneNumber;
+        private string? _MobilePhoneNumber;
         private string _AlternativePhoneNumber;
         private string _PrimaryEmail;
         private string _SecondaryEmail;
