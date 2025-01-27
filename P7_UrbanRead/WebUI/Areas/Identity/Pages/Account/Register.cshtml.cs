@@ -85,9 +85,16 @@ namespace WebUI.Areas.Identity.Pages.Account
             public string LastName { get; set; }
 
             [Required]
-            [Display(Name = "Birth Date")]
             [DataType(DataType.Date)]
+            [Display(Name = "Birth Date")]
             public DateTime DOB { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Phone Number")]
+            public string PhoneNumber { get; set; }
+
+            
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -136,6 +143,8 @@ namespace WebUI.Areas.Identity.Pages.Account
                 user._Person.FirstName = Input.FirstName;
                 user._Person.LastName = Input.LastName;
                 user._Person.DateOfBirth = Input.DOB;
+                user._Person.MobilePhoneNumber = Input.PhoneNumber;
+                user._Person.PrimaryEmail = Input.Email;
 
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);

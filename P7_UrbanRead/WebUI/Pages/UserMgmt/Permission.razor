@@ -24,8 +24,8 @@
                 @if (context.User.IsInRole("Admin"))
                 {
                     <TemplateColumn Context="_usermgmt" Title="Permission">
-                 
-                        <button class=" btn btn-primary" @onclick=@(arg => EditUserPermission(_usermgmt.Id))>Permission</button>
+
+                        <button class=" btn btn-primary" @onclick=@(arg => EditUserPermission(_usermgmt.Id))> @_CurrentUserRole</button>
                         @if (_uidRole.ContainsKey(_usermgmt.Id))
                             @_uidRole[_usermgmt.Id]
 
@@ -55,24 +55,12 @@
 
         _users = DBContext.Users.Include(u => u._Person);   
 
-        foreach (var u in _users)
-        {
-            var _IsAdmin = await UserManager.IsInRoleAsync(u, "Admin");
-            if (_IsAdmin)
-            {
-                _CurrentUserRole = "Admin";
-            }
-            else
-            {
-                _CurrentUserRole = "Member";
-            }
-                
-        }
+        // foreach (var u in _users)
+        // {
+        //     _uidRole.Add(u.Id, isAdmin ? "Admin" : "Member");
+        //     _SelectedUser = await UserManager.GetUsersInRoleAsync("Member"); 
+        // }
            
-        // _uidRole.Add(u.Id, isAdmin ? "Admin" : "Member");
-        
-        // _SelectedUser = await UserManager.GetUsersInRoleAsync("Member");
-
         // return base.OnInitializedAsync();
 
     }
