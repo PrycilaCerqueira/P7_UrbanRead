@@ -19,8 +19,12 @@ namespace WebUI
 
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            builder.Services.AddDbContext<WebUIContext>(options =>
+           
+            builder.Services.AddDbContextFactory<WebUIContext>(options =>
                 options.UseSqlServer(connectionString));
+            //builder.Services.AddDbContext<WebUIContext>(options =>
+            //    options.UseSqlServer(connectionString));
+            builder.Services.AddScoped<WebUIContext>(p => p.GetRequiredService<IDbContextFactory<WebUIContext>>().CreateDbContext());
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
             builder.Services.AddDefaultIdentity<WebUIUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()

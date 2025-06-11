@@ -5,7 +5,7 @@
 @using Microsoft.EntityFrameworkCore
 @using WebUI.Areas.Identity.Data
 @using P7_UrbanRead
-@inject WebUI.Data.WebUIContext DBContext
+@inject IDbContextFactory<WebUIContext> DBContextFactory
 @inject UserManager<WebUIUser> UserManager
 @inject RoleManager<IdentityRole> RoleManager
 
@@ -18,17 +18,31 @@
 
         <div class="grid">
             <QuickGrid Class="table" Items="_users">
-                <PropertyColumn Property="_usermgmt => _usermgmt.UserName" Title="UserName" />
-                <PropertyColumn Property="_usermgmt => _usermgmt._Person.FirstName" Title="First Name" />
-                <PropertyColumn Property="_usermgmt => _usermgmt._Person.LastName" Title="Last Name" />
+                <PropertyColumn Property="u => u.UserName" Title="UserName" />
+                <PropertyColumn Property="u => u._Person.FirstName" Title="First Name" />
+                <PropertyColumn Property="u => u._Person.LastName" Title="Last Name" />
                 @if (context.User.IsInRole("Admin"))
                 {
-                    <TemplateColumn Context="_usermgmt" Title="Permission">
-
-                        <button class=" btn btn-primary" @onclick=@(arg => EditUserPermission(_usermgmt.Id))> @_CurrentUserRole</button>
-                        @if (_uidRole.ContainsKey(_usermgmt.Id))
-                            @_uidRole[_usermgmt.Id]
-
+                    <TemplateColumn Context="userContext" Title="Permission">
+                        @if (_editingUserId == userContext.Id)
+                        {
+                            <select class="form-select" @bind="_CurrentUserRole">
+                                @foreach (var role in _roles)
+                                {
+                                    <option value="@role">@role</option>
+                                }
+                            </select>
+                            <div class="mt-2">
+                                <button class="btn btn-success btn-sm me-2" @onclick="() => SaveUserPermission(userContext.Id)">Save</button>
+                                <button class="btn btn-secondary btn-sm" @onclick="CancelEdit">Cancel</button>
+                            </div>
+                        }
+                        else
+                        {
+                            <button class="btn btn-primary" @onclick="() => EditUserPermission(userContext.Id)">
+                                @(_uidRole.ContainsKey(userContext.Id) ? _uidRole[userContext.Id] : "Loading...")
+                            </button>
+                        }
                     </TemplateColumn>
 
                 }
@@ -44,52 +58,66 @@
 </AuthorizeView>
 
 @code {
-    string _CurrentUserRole { get; set; }
-    IQueryable<WebUIUser> _users { get; set; }
+    string _CurrentUserRole { get; set; } = "Member";
+    string? _editingUserId { get; set; } = null;
+    List<string> _roles = new() { "Admin", "Member" };
+    IQueryable<WebUIUser> _users { get; set; } = Enumerable.Empty<WebUIUser>().AsQueryable();
     Dictionary<string, string> _uidRole { get; set; } = new();
-
-
 
     protected override async Task OnInitializedAsync()
     {
+        using var _context = await DBContextFactory.CreateDbContextAsync();
+        _users = _context.Users.Include(u => u._Person).AsQueryable();
 
-        _users = DBContext.Users.Include(u => u._Person);   
-
-        // foreach (var u in _users)
-        // {
-        //     _uidRole.Add(u.Id, isAdmin ? "Admin" : "Member");
-        //     _SelectedUser = await UserManager.GetUsersInRoleAsync("Member"); 
-        // }
-           
-        // return base.OnInitializedAsync();
-
-    }
-
-    async Task EditUserPermission(string _UserID)
-    {
-        if (_UserID != null)
+        // Cache roles
+        foreach (var user in _users)
         {
-            var _User = await UserManager.FindByIdAsync(_UserID);
-
-            if (_User != null)
-            {
-
-                var _UserResult = await UserManager.IsInRoleAsync(_User, "Admin");
-                if (_UserResult)
-                {
-                    _CurrentUserRole = "Admin";
-                }
-                else
-                {
-                    _CurrentUserRole = "Member";
-                }
-
-            }
-            else
-            {
-                _CurrentUserRole = "Not set";
-            }
+            await GetUserRoleString(user);
         }
     }
 
+    async Task<string> GetUserRoleString(WebUIUser u)
+    {
+        if (_uidRole.TryGetValue(u.Id, out var cached))
+            return cached;
+
+        using var _context = await DBContextFactory.CreateDbContextAsync();
+        var userRole = await _context.UserRoles.FirstOrDefaultAsync(r => r.UserId == u.Id);
+        var role = userRole != null ? await _context.Roles.FirstOrDefaultAsync(r => r.Id == userRole.RoleId) : null;
+        var roleName = role?.Name ?? "Member";
+
+        var normalizedRole = roleName.Contains("Admin") ? "Admin" : "Member";
+        _uidRole[u.Id] = normalizedRole;
+        return normalizedRole;
+    }
+
+    async Task EditUserPermission(string userId)
+    {
+        _editingUserId = userId;
+        var user = await UserManager.FindByIdAsync(userId);
+        _CurrentUserRole = (user != null && await UserManager.IsInRoleAsync(user, "Admin")) ? "Admin" : "Member";
+    }
+
+    void CancelEdit()
+    {
+        _editingUserId = null;
+    }
+
+    async Task SaveUserPermission(string userId)
+    {
+        var user = await UserManager.FindByIdAsync(userId);
+        if (user != null)
+        {
+            var currentRoles = await UserManager.GetRolesAsync(user);
+            var allowedRoles = new[] { "Admin", "Member" };
+            var toRemove = currentRoles.Where(r => allowedRoles.Contains(r));
+
+            await UserManager.RemoveFromRolesAsync(user, toRemove);
+            await UserManager.AddToRoleAsync(user, _CurrentUserRole);
+
+            _uidRole[userId] = _CurrentUserRole;
+        }
+
+        _editingUserId = null;
+    }
 }
