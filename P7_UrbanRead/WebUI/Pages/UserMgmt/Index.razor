@@ -6,6 +6,7 @@
 @using WebUI.Areas.Identity.Data
 @using P7_UrbanRead
 @inject WebUI.Data.WebUIContext DBContext
+@inject UserManager<WebUIUser> UserManager
 
 
 <AuthorizeView Roles="Admin, Member">
@@ -20,8 +21,25 @@
                 <PropertyColumn Property="_usermgmt => _usermgmt._Person.LastName" Title="Last Name" />
                 <PropertyColumn Property="_usermgmt => _usermgmt.UserName" Title="Username" />
                 
-                <TemplateColumn Context="_usermgmt" Title="Action">
-                    <a href="@($"/usermgmt/details?id={_usermgmt.Id}")">Details</a>
+                <TemplateColumn Context="_userRoleContext" Title="Permission">
+                    @if (_userRoleId.ContainsKey(_userRoleContext.Id))
+                    {
+                        <select class="form-select form-select-sm" 
+                        value="@_userRoleId[_userRoleContext.Id]"
+                        onchange="async _event => await SaveUserPermission(_userRoleContext.Id, _event.Value?.ToString())">
+                            @foreach (var _role in _Roles)
+                            {
+                                <option value="@_role">@_role</option>
+                            }
+                        </select>
+                    }
+                    else
+                    {
+                       <span>Loading...</span>
+                    }
+                </TemplateColumn>
+                <TemplateColumn Context="_userContext" Title="Action">
+                    <a href="@($"/usermgmt/details?id={_userContext.Id}")">Details</a>
                 </TemplateColumn>
 
             </QuickGrid> 
@@ -36,4 +54,33 @@
 
 @code {
 
+
+    //Collection that stores key-value pairs. It lets you quickly look up a value based on a key. Id role = Role name
+    Dictionary<string, string> _userRoleId { get; set; } = new();
+
+    //List of roles to populate the Permission column dropdown options
+    List<string> _Roles = new() {"Admin","Member" };
+
+    async Task SaveUserPermission (string _userId, string? _selectedRole)
+    {
+        //If selectedRole is null, empty (""), or consists only of whitespace (like " "), then exit the method immediately and do nothing.
+        if (string.IsNullOrWhiteSpace(_selectedRole)) return;
+
+        // If selectedRole isn't null save the Permission change with StateHasChanged
+        var _user = await UserManager.FindByIdAsync(_userId);
+
+        if (_user != null)
+        {
+            var _currentRoles = await UserManager.GetRolesAsync(_user);
+            var _allowedRoles = new[] {"Admin","Member" };
+            var _toRemove = _currentRoles.Where(_role => _allowedRoles.Contains(_role));
+
+            await UserManager.RemoveFromRoleAsync(_user, _toRemove);
+            await UserManager.AddToRoleAsync(_user, _currentRoles);
+
+            _userRoleId[_userId] = _selectedRole;
+            StateHasChanged();
+        }
+
+    }
 }

@@ -61,6 +61,7 @@
     string _CurrentUserRole { get; set; } = "Member";
     string? _editingUserId { get; set; } = null;
     List<string> _roles = new() { "Admin", "Member" };
+
     IQueryable<WebUIUser> _users { get; set; } = Enumerable.Empty<WebUIUser>().AsQueryable();
     Dictionary<string, string> _uidRole { get; set; } = new();
 
@@ -120,4 +121,6 @@
 
         _editingUserId = null;
     }
+
+    //TODO: Functional. Now, apply this changes to User "/usermgmt" and "/usermgmt/details" pages
 }
