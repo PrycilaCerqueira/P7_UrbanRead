@@ -7,7 +7,8 @@
 @using P7_UrbanRead
 @inject WebUI.Data.WebUIContext DBContext
 @inject UserManager<WebUIUser> UserManager
-
+@inject IDbContextFactory<WebUIContext> IDbContextFactory
+@inject RoleManager<IdentityRole> RoleManager
 
 <AuthorizeView Roles="Admin, Member">
     <Authorized>
@@ -25,12 +26,12 @@
                     @if (_userRoleId.ContainsKey(_userRoleContext.Id))
                     {
                         <select class="form-select form-select-sm" 
-                        value="@_userRoleId[_userRoleContext.Id]"
-                        onchange="async _event => await SaveUserPermission(_userRoleContext.Id, _event.Value?.ToString())">
-                            @foreach (var _role in _Roles)
-                            {
-                                <option value="@_role">@_role</option>
-                            }
+                            value="@_userRoleId[_userRoleContext.Id]"
+                            onchange="async _event => await SaveUserPermission(_userRoleContext.Id, _event.Value?.ToString())">
+                                @foreach (var _role in _Roles)
+                                {
+                                    <option value="@_role">@_role</option>
+                                }
                         </select>
                     }
                     else
@@ -53,7 +54,8 @@
 
 
 @code {
-
+    //Initialized an empty queryable list of users from database
+    IQueryable<WebUIUser> _qUsers { get; set; } = Enumerable.Empty<WebUIUser>().AsQueryable();
 
     //Collection that stores key-value pairs. It lets you quickly look up a value based on a key. Id role = Role name
     Dictionary<string, string> _userRoleId { get; set; } = new();
@@ -61,6 +63,28 @@
     //List of roles to populate the Permission column dropdown options
     List<string> _Roles = new() {"Admin","Member" };
 
+   
+    //Load a local db before rendering the page method
+    protected override async Task OnInitializedAsync()
+    {
+        //Creates a DBcontext instance that disposes a db once the method finishes
+        using var _context = await IDbContextFactory.CreateDbContextAsync(); //initiate a new db instance
+        _qUsers = _context.Users.Include(u => u._Person).AsQueryable(); //save a db local copy of the users table including person table 
+
+        foreach(var _qUser in _qUsers)
+        {
+            await GetUserRoleString(_qUser);
+        }
+    }
+
+    //Get User Role string method
+    async Task<string> GetUserRoleString(WebUIUser _qUser)
+    {
+        return null;
+    }
+    
+
+    //Save change method
     async Task SaveUserPermission (string _userId, string? _selectedRole)
     {
         //If selectedRole is null, empty (""), or consists only of whitespace (like " "), then exit the method immediately and do nothing.
