@@ -5,7 +5,7 @@
 @using Microsoft.EntityFrameworkCore
 @using WebUI.Areas.Identity.Data
 @using P7_UrbanRead
-@inject WebUI.Data.WebUIContext DBContext
+@* @inject WebUI.Data.WebUIContext DBContext *@
 @inject UserManager<WebUIUser> UserManager
 @inject IDbContextFactory<WebUIContext> IDbContextFactory
 @inject RoleManager<IdentityRole> RoleManager
@@ -16,7 +16,7 @@
         <PageTitle>List of Users</PageTitle>
 
         <div class="grid">
-            <QuickGrid Class="table" Items="DBContext.Users.Include(u => u._Person)">
+            <QuickGrid Class="table" Items="_querableContextUsers">
                 <PropertyColumn Property="_usermgmt => _usermgmt._Person.Id" Title="ID" IsDefaultSortColumn="true" InitialSortDirection="SortDirection.Ascending" />
                 <PropertyColumn Property="_usermgmt => _usermgmt._Person.FirstName" Title="First Name" />
                 <PropertyColumn Property="_usermgmt => _usermgmt._Person.LastName" Title="Last Name" />
@@ -55,9 +55,8 @@
 
 @code {
 
-
     //Initialized an empty queryable list of users from database
-    IQueryable<WebUIUser> _qUsers { get; set; } = Enumerable.Empty<WebUIUser>().AsQueryable();
+    IQueryable<WebUIUser> _querableContextUsers { get; set; } = Enumerable.Empty<WebUIUser>().AsQueryable();
 
     //Collection that stores key-value pairs. It lets you quickly look up a value based on a key. Id role = Role name
     Dictionary<string, string> _usersRoles { get; set; } = new();
@@ -71,10 +70,10 @@
     {
         //Creates a DBcontext instance that disposes a db once the method finishes
         using var _context = await IDbContextFactory.CreateDbContextAsync(); //initiate a new db instance
-        _qUsers = _context.Users.Include(u => u._Person).AsQueryable(); //save a db local copy of the users table including person table 
+        _querableContextUsers = _context.Users.Include(u => u._Person).AsQueryable(); //save a db local copy of the users table including person table 
 
         //Cache roles
-        foreach(var _qUser in _qUsers)
+        foreach(var _qUser in _querableContextUsers)
         {
             await GetUserRoleString(_qUser);
         }
@@ -89,7 +88,7 @@
         using var _context = await IDbContextFactory.CreateDbContextAsync(); //initiate a new db instance
         var _userRole = await _context.UserRoles.FirstOrDefaultAsync(r => r.UserId == _qUser.Id); //get the user 
         var _role = _userRole != null ? await _context.Roles.FirstOrDefaultAsync(r => r.Id == _userRole.RoleId) : null; //if user isn't null, get the user's role id or return null
-        var _roleNormalized = _role?.Name ?? "None"; //get the role name if not null or return member (default role assignment)
+        var _roleNormalized = _role?.Name ?? "Member"; //get the role name if not null or return Member (default role assignment)
 
         var _roleName = _roleNormalized.Contains("Admin") ? "Admin" : "Member";
         _usersRoles[_qUser.Id] = _roleName;
