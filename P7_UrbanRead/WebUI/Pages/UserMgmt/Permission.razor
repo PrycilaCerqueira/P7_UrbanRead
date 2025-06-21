@@ -86,7 +86,7 @@
         using var _context = await DBContextFactory.CreateDbContextAsync();
         var userRole = await _context.UserRoles.FirstOrDefaultAsync(r => r.UserId == u.Id);
         var role = userRole != null ? await _context.Roles.FirstOrDefaultAsync(r => r.Id == userRole.RoleId) : null;
-        var roleName = role?.Name ?? "Member";
+        var roleName = role?.Name ?? "none";
 
         var normalizedRole = roleName.Contains("Admin") ? "Admin" : "Member";
         _uidRole[u.Id] = normalizedRole;
