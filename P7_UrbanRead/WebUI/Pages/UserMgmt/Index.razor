@@ -23,22 +23,22 @@
                 <PropertyColumn Property="_usermgmt => _usermgmt.UserName" Title="Username" />
                 
                 <TemplateColumn Context="_userRoleContext" Title="Permission">
-                    @if (_usersRoles.ContainsKey(_userRoleContext.Id))
+                    @if (_usersRoles.TryGetValue(_userRoleContext.Id, out var currentRole))
                     {
-                        <select class="form-select form-select-sm" 
-                            value="@_usersRoles[_userRoleContext.Id]"
-                            onchange="async _event => await SaveUserPermission(_userRoleContext.Id, _event.Value?.ToString())">
-                                @foreach (var _role in _Roles)
-                                {
-                                    <option value="@_role">@_role</option>
-                                }
+                        <select class="form-select form-select-sm"
+                                value="@currentRole"
+                                @onchange="async e => await SaveUserPermission(_userRoleContext.Id, e.Value?.ToString())">
+                            @foreach (var _role in _Roles)
+                            {
+                                <option value="@_role">@_role</option>
+                            }
                         </select>
                     }
                     else
                     {
-                       <span>Loading...</span>
+                        <span>Loading...</span>
                     }
-                </TemplateColumn>
+                </TemplateColumn>                
                 <TemplateColumn Context="_userContext" Title="Action">
                     <a href="@($"/usermgmt/details?id={_userContext.Id}")">Details</a>
                 </TemplateColumn>
@@ -54,6 +54,8 @@
 
 
 @code {
+
+
     //Initialized an empty queryable list of users from database
     IQueryable<WebUIUser> _qUsers { get; set; } = Enumerable.Empty<WebUIUser>().AsQueryable();
 
@@ -87,14 +89,14 @@
         using var _context = await IDbContextFactory.CreateDbContextAsync(); //initiate a new db instance
         var _userRole = await _context.UserRoles.FirstOrDefaultAsync(r => r.UserId == _qUser.Id); //get the user 
         var _role = _userRole != null ? await _context.Roles.FirstOrDefaultAsync(r => r.Id == _userRole.RoleId) : null; //if user isn't null, get the user's role id or return null
-        var _roleNormalized = _role?.Name ?? "Member"; //get the role name if not null or return member (default role assignment)
+        var _roleNormalized = _role?.Name ?? "None"; //get the role name if not null or return member (default role assignment)
 
         var _roleName = _roleNormalized.Contains("Admin") ? "Admin" : "Member";
         _usersRoles[_qUser.Id] = _roleName;
 
         return _roleName;
     }
-    
+
 
     //Save change method
     async Task SaveUserPermission (string _userId, string? _selectedRole)
@@ -102,21 +104,35 @@
         //If selectedRole is null, empty (""), or consists only of whitespace (like " "), then exit the method immediately and do nothing.
         if (string.IsNullOrWhiteSpace(_selectedRole)) return;
 
-        // If selectedRole isn't null save the Permission change with StateHasChanged
+        // Find user in users' list
         var _user = await UserManager.FindByIdAsync(_userId);
 
         if (_user != null)
         {
+            //Get user's role
             var _currentRoles = await UserManager.GetRolesAsync(_user);
+
+            //Role you're managing 
             var _allowedRoles = new[] {"Admin","Member" };
-            var _toRemove = _currentRoles.Where(_role => _allowedRoles.Contains(_role));
 
-            await UserManager.RemoveFromRoleAsync(_user, _toRemove);
-            await UserManager.AddToRoleAsync(_user, _currentRoles);
+            // Remove any of those allowed roles the user currently has
+            var _toRemove = _currentRoles.Where(_role => _allowedRoles.Contains(_role)).ToList();
+            if (_toRemove.Any())
+            {
+                await UserManager.RemoveFromRolesAsync(_user, _toRemove);
+            }
 
+            //Added the selcted role
+            await UserManager.AddToRoleAsync(_user, _selectedRole);
+
+            //Update cache
             _usersRoles[_userId] = _selectedRole;
+
+            //Notify UI to re-render page
             StateHasChanged();
         }
 
     }
+
+    //TODO:StateHasChanged() isn't working upon permission change 
 }
