@@ -5,10 +5,18 @@
 @using Microsoft.EntityFrameworkCore
 @using WebUI.Areas.Identity.Data
 @using P7_UrbanRead
-@* @inject WebUI.Data.WebUIContext DBContext *@
 @inject UserManager<WebUIUser> UserManager
 @inject IDbContextFactory<WebUIContext> IDbContextFactory
 @inject RoleManager<IdentityRole> RoleManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<style>
+    /* subtle greyed-out look for disabled selects */
+    .disabled-select {
+        opacity: 0.6;
+        pointer-events: none; /* prevents interaction */
+    }
+</style>
 
 <AuthorizeView Roles="Admin, Member">
     <Authorized>
@@ -16,7 +24,7 @@
         <PageTitle>List of Users</PageTitle>
 
         <div class="grid">
-            <QuickGrid Class="table" Items="_querableContextUsers">
+            <QuickGrid TItem="WebUIUser" Class="table" Items="_users.AsQueryable()">
                 <PropertyColumn Property="_usermgmt => _usermgmt._Person.Id" Title="ID" IsDefaultSortColumn="true" InitialSortDirection="SortDirection.Ascending" />
                 <PropertyColumn Property="_usermgmt => _usermgmt._Person.FirstName" Title="First Name" />
                 <PropertyColumn Property="_usermgmt => _usermgmt._Person.LastName" Title="Last Name" />
@@ -25,8 +33,9 @@
                 <TemplateColumn Context="_userRoleContext" Title="Permission">
                     @if (_usersRoles.TryGetValue(_userRoleContext.Id, out var currentRole))
                     {
-                        <select class="form-select form-select-sm"
+                        <select class="form-select form-select-sm @(CanEditPermission(_userRoleContext) ? string.Empty : "disabled-select")"
                                 value="@currentRole"
+                                disabled="@( !CanEditPermission(_userRoleContext) )"
                                 @onchange="async e => await SaveUserPermission(_userRoleContext.Id, e.Value?.ToString())">
                             @foreach (var _role in _Roles)
                             {
@@ -55,40 +64,60 @@
 
 @code {
 
-    //Initialized an empty queryable list of users from database
-    IQueryable<WebUIUser> _querableContextUsers { get; set; } = Enumerable.Empty<WebUIUser>().AsQueryable();
+    // materialized list for the grid
+    List<WebUIUser> _users { get; set; } = new();
 
-    //Collection that stores key-value pairs. It lets you quickly look up a value based on a key. Id role = Role name
+    //Collection that stores key-value pairs. Id -> role name
     Dictionary<string, string> _usersRoles { get; set; } = new();
 
     //List of roles to populate the Permission column dropdown options
     List<string> _Roles = new() {"Admin","Member" };
 
+    // track whether current viewer is an admin
+    bool _currentUserIsAdmin;
 
-    //Load a local db before rendering the page method
     protected override async Task OnInitializedAsync()
     {
-        //Creates a DBcontext instance that disposes a db once the method finishes
-        using var _context = await IDbContextFactory.CreateDbContextAsync(); //initiate a new db instance
-        _querableContextUsers = _context.Users.Include(u => u._Person).AsQueryable(); //save a db local copy of the users table including person table 
+        // determine current user's roles
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        _currentUserIsAdmin = user.IsInRole("Admin");
 
-        //Cache roles
-        foreach(var _qUser in _querableContextUsers)
+        // create a context and materialize users for UI binding
+        using var _context = await IDbContextFactory.CreateDbContextAsync();
+        _users = await _context.Users.Include(u => u._Person).ToListAsync();
+
+        // populate role cache (can be batched for performance)
+        foreach (var u in _users)
         {
-            await GetUserRoleString(_qUser);
+            await GetUserRoleString(u);
         }
+
+        StateHasChanged();
     }
 
-    //Get User Role string method
+    // decide whether the current viewer can change the target's permission
+    bool CanEditPermission(WebUIUser target)
+    {
+        // Option A (simple): only Admins can edit permissions
+        if (!_currentUserIsAdmin) return false;
+
+        // Option B (optional): prevent editing other Admins' roles even if you're Admin.
+        // Uncomment if you want to prevent changing Admin accounts:
+        if (_usersRoles.TryGetValue(target.Id, out var role) && role == "Admin" && target.Email == "admin@urban.com") return false;
+
+        return true;
+    }
+
     async Task<string> GetUserRoleString(WebUIUser _qUser)
     {
         if (_usersRoles.TryGetValue(_qUser.Id, out var cached))
             return cached;
 
-        using var _context = await IDbContextFactory.CreateDbContextAsync(); //initiate a new db instance
-        var _userRole = await _context.UserRoles.FirstOrDefaultAsync(r => r.UserId == _qUser.Id); //get the user 
-        var _role = _userRole != null ? await _context.Roles.FirstOrDefaultAsync(r => r.Id == _userRole.RoleId) : null; //if user isn't null, get the user's role id or return null
-        var _roleNormalized = _role?.Name ?? "Member"; //get the role name if not null or return Member (default role assignment)
+        using var _context = await IDbContextFactory.CreateDbContextAsync();
+        var _userRole = await _context.UserRoles.FirstOrDefaultAsync(r => r.UserId == _qUser.Id);
+        var _role = _userRole != null ? await _context.Roles.FirstOrDefaultAsync(r => r.Id == _userRole.RoleId) : null;
+        var _roleNormalized = _role?.Name ?? "Member";
 
         var _roleName = _roleNormalized.Contains("Admin") ? "Admin" : "Member";
         _usersRoles[_qUser.Id] = _roleName;
@@ -96,42 +125,29 @@
         return _roleName;
     }
 
-
-    //Save change method
     async Task SaveUserPermission (string _userId, string? _selectedRole)
     {
-        //If selectedRole is null, empty (""), or consists only of whitespace (like " "), then exit the method immediately and do nothing.
         if (string.IsNullOrWhiteSpace(_selectedRole)) return;
 
-        // Find user in users' list
         var _user = await UserManager.FindByIdAsync(_userId);
 
         if (_user != null)
         {
-            //Get user's role
             var _currentRoles = await UserManager.GetRolesAsync(_user);
-
-            //Role you're managing 
             var _allowedRoles = new[] {"Admin","Member" };
 
-            // Remove any of those allowed roles the user currently has
             var _toRemove = _currentRoles.Where(_role => _allowedRoles.Contains(_role)).ToList();
             if (_toRemove.Any())
             {
                 await UserManager.RemoveFromRolesAsync(_user, _toRemove);
             }
 
-            //Added the selcted role
             await UserManager.AddToRoleAsync(_user, _selectedRole);
 
-            //Update cache
             _usersRoles[_userId] = _selectedRole;
 
-            //Notify UI to re-render page
             StateHasChanged();
         }
-
     }
 
-    //TODO:StateHasChanged() isn't working upon permission change 
 }
