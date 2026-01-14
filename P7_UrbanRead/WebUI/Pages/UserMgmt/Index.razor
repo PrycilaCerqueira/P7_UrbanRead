@@ -9,6 +9,7 @@
 @inject IDbContextFactory<WebUIContext> IDbContextFactory
 @inject RoleManager<IdentityRole> RoleManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IJSRuntime JSRuntime
 
 <style>
     /* subtle greyed-out look for disabled selects */
@@ -136,17 +137,26 @@
             var _currentRoles = await UserManager.GetRolesAsync(_user);
             var _allowedRoles = new[] {"Admin","Member" };
 
-            var _toRemove = _currentRoles.Where(_role => _allowedRoles.Contains(_role)).ToList();
-            if (_toRemove.Any())
+            bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", "Save changes?");
+            if (confirm == true)
             {
-                await UserManager.RemoveFromRolesAsync(_user, _toRemove);
+                var _toRemove = _currentRoles.Where(_role => _allowedRoles.Contains(_role)).ToList();
+                if (_toRemove.Any())
+                {
+                    await UserManager.RemoveFromRolesAsync(_user, _toRemove);
+                }
+
+                await UserManager.AddToRoleAsync(_user, _selectedRole);
+
+                _usersRoles[_userId] = _selectedRole;
+
+                StateHasChanged();
+            }
+            else
+            {
+                await JSRuntime.InvokeVoidAsync("location.reload");
             }
 
-            await UserManager.AddToRoleAsync(_user, _selectedRole);
-
-            _usersRoles[_userId] = _selectedRole;
-
-            StateHasChanged();
         }
     }
 

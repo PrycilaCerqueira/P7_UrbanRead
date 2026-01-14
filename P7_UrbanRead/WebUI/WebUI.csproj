@@ -40,6 +40,7 @@
 
   <ItemGroup>
     <Content Remove="BookDetails.razor.razor" />
+    <Content Remove="Pages\UserMgmt\Permission.razor" />
   </ItemGroup>
 
   <ItemGroup>

@@ -135,7 +135,7 @@
     public async Task UpdateUser()
     {
 
-        bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", "Do you want save your changes? ");
+        bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", "Save changes?");
         if (confirm == true)
         {
             try
@@ -158,7 +158,7 @@
 
     public async Task DeleteUser()
     {
-        bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want delete this user?");
+        bool confirm = await JSRuntime.InvokeAsync<bool>("confirm", "Delete this user?");
         if (confirm == true)
         {
             DBContext.Remove(_SelectedUser!);
